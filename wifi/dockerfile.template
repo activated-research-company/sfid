@@ -9,6 +9,6 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/tags/v4.3.
     | xargs -n1 curl -Ls \
     | tar -xvz -C /usr/src/wifi/
 
-COPY scripts/start.sh .
+COPY start.sh .
 
-CMD ["bash", "/usr/src/wifi/start.sh"]
+CMD ["bash", "start.sh"]
