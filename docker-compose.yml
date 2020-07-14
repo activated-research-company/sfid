@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
     wifi:
-        build: ./wifi-connect
+        build: wifi
         network_mode: "host"
         labels:
             io.balena.features.dbus: '1'
