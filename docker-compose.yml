@@ -1,7 +1,7 @@
 version: "2.1"
 
 services:
-    wifi-connect:
+    wifi:
         build: ./wifi-connect
         network_mode: "host"
         labels:
