@@ -11,4 +11,4 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/tags/v4.3.
 
 COPY scripts/start.sh .
 
-CMD ["bash", "start.sh"]
+CMD ["bash", "./start.sh"]
