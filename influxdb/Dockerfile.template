@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.11
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.12
 
 RUN apk add influxdb
 
