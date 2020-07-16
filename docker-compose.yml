@@ -1,21 +1,25 @@
 version: "2.1"
 
 volumes:
-    influxdb:
+  db:
 
 services:
-    wifi:
-        build: wifi
-        network_mode: "host"
-        labels:
-            io.balena.features.dbus: '1'
-        cap_add:
-            - NET_ADMIN
-        environment:
-            DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+  battery:
+    build: battery
+    privileged: true
 
-    influxdb:
-        restart: always
-        build: ./influxdb
-        volumes:
-        - 'influxdb:/data'
+  wifi:
+    build: wifi
+    network_mode: "host"
+    labels:
+      io.balena.features.dbus: '1'
+    cap_add:
+      - NET_ADMIN
+    environment:
+      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+
+  db:
+    restart: always
+    build: db
+    volumes:
+      - 'db:/data'
