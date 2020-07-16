@@ -2,7 +2,7 @@
 # see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-buster-build
 
-RUN install_packages pijuice-base
+RUN install_packages pijuice-gui
 
 # Set our working directory
 WORKDIR /usr/src/db
