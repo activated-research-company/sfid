@@ -2,15 +2,6 @@
 # see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-buster-build
 
-# RUN install_packages pijuice-base
-# RUN apt-get update
-# RUN apt-get install pijuice-base
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        systemd \
-        systemd-sysv \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN install_packages python3-urwid python3-smbus
 
 RUN apt-get install wget; \
