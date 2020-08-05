@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-buster
+FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-buster-build
 
 RUN install_packages python3-urwid python-smbus python3-smbus wget
 
