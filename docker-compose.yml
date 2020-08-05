@@ -1,4 +1,4 @@
-version: "2.1"
+version: '2.1'
 
 volumes:
   db:
@@ -10,17 +10,17 @@ services:
     labels:
       io.balena.features.dbus: '1'
     environment:
-      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
   wifi:
     build: wifi
-    network_mode: "host"
+    network_mode: 'host'
     labels:
       io.balena.features.dbus: '1'
     cap_add:
       - NET_ADMIN
     environment:
-      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/host/run/dbus/system_bus_socket"
+      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
   db:
     restart: always

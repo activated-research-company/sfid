@@ -1,14 +1,11 @@
-# base-image for python on any machine using a template variable,
-# see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-buster
 
-RUN install_packages python3-urwid python3-smbus python-smbus wget
+RUN install_packages python3-urwid python-smbus python3-smbus wget
 
 RUN wget https://github.com/PiSupply/PiJuice/raw/master/Software/Install/pijuice-base_1.5_all.deb; \
   dpkg -i pijuice-base_1.5_all.deb;
 
-# Set our working directory
-WORKDIR /usr/src/db
+WORKDIR /usr/src/battery
 
 # This will copy all files in our root to the working  directory in the container
 COPY . ./
@@ -16,5 +13,4 @@ COPY . ./
 # Enable udevd so that plugged dynamic hardware devices show up in our container.
 ENV UDEV=1
 
-# main.py will run when container starts up on the device
 CMD ["python3", "main.py"]
