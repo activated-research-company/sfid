@@ -7,10 +7,8 @@ RUN wget https://github.com/PiSupply/PiJuice/raw/master/Software/Install/pijuice
 
 WORKDIR /usr/src/battery
 
-# This will copy all files in our root to the working  directory in the container
 COPY . ./
 
-# Enable udevd so that plugged dynamic hardware devices show up in our container.
 ENV UDEV=1
 
 CMD ["python3", "main.py"]
