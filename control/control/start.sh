@@ -1,1 +1,1 @@
-node /usr/src/api/index.js
+node /usr/src/control/index.js
