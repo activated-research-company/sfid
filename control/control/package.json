@@ -1,29 +1,42 @@
 {
-  "name": "control",
+  "name": "solvere-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Solvere control panel websocket API for interfacing with physical devices.",
+  "repository": "https://github.com/adamlee-ARC/solvere-app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development ts-node src/index",
-    "start": "ts-node src/index",
-    "nodemon": "./node_modules/.bin/nodemon -I --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+    "lint": "eslint .",
+    "test": "ospec",
+    "c8": "node node_modules/c8/bin/c8.js npm test",
+    "coverage": "node node_modules/c8/bin/c8.js report --reporter=text-lcov > coverage/tests.lcov",
+    "inspect": "NODE_ENV=development node --inspect index.js",
+    "trace": "NODE_ENV=development nodemon --trace-warnings index.js",
+    "start": "NODE_ENV=development nodemon src/index.js"
   },
-  "author": "",
+  "author": "Adam Lee, Activated Research Company",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^14.0.23",
-    "@types/serialport": "^8.0.1",
-    "@types/winston": "^2.4.4",
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.0.5",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.6"
-  },
   "dependencies": {
-    "rxjs": "^6.6.0",
-    "serialport": "^9.0.0",
-    "winston": "^3.3.3"
+    "@serialport/parser-delimiter": "^8.0.6",
+    "bottlejs": "^1.7.2",
+    "influx": "^5.6.0",
+    "moment-timezone": "^0.5.31",
+    "node-pid-controller": "^1.0.1",
+    "phidget22": "^2.6.7",
+    "serialport": "^8.0.6",
+    "set-system-clock": "^1.0.4",
+    "socket.io": "^2.3.0",
+    "systeminformation": "^4.26.10",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "c8": "^7.2.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "ospec": "^4.1.1",
+    "require-all": "^3.0.0"
   }
 }

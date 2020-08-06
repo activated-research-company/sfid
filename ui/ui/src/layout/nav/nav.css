@@ -1,0 +1,8 @@
+x-tab {
+  min-height: 30px;
+}
+
+x-tab > x-box > x-icon {
+  height: 24px;
+  width: 24px;
+}

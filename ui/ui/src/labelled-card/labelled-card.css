@@ -1,0 +1,17 @@
+header {
+  height: 52px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
+  -moz-transform: rotate(180deg);  /* FF3.5+ */
+  -o-transform: rotate(180deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-180deg);  /* Saf3.1+, Chrome */
+  -moz-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+} 

@@ -1,0 +1,33 @@
+.padded-button {
+  padding: 2px 14px;
+}
+
+#numpad-modal {
+  width: fit-content;
+}
+
+.numpad-input {
+  width: 168.83px;
+}
+
+#default-key {
+  width: 83px;
+  height: 24.5px;
+}
+
+#delete-key, #save-key, #play-key, #stop-key, #pid-save-key {
+  width: 83px;
+  height: 49px;
+}
+
+#play-key {
+  color: green;
+}
+
+#stop-key {
+  color: red;
+}
+
+#zero-key {
+  width:107px;
+}

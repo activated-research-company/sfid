@@ -1,0 +1,29 @@
+#log-contents {
+  height: 394px;
+  width: 432px;
+}
+
+#api-log-files {
+  height: 135px;
+}
+
+#app-log-files {
+  height: 135px;
+}
+
+.debug { color: blue }
+.verbose { color: cyan }
+.info { color: green }
+.warn { color: orange}
+.debug { color: blue }
+.error { color: red }
+.silly {
+  background: red;
+  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+  background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+  background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  background-clip: content-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

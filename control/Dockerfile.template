@@ -1,0 +1,13 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-build as build
+
+WORKDIR /usr/src/control
+COPY ./control/package.json .
+RUN JOBS=MAX npm install --unsafe-perm --production
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-run
+
+WORKDIR /usr/src/control
+COPY ./control ./
+COPY --from=build /usr/src/control/node_modules ./node_modules
+
+CMD ["bash", "/usr/src/control/start.sh"]

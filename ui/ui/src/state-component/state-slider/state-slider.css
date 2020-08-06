@@ -1,0 +1,30 @@
+@keyframes strobe {
+  0%   { opacity:1; }
+  50%  { opacity:.40; }
+  100% { opacity:1; }
+}
+
+@-o-keyframes strobe {
+  0%   { opacity:1; }
+  50%  { opacity:.40; }
+  100% { opacity:1; }
+}
+
+@-moz-keyframes strobe {
+  0%   { opacity:1; }
+  50%  { opacity:.40; }
+  100% { opacity:1; }
+}
+
+@-webkit-keyframes strobe {
+  0%   { opacity:1; }
+  50%  { opacity:.40; }
+  100% { opacity:1; }
+}
+
+.a-strobe {
+    -webkit-animation: strobe 2s infinite;
+    -moz-animation: strobe 2s infinite;
+    -o-animation: strobe 2s infinite;
+    animation: strobe 2s infinite;
+}

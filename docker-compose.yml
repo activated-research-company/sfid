@@ -1,16 +1,24 @@
 version: '2.1'
 
 volumes:
-  db:
+  data:
 
 services:
-  battery:
-    build: battery
-    privileged: true
-    labels:
-      io.balena.features.dbus: '1'
-    environment:
-      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
+
+  log:
+    build: log
+    volumes:
+      - 'solvere-data:/data'
+    expose:
+      - '80'
+
+  # battery:
+  #   build: battery
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.dbus: '1'
+  #   environment:
+  #     DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
   wifi:
     build: wifi
@@ -25,4 +33,29 @@ services:
   db:
     build: db
     volumes:
-      - 'db:/data'
+      - 'db:/db'
+
+  control:
+    build: control
+    volumes:
+      - 'data:/control'
+    expose:
+      - '3000'
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: true
+    depends_on:
+      - log
+      - phidget
+      - db
+
+  ui:
+    build: ui
+    volumes:
+      - 'data:/ui'
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: true
+      # io.balena.features.dbus: '1'
+    depends_on:
+      - log
