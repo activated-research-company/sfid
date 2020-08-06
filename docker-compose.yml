@@ -33,7 +33,7 @@ services:
   db:
     build: db
     volumes:
-      - 'db:/db'
+      - 'data:/db'
 
   control:
     build: control
