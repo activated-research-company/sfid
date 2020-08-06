@@ -1,0 +1,59 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-run as run
+
+WORKDIR /usr/src/phidget
+
+RUN set -ex; \
+    tempPkgs=' \
+        ca-certificates \
+        wget \
+        unzip \
+    '; \
+    apt-get update; \
+    apt-get install -q -y --no-install-recommends \
+        $tempPkgs; \
+    # Do something with tempPkgs
+    wget https://www.phidgets.com/downloads/phidget22/libraries/linux/libphidget22/libphidget22-1.6.20200417.tar.gz; \
+    wget https://www.phidgets.com/downloads/phidget22/libraries/linux/libphidget22extra/libphidget22extra-1.6.20200417.tar.gz; \
+    wget https://www.phidgets.com/downloads/phidget22/servers/linux/phidget22networkserver/phidget22networkserver-1.6.20200417.tar.gz; \
+    # Cleanup tempPkgs
+    apt-get purge -y --auto-remove $tempPkgs; \
+    # Install persistend packages
+    apt-get update; \
+    apt-get install -q -y --no-install-recommends \
+        build-essential \
+        usbutils \
+        libusb-1.0-0-dev \
+        ; \
+    apt-get autoremove -q -y; \
+    apt-get clean -q -y; \
+    rm -rf /var/lib/apt/lists/*; \
+    # Phidget 22 Library
+    tar -xzf libphidget22-*.tar.gz; \
+    cd libphidget22*; \
+    ./configure --prefix=/usr; \
+    make; \
+    make install; \
+    cd ..; \
+    # Phidget 22 Library Extra
+    tar -xzf libphidget22extra-*.tar.gz; \
+    cd libphidget22extra*; \
+    ./configure --prefix=/usr; \
+    make; \
+    make install; \
+    cd ..; \
+    # Phidget 22 Network Server
+    tar -xzf phidget22networkserver-*.tar.gz; \
+    cd phidget22networkserver*; \
+    ./configure --prefix=/usr; \
+    make; \
+    make install
+
+# Config    
+COPY ./phidget22networkserver.pc /etc/phidgets/phidget22networkserver.pc
+
+# Cleanup
+RUN rm -rf libphidget22*; \
+    rm -rf phidget22networkserver*
+
+CMD ["phidget22networkserver"]
+# CMD ["sleep", "7200"]

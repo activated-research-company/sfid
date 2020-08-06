@@ -35,6 +35,16 @@ services:
     volumes:
       - 'data:/db'
 
+  phidget:
+    build: phidget
+    volumes:
+      - 'data:/phidget'
+    expose:
+      - '5661'
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: true
+
   control:
     build: control
     volumes:

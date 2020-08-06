@@ -1,0 +1,68 @@
+phidget {
+        enabled: true
+
+        logging {
+                level: verbose
+                file: '/phidget/phidget22networkserver.log'
+                source {
+			phidget22net {					# networking code
+				level: verbose
+			}
+			phidget22usb {					# USB code
+				level: verbose
+			}
+			_phidget22match {				# channel matching code
+				level: error
+			}
+			_phidget22channel {				# channel life-cycle code
+				level: error
+			}
+			_phidget22bridge {				# bridge processing code
+				level: error
+			}
+			_phidget22disp {				# dispatcher code
+				level: error
+			}
+		}
+        }
+
+        network {
+                ipv4 {
+                        port: 5661
+                }
+                publish {
+                        enabled: true
+                }
+        }
+
+        feature {
+                control {
+                        enabled: true
+                }
+                dictionary {
+                        enabled: true
+                        directory: '/etc/phidgets/dictionary.d'
+                }
+        }
+
+        www {
+                enabled: false
+                docroot: '/var/phidgets/www'
+                mimetypes: '/etc/phidgets/mimetypes.kv'
+                logging {
+                        level: err
+                        accesslog: '/var/log/phidget22access.log'
+                }
+                network {
+                        ipv4 {
+                                port: 8080
+                        }
+                        publish {
+                                enabled: true
+                        }
+                }
+                phidgets {
+                        enabled: true
+                }
+        }
+}
