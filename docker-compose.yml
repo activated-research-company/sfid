@@ -20,51 +20,51 @@ services:
   #   environment:
   #     DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
-  wifi:
-    build: wifi
-    network_mode: 'host'
-    labels:
-      io.balena.features.dbus: '1'
-    cap_add:
-      - NET_ADMIN
-    environment:
-      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
+  # wifi:
+  #   build: wifi
+  #   network_mode: 'host'
+  #   labels:
+  #     io.balena.features.dbus: '1'
+  #   cap_add:
+  #     - NET_ADMIN
+  #   environment:
+  #     DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
-  db:
-    build: db
-    volumes:
-      - 'data:/data'
+  # db:
+  #   build: db
+  #   volumes:
+  #     - 'data:/data'
 
-  phidget:
-    build: phidget
-    volumes:
-      - 'data:/data'
-    expose:
-      - '5661'
-    privileged: true
-    labels:
-      io.balena.features.kernel-modules: true
+  # phidget:
+  #   build: phidget
+  #   volumes:
+  #     - 'data:/data'
+  #   expose:
+  #     - '5661'
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.kernel-modules: true
 
-  control:
-    build: control
-    volumes:
-      - 'data:/data'
-    expose:
-      - '3000'
-    privileged: true
-    labels:
-      io.balena.features.kernel-modules: true
-    depends_on:
-      - log
-      - phidget
-      - db
+  # control:
+  #   build: control
+  #   volumes:
+  #     - 'data:/data'
+  #   expose:
+  #     - '3000'
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.kernel-modules: true
+  #   depends_on:
+  #     - log
+  #     - phidget
+  #     - db
 
-  ui:
-    build: ui
-    volumes:
-      - 'data:/data'
-    privileged: true
-    labels:
-      io.balena.features.kernel-modules: true
-    depends_on:
-      - log
+  # ui:
+  #   build: ui
+  #   volumes:
+  #     - 'data:/data'
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.kernel-modules: true
+  #   depends_on:
+  #     - log
