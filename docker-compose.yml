@@ -8,7 +8,7 @@ services:
   log:
     build: log
     volumes:
-      - 'data:/data/log'
+      - 'data:/data'
     expose:
       - '80'
 
@@ -33,12 +33,12 @@ services:
   db:
     build: db
     volumes:
-      - 'data:/data/db'
+      - 'data:/data'
 
   phidget:
     build: phidget
     volumes:
-      - 'data:/data/phidget'
+      - 'data:/data'
     expose:
       - '5661'
     privileged: true
@@ -48,7 +48,7 @@ services:
   control:
     build: control
     volumes:
-      - 'data:/data/control'
+      - 'data:/data'
     expose:
       - '3000'
     privileged: true
@@ -62,7 +62,7 @@ services:
   ui:
     build: ui
     volumes:
-      - 'data:/data/ui'
+      - 'data:/data'
     privileged: true
     labels:
       io.balena.features.kernel-modules: true
