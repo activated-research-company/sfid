@@ -18,5 +18,5 @@ if [ ! -c /dev/fb1 ] && [ "$TFT" = "1" ]; then
   mknod /dev/fb1 c $(cat /sys/class/graphics/fb1/dev | tr ':' ' ') || true
   FRAMEBUFFER=/dev/fb1 startx /usr/src/ui/node_modules/electron/dist/electron /usr/src/ui --enable-logging
 else
-  startx  /usr/src/ui/node_modules/electron/dist/electron /usr/src/ui --enable-logging --no-sandbox -- -nocursor 
+  startx /usr/src/ui/node_modules/electron/dist/electron /usr/src/ui
 fi
