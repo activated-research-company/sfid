@@ -3,7 +3,7 @@ phidget {
 
         logging {
                 level: verbose
-                file: '/phidget/phidget22networkserver.log'
+                file: '/data/phidget22networkserver.log'
                 source {
 			phidget22net {					# networking code
 				level: verbose
