@@ -20,6 +20,9 @@ function getEnv(app, path) {
       host: env.CONTROL_HOST,
       port: env.CONTROL_PORT,
     },
+    ui: {
+      host: env.UI_HOST,
+    },
     dev: env.NODE_ENV && env.NODE_ENV === 'development',
     persistentDataPath: getDataPath(env.DATA_PATH) || app.APPDATA,
     fullControlIsEnabled: env.ENABLE_FULL_CONTROL || false,

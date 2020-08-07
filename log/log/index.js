@@ -1,7 +1,7 @@
 // TODO: move this into src (same with api) - change docker file to support
 
 const http = require('http');
-const { apiLogger, appLogger, logLogger, env } = require('./container')
+const { controlLogger, uiLogger, logLogger, env } = require('./container')
 
 logLogger.info('initializing');
 
@@ -17,11 +17,11 @@ const server = http.createServer((req, res) => {
     catch (e) { logLogger.error(e); }
 
     switch (req.url) {
-      case '/api':
-        apiLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
+      case `/${env.control.host}`:
+        controlLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
         break;
-      case '/app':
-        appLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
+      case `/${env.ui.host}`:
+        uiLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
         break;
       default:
         logLogger.error(`received post on invalid url '${req.url}'`);
@@ -30,4 +30,4 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(env.port);
+server.listen(env.log.port);

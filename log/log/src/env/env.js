@@ -17,9 +17,18 @@ function getEnv(path) {
   }  
 
   return {
-    persistentDataPath: getDataPath(process.env.DATA_PATH),
-    port: parseInt(env.LOG_PORT, 10),
-    level: parseInt(env.LOG_LEVEL, 10),
+    dataPath: getDataPath(process.env.DATA_PATH),
+    log: {
+      host: env.LOG_HOST,
+      port: parseInt(env.LOG_PORT, 10),
+      level: parseInt(env.LOG_LEVEL, 10),
+    },
+    control: {
+      host: env.CONTROL_HOST,
+    },
+    ui: {
+      host: env.UI_HOST,
+    },
   };
 }
 

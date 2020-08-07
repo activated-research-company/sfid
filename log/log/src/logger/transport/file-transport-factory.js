@@ -10,7 +10,7 @@ function getFileTransportFactory(winston, path, env) {
     });
 
     return new winston.transports.DailyRotateFile({
-      dirname: path.join(env.persistentDataPath, 'log', url),
+      dirname: path.join(env.dataPath, 'log', url),
       filename: '%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       maxSize: '10m',

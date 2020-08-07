@@ -1,11 +1,11 @@
-function getDecorator(winston, { log }) {
+function getDecorator(winston, { ui, log }) {
   function decorate(logger) {
     const decoratedLogger = logger;
 
     const httpTransport = new winston.transports.Http({
       host: log.host,
       port: log.port,
-      path: 'app',
+      path: ui.host,
       handleExceptions: true,
     });
 
