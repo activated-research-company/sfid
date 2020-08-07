@@ -9,7 +9,7 @@ function getEnv(path) {
     dotenv.config();
   }
 
-  function getPersistentDataPath(directory) {
+  function getDataPath(directory) {
     if (directory[0] === '~') {
       return path.join(env.HOME, directory.slice(1));
     }
@@ -17,7 +17,7 @@ function getEnv(path) {
   }  
 
   return {
-    persistentDataPath: getPersistentDataPath(process.env.PERSISTENT_DATA_PATH),
+    persistentDataPath: getDataPath(process.env.DATA_PATH),
     port: parseInt(env.LOG_PORT, 10),
     level: parseInt(env.LOG_LEVEL, 10),
   };
