@@ -45,19 +45,19 @@ services:
     labels:
       io.balena.features.kernel-modules: true
 
-  # control:
-  #   build: control
-  #   volumes:
-  #     - 'data:/data'
-  #   expose:
-  #     - '3000'
-  #   privileged: true
-  #   labels:
-  #     io.balena.features.kernel-modules: true
-  #   depends_on:
-  #     - log
-  #     - phidget
-  #     - db
+  control:
+    build: control
+    volumes:
+      - 'data:/data'
+    expose:
+      - '3000'
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: true
+    depends_on:
+      - log
+      - phidget
+      # - db
 
   # ui:
   #   build: ui
