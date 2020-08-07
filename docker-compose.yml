@@ -59,12 +59,12 @@ services:
       - phidget
       # - db
 
-  # ui:
-  #   build: ui
-  #   volumes:
-  #     - 'data:/data'
-  #   privileged: true
-  #   labels:
-  #     io.balena.features.kernel-modules: true
-  #   depends_on:
-  #     - log
+  ui:
+    build: ui
+    volumes:
+      - 'data:/data'
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: true
+    depends_on:
+      - log
