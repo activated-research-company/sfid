@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+export PORTAL_SSID="arc-${BALENA_APP_NAME}-${SERIAL_NUMBER}"
 
 # Optional step - it takes couple of seconds (or longer) to establish a WiFi connection
 # sometimes. In this case, following checks will fail and wifi-connect
