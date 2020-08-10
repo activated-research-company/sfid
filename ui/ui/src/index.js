@@ -27,7 +27,7 @@ const electronConfig = {
   URL_LAUNCHER_NODE: process.env.URL_LAUNCHER_NODE === '1' ? 1 : 0,
   URL_LAUNCHER_WIDTH: parseInt(process.env.URL_LAUNCHER_WIDTH || 1920, 10),
   URL_LAUNCHER_HEIGHT: parseInt(process.env.URL_LAUNCHER_HEIGHT || 1080, 10),
-  URL_LAUNCHER_TITLE: process.env.URL_LAUNCHER_TITLE || 'Solvere',
+  URL_LAUNCHER_TITLE: process.env.URL_LAUNCHER_TITLE || 'SFID',
   URL_LAUNCHER_URL: `file:///${path.join(__dirname, 'index.html')}`,
   URL_LAUNCHER_OVERLAY_SCROLLBARS: process.env.URL_LAUNCHER_OVERLAY_SCROLLBARS === '1' ? 1 : 0,
   ELECTRON_ENABLE_HW_ACCELERATION: process.env.ELECTRON_ENABLE_HW_ACCELERATION === '1',
@@ -44,13 +44,13 @@ if (process.env.NODE_ENV === 'development') {
   Object.assign(electronConfig, {
     URL_LAUNCHER_KIOSK: 0,
     URL_LAUNCHER_FRAME: 1,
-    URL_LAUNCHER_HEIGHT: 875,
-    URL_LAUNCHER_WIDTH: 500,
+    URL_LAUNCHER_HEIGHT: 500,
+    URL_LAUNCHER_WIDTH: 875,
   });
   if (process.env.DEV_TOOLS === '1') {
     Object.assign(electronConfig, {
-      URL_LAUNCHER_HEIGHT: 900,
-      URL_LAUNCHER_WIDTH: 1000,
+      URL_LAUNCHER_HEIGHT: 600,
+      URL_LAUNCHER_WIDTH: 1200,
     });
   }
 }
@@ -93,7 +93,6 @@ app.on('ready', () => {
   });
 
   mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, '/assets/favicon.ico'),
     width: electronConfig.URL_LAUNCHER_WIDTH,
     height: electronConfig.URL_LAUNCHER_HEIGHT,
     frame: !!(electronConfig.URL_LAUNCHER_FRAME),
@@ -106,6 +105,8 @@ app.on('ready', () => {
       overlayScrollbars: !!(electronConfig.URL_LAUNCHER_OVERLAY_SCROLLBARS),
     },
   });
+
+  mainWindow.setIcon(electron.nativeImage.createFromPath(path.join(__dirname, '/assets/favicon.ico')));
 
   mainWindow.webContents.on('did-finish-load', () => {
     setTimeout(() => {
