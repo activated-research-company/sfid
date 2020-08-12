@@ -6,4 +6,4 @@ RUN echo "LABEL=influxdb /mnt/influxdb ext4 rw,relatime,discard,data=ordered 0 2
 
 COPY influxdb.conf /etc/influxdb
 
-CMD ["bash", "/usr/src/influxdb/start.sh"]
+CMD ["bash", "start.sh"]
