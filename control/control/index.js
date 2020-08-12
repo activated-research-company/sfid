@@ -87,7 +87,7 @@ const listen = () => {
   serialPortRegistrar.registerSerialPorts();
 };
 
-state.subscribe(console.log);
+// state.subscribe(console.log);
 
 settings
   .load()

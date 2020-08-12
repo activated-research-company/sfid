@@ -11,6 +11,12 @@ services:
       - 'data:/data'
     expose:
       - '80'
+  
+  nginx:
+    build : nginx
+    ports:
+        - "80:80"
+        - "443:443"
 
   # battery:
   #   build: battery
@@ -20,9 +26,9 @@ services:
   #   environment:
   #     DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
 
-  wifi:
-    build: wifi
-    ports:
+  wifi-connect:
+    build: wifi-connect
+    expose:
       - '80'
     network_mode: 'host'
     labels:
