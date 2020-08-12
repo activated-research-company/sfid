@@ -198,7 +198,11 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
         updateState(decoratedSystemState.computerFsSize, args / 1073741824, args / 1073741824, false, decoratedSystemState.computerFsSize.sampleRate);
       })
       .on(decoratedSystemState.computerFsUsed.event, (args) => {
-        updateState(decoratedSystemState.computerFsUsed, args / 1073741824, args / 1073741824, false, decoratedSystemState.computerFsSize.sampleRate);
+        updateState(decoratedSystemState.computerFsUsed, args / 1073741824, args / 1073741824, false, decoratedSystemState.computerFsUsed.sampleRate);
+      })
+      .on(decoratedSystemState.computerIp.event, (args) => {
+        console.log(args);
+        updateState(decoratedSystemState.computerIp, args, args, false, decoratedSystemState.computerIp.sampleRate);
       });
 
     webSocket

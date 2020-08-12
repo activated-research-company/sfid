@@ -44,15 +44,9 @@ if (process.env.NODE_ENV === 'development') {
   Object.assign(electronConfig, {
     URL_LAUNCHER_KIOSK: 0,
     URL_LAUNCHER_FRAME: 1,
-    URL_LAUNCHER_HEIGHT: 500,
-    URL_LAUNCHER_WIDTH: 875,
+    URL_LAUNCHER_HEIGHT: 600,
+    URL_LAUNCHER_WIDTH: 1400,
   });
-  if (process.env.DEV_TOOLS === '1') {
-    Object.assign(electronConfig, {
-      URL_LAUNCHER_HEIGHT: 600,
-      URL_LAUNCHER_WIDTH: 1200,
-    });
-  }
 }
 
 // Listen for a 'resin-update-lock' to either enable, disable or check
@@ -87,7 +81,9 @@ app.on('ready', () => {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        'Content-Security-Policy': ['*'],
+        'Content-Security-Policy': [
+          'default-src \'self\' \'unsafe-inline\' \'unsafe-eval\' ws: *',
+        ],
       },
     });
   });
@@ -114,7 +110,7 @@ app.on('ready', () => {
     }, 300);
   });
 
-  if (process.env.DEV_TOOLS === '1') { mainWindow.webContents.openDevTools(); }
+  if (process.env.NODE_ENV === 'development') { mainWindow.webContents.openDevTools(); }
 
   process.on('uncaughtException', () => {});
 

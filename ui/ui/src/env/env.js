@@ -4,7 +4,7 @@ function getEnv(app, path) {
   // TODO: validate env config and throw errors if something isn't found instead of taking defaults in code
 
   function getDataPath(directory) {
-    if (directory[0] === '~') {
+    if (directory && directory[0] === '~') {
       return path.join(env.HOME, directory.slice(1));
     }
     return directory;

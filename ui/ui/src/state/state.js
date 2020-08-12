@@ -254,6 +254,12 @@ function state() {
       event: 'computer.fsused',
       actual: 0,
     },
+    computerIp: {
+      label: 'IP',
+      units: '',
+      event: 'computer.ip',
+      actual: '',
+    },
     cellCompartmentLeak: {
       label: 'Leak',
       units: '',

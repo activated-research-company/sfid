@@ -1,6 +1,7 @@
 function decorate(systemState) {
   const decoratedSystemState = systemState;
 
+  const raw = (value) => value;
   const oneDecimal = (value) => value.toFixed(1);
   const twoDecimals = (value) => value.toFixed(2);
   const threeDecimals = (value) => value.toFixed(3);
@@ -58,6 +59,7 @@ function decorate(systemState) {
   decoratedSystemState.computerMemory.getDisplayValue = pipe(Math.round);
   decoratedSystemState.computerFsSize.getDisplayValue = pipe(twoDecimals);
   decoratedSystemState.computerFsUsed.getDisplayValue = pipe(twoDecimals);
+  decoratedSystemState.computerIp.getDisplayValue = pipe(raw);
   decoratedSystemState.cellCompartmentLeakVolts.getDisplayValue = pipe(twoDecimals);
 
   return decoratedSystemState;

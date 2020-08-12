@@ -5,6 +5,9 @@ function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButto
         m('.bb.bt', [
           m(labelledCard, { label: 'Comp' }, [
             m('.flex.pb2', [
+              m('.w-50.pr1', m(stateDisplay, { state: systemState.computerIp })),
+            ]),
+            m('.flex.pb2', [
               m('.w-50.pr1', m(stateDisplay, { state: systemState.computerCpu })),
               m('.w-50.pl1', m(stateDisplay, { state: systemState.computerMemory })),
             ]),
