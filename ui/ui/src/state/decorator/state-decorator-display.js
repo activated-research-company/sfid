@@ -4,10 +4,7 @@ function decorate(systemState) {
   const raw = (value) => value;
   const oneDecimal = (value) => value.toFixed(1);
   const twoDecimals = (value) => value.toFixed(2);
-  const threeDecimals = (value) => value.toFixed(3);
   const addNumberSign = (number) => `${parseFloat(number) >= 0 ? '+' : ''}${number}`;
-  const flip = (value) => !value;
-  const hpaToAtm = (hpa) => hpa / 1013.25;
   const sixCharacters = (value) => {
     let transformedValue = value.toString().substring(0, 6);
     if (transformedValue.substring(transformedValue.length - 1) === '.') {
@@ -24,16 +21,6 @@ function decorate(systemState) {
     return getDisplayValue;
   }
 
-  decoratedSystemState.cellAir.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
-  decoratedSystemState.cellAirPressure.getDisplayValue = pipe(oneDecimal, addNumberSign);
-  decoratedSystemState.cellTemperature.getDisplayValue = pipe(twoDecimals);
-  decoratedSystemState.cellDiskSpeed.getDisplayValue = pipe(twoDecimals);
-  decoratedSystemState.cellPressure.getDisplayValue = pipe(threeDecimals, addNumberSign, sixCharacters);
-  decoratedSystemState.diversionValve.getDisplayValue = pipe(flip);
-  decoratedSystemState.laserOutput.getDisplayValue = pipe(Math.round);
-  decoratedSystemState.laserPowerCalculated.getDisplayValue = pipe(twoDecimals);
-  decoratedSystemState.laserBoxTemperature.getDisplayValue = pipe(twoDecimals);
-  decoratedSystemState.laserHousingTemperature.getDisplayValue = pipe(twoDecimals);
   decoratedSystemState.fidAir.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
   decoratedSystemState.fidAirPressure.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
   decoratedSystemState.fidHydrogen.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
@@ -52,6 +39,7 @@ function decorate(systemState) {
     secondsRemaining -= minutes * 60;
     return `${days}d ${hours}h ${minutes}m`;
   }
+
   decoratedSystemState.computerUptime.getDisplayValue = getUptimeDisplayValue;
 
   decoratedSystemState.computerTemperature.getDisplayValue = pipe(twoDecimals);
@@ -60,7 +48,6 @@ function decorate(systemState) {
   decoratedSystemState.computerFsSize.getDisplayValue = pipe(twoDecimals);
   decoratedSystemState.computerFsUsed.getDisplayValue = pipe(twoDecimals);
   decoratedSystemState.computerIp.getDisplayValue = pipe(raw);
-  decoratedSystemState.cellCompartmentLeakVolts.getDisplayValue = pipe(twoDecimals);
 
   return decoratedSystemState;
 }

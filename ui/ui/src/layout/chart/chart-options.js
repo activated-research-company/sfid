@@ -4,17 +4,6 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
     let component;
     const chartables = [
       {
-        component: 'Cell',
-        outputs: [
-          systemState.cellAir,
-          systemState.cellAirPressure,
-          systemState.cellTemperature,
-          systemState.cellDiskSpeed,
-          systemState.cellPressure,
-          systemState.cellCompartmentLeakVolts,
-        ],
-      },
-      {
         component: 'FID',
         outputs: [
           systemState.fidAir,
@@ -23,15 +12,6 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
           systemState.fidHydrogenPressure,
           systemState.fidTemperature,
           systemState.fid,
-        ],
-      },
-      {
-        component: 'Laser',
-        outputs: [
-          systemState.laserOutput,
-          systemState.laserPowerCalculated,
-          systemState.laserBoxTemperature,
-          systemState.laserHousingTemperature,
         ],
       },
       {

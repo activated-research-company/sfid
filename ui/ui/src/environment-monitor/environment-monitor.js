@@ -1,7 +1,8 @@
-function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButton, stateIcon) {
+function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButton, stateIcon, env) {
   function component() {
     return {
       view: () => m('.ma-aa', [
+        m('.tc.pb2', `Device ID: ${env.uuid}`),
         m('.bb.bt', [
           m(labelledCard, { label: 'Comp' }, [
             m('.flex.pb2', [
@@ -55,5 +56,6 @@ module.exports = (container) => {
     'stateDisplay',
     'simButton',
     'stateIcon',
+    'env',
   );
 };

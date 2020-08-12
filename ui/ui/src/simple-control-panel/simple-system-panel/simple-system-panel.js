@@ -5,7 +5,6 @@ function simpleSystemPanel(
   modeButton,
   modeDisplay,
   modeStepDisplay,
-  stateSwitch,
 ) {
   function component() {
     return {
@@ -20,7 +19,6 @@ function simpleSystemPanel(
         ]),
         m('.flex.w-100', [
           m('.w-100.pr1', m(modeButton, { mode: 'shutdown', label: 'Shutdown', icon: 'power-settings-new' })),
-          m('.w-100.pl1', m(stateSwitch, { state: systemState.diversionValve, hideLabel: true })),
         ]),
       ]),
     };
@@ -39,7 +37,6 @@ module.exports = (container) => {
     'modeButton',
     'modeDisplay',
     'modeStepDisplay',
-    'stateSwitch',
     'emergencyShutdownButton',
     'emergencyShutdownConfirm',
   );

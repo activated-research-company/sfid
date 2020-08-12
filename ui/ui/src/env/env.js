@@ -11,6 +11,7 @@ function getEnv(app, path) {
   }
 
   return {
+    uuid: env.BALENA_DEVICE_UUID,
     log: {
       host: env.LOG_HOST,
       port: parseInt(env.LOG_PORT, 10),

@@ -47,15 +47,6 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
       state.turnOff = function() { webSocket.emit(this.event, 0); };
     }
 
-    addCommunicationMethods(decoratedSystemState.cellAir);
-    addCommunicationMethods(decoratedSystemState.cellTemperature);
-    addCommunicationMethods(decoratedSystemState.cellDiskSpeed);
-    addCommunicationMethods(decoratedSystemState.cellPressure);
-    addCommunicationMethods(decoratedSystemState.diversionValve);
-    addCommunicationMethods(decoratedSystemState.laserHardInterlock);
-    addCommunicationMethods(decoratedSystemState.laserEnabled);
-    addCommunicationMethods(decoratedSystemState.laserPilot);
-    addCommunicationMethods(decoratedSystemState.laserOutput);
     addCommunicationMethods(decoratedSystemState.fidHydrogen);
     addCommunicationMethods(decoratedSystemState.fidAir);
     addCommunicationMethods(decoratedSystemState.fidTemperature);
@@ -79,79 +70,6 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
         }
       }
     }
-
-    webSocket
-      .on(decoratedSystemState.cellAir.event, (args) => {
-        decoratedSystemState.cellAirPressure.actual = round(args.pressure, 1);
-        updateState(decoratedSystemState.cellAir, args.setpoint, round(args.flow, 1), args.reachedSetpoint);
-      })
-      .on(decoratedSystemState.cellTemperature.event, (args) => {
-        decoratedSystemState.cellTemperature.kp = args.kp;
-        decoratedSystemState.cellTemperature.ki = args.ki;
-        decoratedSystemState.cellTemperature.kd = args.kd;
-        decoratedSystemState.cellTemperature.output = args.output;
-        updateState(decoratedSystemState.cellTemperature, args.setpoint, args.actual, args.reachedSetpoint, args.sampleRate);
-      })
-      .on(decoratedSystemState.cellDiskSpeed.event, (args) => {
-        updateState(decoratedSystemState.cellDiskSpeed, args.setpoint, args.actual, args.reachedSetpoint, args.sampleRate);
-      })
-      .on(decoratedSystemState.cellPressure.event, (args) => {
-        updateState(decoratedSystemState.cellPressure, args.setpoint, round(args.pressure, 3), args.reachedSetpoint);
-      })
-      .on(decoratedSystemState.diversionValve.event, (args) => {
-        updateState(decoratedSystemState.diversionValve, !args, !args);
-      });
-
-    webSocket
-      .on(decoratedSystemState.laserHardInterlock.event, (args) => {
-        updateState(decoratedSystemState.laserHardInterlock, (args === '1'), (args === '1'));
-      })
-      .on(decoratedSystemState.laserEnabled.event, (args) => {
-        updateState(decoratedSystemState.laserEnabled, (args.actual === '0'), (args.actual === '0'));
-      })
-      .on(decoratedSystemState.laserPilot.event, (args) => {
-        updateState(decoratedSystemState.laserPilot, (args !== '0'), (args !== '0'));
-      })
-      .on(decoratedSystemState.laserOutput.event, (args) => {
-        const setpoint = Math.round((args.setpoint / process.env.LASER_MAX_POWER) * 100);
-        const actual = Math.round((args.actual / process.env.LASER_MAX_POWER) * 100);
-        updateState(decoratedSystemState.laserOutput, setpoint, actual, args.reachedSetpoint);
-      })
-      .on(decoratedSystemState.laserBoxTemperature.event, (args) => {
-        updateState(decoratedSystemState.laserBoxTemperature, args, args);
-      })
-      .on('laser', (args) => {
-        const json = JSON.parse(args);
-        updateState(decoratedSystemState.laserHardInterlock, json.interlockIsEngaged, json.interlockIsEngaged, json.sampleRate);
-        updateState(decoratedSystemState.laserInterlock1, json.interlock1IsEngaged, json.interlock1IsEngaged, json.sampleRate);
-        updateState(decoratedSystemState.laserInterlock2, json.interlock2IsEngaged, json.interlock2IsEngaged, json.sampleRate);
-        updateState(decoratedSystemState.laserEnabled, json.powerSupplyIsOn, json.powerSupplyIsOn, json.sampleRate);
-        updateState(decoratedSystemState.laserPilot, json.pilotIsOn, json.pilotIsOn, json.sampleRate);
-
-        const setpoint = Math.round((json.powerSetpoint / process.env.LASER_MAX_POWER) * 100);
-        const actual = Math.round((json.power / process.env.LASER_MAX_POWER) * 100);
-
-        updateState(decoratedSystemState.laserOutput, setpoint, actual, json.reachedSetpoint, json.sampleRate);
-        eventEmitter.emit(decoratedSystemState.laserOutput.event, {
-          setpoint: json.powerSetpoint,
-          actual: json.power,
-        });
-
-        const calculatedSetpoint = Math.round((json.power / process.env.LASER_MAX_POWER) * 100);
-        const calculatedActual = Math.round((json.powerCalculated / process.env.LASER_MAX_POWER) * 100);
-
-        updateState(decoratedSystemState.laserPowerCalculated, calculatedSetpoint, calculatedActual, json.sampleRate);
-        eventEmitter.emit(decoratedSystemState.laserPowerCalculated.event, {
-          setpoint: calculatedSetpoint,
-          actual: calculatedActual,
-        });
-
-        updateState(decoratedSystemState.laserBoxTemperature, json.temperature, json.temperature, json.sampleRate);
-        eventEmitter.emit(decoratedSystemState.laserBoxTemperature.event, json.temperature, json.sampleRate);
-      })
-      .on(decoratedSystemState.laserHousingTemperature.event, (args) => {
-        updateState(decoratedSystemState.laserHousingTemperature, args.actual, args.actual, args.sampleRate);
-      });
 
     webSocket
       .on(decoratedSystemState.fidHydrogen.event, (args) => {
@@ -202,14 +120,6 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
       })
       .on(decoratedSystemState.computerIp.event, (args) => {
         updateState(decoratedSystemState.computerIp, args, args, false, decoratedSystemState.computerIp.sampleRate);
-      });
-
-    webSocket
-      .on(decoratedSystemState.cellCompartmentLeak.event, (args) => {
-        updateState(decoratedSystemState.cellCompartmentLeak, args, args, decoratedSystemState.cellCompartmentLeak.sampleRate);
-      })
-      .on(decoratedSystemState.cellCompartmentLeakVolts.event, (args) => {
-        updateState(decoratedSystemState.cellCompartmentLeakVolts, args, args, decoratedSystemState.cellCompartmentLeakVolts.sampleRate);
       });
 
     webSocket
