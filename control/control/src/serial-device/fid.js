@@ -47,7 +47,7 @@ class Fid extends SerialDevice {
                   },
                 ],
                 {
-                  database: 'solvere',
+                  database: 'sfid',
                   precision: 'ms',
                 },
               )

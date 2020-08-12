@@ -18,7 +18,7 @@ if (!webSocket.isConnected()) { webSocket.connect(); }
 
 setInterval(m.redraw, 250); // this is much more efficient than actively redrawing on state updates
 
-function solvere() {
+function sfid() {
   let route = 'simple-control';
 
   function getComponent() {
@@ -51,5 +51,5 @@ function solvere() {
 
 settings.load().then(() => {
   // eslint-disable-next-line no-undef
-  m.mount(document.body, solvere);
+  m.mount(document.body, sfid);
 });

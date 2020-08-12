@@ -23,8 +23,8 @@ function getInflux(env) {
   influxdb
     .getDatabaseNames()
     .then((names) => {
-      if (!names.includes('solvere')) {
-        return influxdb.createDatabase('solvere');
+      if (!names.includes('sfid')) {
+        return influxdb.createDatabase('sfid');
       }
       return null;
     });

@@ -2,9 +2,9 @@ function decorate(state) {
   const decoratedState = state;
 
   decoratedState.online.icon = {
-    on: 'public',
+    on: 'cloud',
     onColor: 'green',
-    off: 'public',
+    off: 'cloud-off',
     offColor: 'gray',
   };
 

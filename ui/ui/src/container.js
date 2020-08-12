@@ -3,7 +3,7 @@ const Bottle = require('bottlejs');
 const bottle = new Bottle();
 
 require('./electron/electron')(bottle);
-require('./app/app')(bottle);
+require('./electron/app')(bottle);
 require('./env/env')(bottle);
 require('./fs/fs')(bottle);
 require('./event-emitter/event-emitter')(bottle);
@@ -73,7 +73,6 @@ require('./simple-control-panel/mode/mode-step-display')(bottle);
 require('./layout/nav/nav')(bottle);
 
 require('./utility/round')(bottle);
-require('./utility/add-fade-out')(bottle);
 
 require('./setpoint-saver/setpoint-saver')(bottle);
 

@@ -1,8 +1,8 @@
 {
-  "name": "solvere-api",
+  "name": "sfid-control",
   "version": "1.0.0",
-  "description": "Solvere control panel websocket API for interfacing with physical devices.",
-  "repository": "https://github.com/adamlee-ARC/solvere-app",
+  "description": "SFID control panel websocket API for interfacing with physical devices.",
+  "repository": "https://github.com/adamlee-ARC/sfid",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
