@@ -25,7 +25,6 @@ function getEnv(app, path) {
     },
     dev: env.NODE_ENV && env.NODE_ENV === 'development',
     persistentDataPath: getDataPath(env.DATA_PATH) || app.APPDATA,
-    fullControlIsEnabled: env.ENABLE_FULL_CONTROL || false,
     screenSleepTime: env.SCREEN_SLEEP_TIME,
   };
 }

@@ -9,9 +9,9 @@
     "test": "ospec",
     "c8": "node node_modules/c8/bin/c8.js npm test",
     "coverage": "node node_modules/c8/bin/c8.js report --reporter=text-lcov > coverage/tests.lcov",
-    "inspect": "NODE_ENV=development node --inspect index.js",
-    "trace": "NODE_ENV=development nodemon --trace-warnings index.js",
-    "start": "NODE_ENV=development nodemon src/index.js"
+    "inspect": "cross-env NODE_ENV=development node --inspect index.js",
+    "trace": "cross-env NODE_ENV=development nodemon --trace-warnings index.js",
+    "start": "cross-env NODE_ENV=development nodemon src/index.js"
   },
   "author": "Adam Lee, Activated Research Company",
   "license": "ISC",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "c8": "^7.2.1",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.2.0",
