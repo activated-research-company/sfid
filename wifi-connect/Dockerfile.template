@@ -7,7 +7,7 @@ WORKDIR /usr/src/wifi-connect
 RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/tags/v4.3.1 -s \
     | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
     | xargs -n1 curl -Ls \
-    | tar -xvz -C /usr/src/wifi/
+    | tar -xvz -C /usr/src/wifi-connect/
 
 COPY start.sh .
 
