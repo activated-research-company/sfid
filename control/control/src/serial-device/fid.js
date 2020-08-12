@@ -1,12 +1,13 @@
 const SerialDevice = require('./serial-device');
 
 class Fid extends SerialDevice {
-  constructor(serialPortFactory, { fid }, sampleRate, influx, eventEmitter) {
+  constructor(serialPortFactory, { fid }, sampleRate, influx, eventEmitter, state) {
     super(fid, serialPortFactory, eventEmitter);
     eventEmitter.on('setfidigniter', this.ignite.bind(this));
     this.sampleRate = sampleRate;
     this.influx = influx;
     this.eventEmitter = eventEmitter;
+    this.state = state;
     this.commands = 0;
     this.igniting = false;
     this.ignited = false;
@@ -31,6 +32,7 @@ class Fid extends SerialDevice {
           const json = this.dataToJson(data);
           if (json) {
             this.eventEmitter.emit('fid', json);
+            this.state.next({ type: 'fid', payload: json });
             if (this.influx.writePoints && json.voltage) {
               this.influx.writePoints(
                 [
@@ -97,7 +99,7 @@ class Fid extends SerialDevice {
       }
     }
     return {
-      voltage: this.voltage,
+      voltage: parseFloat(this.voltage.toFixed(4)),
       temperature: this.temperature,
       sampleRate: this.sampleRate,
     };

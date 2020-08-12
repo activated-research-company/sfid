@@ -14,14 +14,17 @@ function listen(service) {
 
 bottle.decorator(listen);
 
+require('./env/env')(bottle);
+
 require('./settings/settings')(bottle);
 require('./settings/decorator/default')(bottle);
 require('./settings/decorator/setter')(bottle);
 
+require('./state/state')(bottle);
+
 require('./computer-information/computer-information')(bottle);
 require('./computer-information/computer-information-service')(bottle);
 
-require('./env/env')(bottle);
 
 require('./influx/influx')(bottle);
 

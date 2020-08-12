@@ -37,7 +37,7 @@ function fidPortMock(eventEmitter) {
     }
 
     if (this.peaking) {
-      volts = (this.peakHeight * (Math.abs(this.peakStep) / this.peakDuration)).toFixed(3);
+      volts = (this.peakHeight * (Math.abs(this.peakStep) / this.peakDuration)).toFixed(4);
       if (this.peakStep === this.peakDuration) {
         this.peakDirection = -1;
       }

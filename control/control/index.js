@@ -6,6 +6,7 @@
 const {
   env,
   settings,
+  state,
   webSocketServer,
   influx,
   eventEmitter,
@@ -78,12 +79,15 @@ const listen = () => {
       alicatDeviceFactory.getNewFlowController('a', 'fidair'),
       alicatDeviceFactory.getNewFlowController('h', 'fidhydrogen'),
     ],
+    state,
   );
 
-  const fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, influx, eventEmitter);
+  const fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, influx, eventEmitter, state);
 
   serialPortRegistrar.registerSerialPorts();
 };
+
+state.subscribe(console.log);
 
 settings
   .load()

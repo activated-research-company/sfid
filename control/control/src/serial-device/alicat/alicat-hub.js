@@ -1,7 +1,7 @@
 const SerialDevice = require('../serial-device');
 
 class AlicatHub extends SerialDevice {
-  constructor(serialDevice, serialPortFactory, eventEmitter, controllers) {
+  constructor(serialDevice, serialPortFactory, eventEmitter, controllers, state) {
     super(serialDevice, serialPortFactory, eventEmitter);
 
     controllers.forEach((controller) => {
@@ -15,6 +15,7 @@ class AlicatHub extends SerialDevice {
     this.controllers = controllers;
     this.commandStack = [];
     this.eventEmitter = eventEmitter;
+    this.state = state;
   }
 
   pushGlobalCommand(command) {
@@ -32,6 +33,7 @@ class AlicatHub extends SerialDevice {
       if (parser) {
         parser.on('data', (data) => {
           const json = AlicatHub.dataToJson(data);
+          this.state.next({ type: json.gas, payload: json})
           this.controllers.forEach((controller) => {
             if (controller.address === json.id) {
               this.eventEmitter.emit(controller.event.toLowerCase(), controller.get(json));

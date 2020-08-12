@@ -6,11 +6,15 @@ function getInflux(env) {
   const influxdb = new influx.InfluxDB({
     host: env.influxdb.host,
     port: env.influxdb.port,
-    database: 'solvere',
+    database: 'sfid',
     schema: [
       {
         measurement: 'fid',
-        fields: { voltage: influx.FieldType.FLOAT },
+        fields: {
+          voltage: influx.FieldType.FLOAT,
+          temperature: influx.FieldType.FLOAT,
+          flameTemperature: influx.FieldType.FLOAT,
+        },
         tags: ['flame'],
       },
     ],
