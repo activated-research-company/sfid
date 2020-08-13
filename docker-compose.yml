@@ -47,19 +47,19 @@ services:
     expose:
       - '8086'
 
-    grafana:
-      build: grafana
-      ports:
-        - '80'
-      volumes:
-        - 'data:/data'
-      environment:
-          - 'GF_PATHS_DATA=/data/grafana'
-          - 'GF_SERVER_HTTP_PORT=80'
-          - 'GF_SESSION_PROVIDER=memory'
-          # - 'GF_AUTH_ANONYMOUS_ENABLED=true'
-      depends_on:
-        - influxdb
+  grafana:
+    build: grafana
+    ports:
+      - '80'
+    volumes:
+      - 'data:/data'
+    environment:
+        - 'GF_PATHS_DATA=/data/grafana'
+        - 'GF_SERVER_HTTP_PORT=80'
+        - 'GF_SESSION_PROVIDER=memory'
+        # - 'GF_AUTH_ANONYMOUS_ENABLED=true'
+    depends_on:
+      - influxdb
 
   phidget:
     build: phidget
