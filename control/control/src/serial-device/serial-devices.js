@@ -5,7 +5,7 @@ function getSerialDevices(env) {
     serialDevices.alicatHub = {
       name: 'alicat hub',
       onFoundEvent: 'alicathubfound',
-      baudRate: 19200,
+      baudRate: env.fc.baudRate,
       probe: 'h\r',
       delimiter: Buffer.from('\r'),
       port: '',

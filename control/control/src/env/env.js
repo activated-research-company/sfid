@@ -49,12 +49,13 @@ function getEnv(path) {
     fc: {
       isAttached: isTrue(env.FC_IS_ATTACHED),
       useSim: isTrue(env.FC_USE_SIM),
-      simPort: process.env.FC_SIM_PORT,
+      simPort: env.FC_SIM_PORT,
+      baudRate: parseInt(env.FC_BAUD_RATE, 10),
     },
     fid: {
       isAttached: isTrue(env.FID_IS_ATTACHED),
       useSim: isTrue(env.FID_USE_SIM),
-      simPort: process.env.FID_SIM_PORT,
+      simPort: env.FID_SIM_PORT,
       sampleRate: parseInt(env.FID_SAMPLE_RATE, 10),
       temperatureSensor: {
         isAttached: isTrue(env.FID_TEMPERATURE_SENSOR_IS_ATTACHED),
