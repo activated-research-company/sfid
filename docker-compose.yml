@@ -7,16 +7,16 @@ services:
 
   log:
     build: log
-    volumes:
-      - 'data:/data'
     expose:
       - '80'
+    volumes:
+      - 'data:/data'
   
-  # nginx:
-  #   build : nginx
-  #   ports:
-  #       - '80:80'
-  #       - '443:443'
+  nginx:
+    build : nginx
+    ports:
+        - '80:80'
+        - '443:443'
 
   # battery:
   #   build: battery
@@ -41,15 +41,15 @@ services:
 
   influxdb:
     build: influxdb
-    volumes:
-      - 'data:/data'
     privileged: true
     expose:
       - '8086'
+    volumes:
+      - 'data:/data'
 
   grafana:
     build: grafana
-    ports:
+    expose:
       - '80'
     volumes:
       - 'data:/data'
@@ -63,21 +63,21 @@ services:
 
   phidget:
     build: phidget
-    volumes:
-      - 'data:/data'
+    privileged: true
     expose:
       - '5661'
-    privileged: true
+    volumes:
+      - 'data:/data'
     labels:
       io.balena.features.kernel-modules: true
 
   control:
     build: control
-    volumes:
-      - 'data:/data'
+    privileged: true
     expose:
       - '3000'
-    privileged: true
+    volumes:
+      - 'data:/data'
     labels:
       io.balena.features.kernel-modules: true
     depends_on:
@@ -87,9 +87,9 @@ services:
 
   ui:
     build: ui
+    privileged: true
     volumes:
       - 'data:/data'
-    privileged: true
     labels:
       io.balena.features.kernel-modules: true
     depends_on:
