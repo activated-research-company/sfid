@@ -7,8 +7,6 @@ function redIndicatorLight(indicatorLightFactory, { light: { red }}, eventEmitte
 
   const errorEvents = [
     'cellcompartment.leak',
-    'laser.interlocksync',
-    'laser.temptoohigh',
     'stall',
     'thermalrunaway',
     'unresponsivethermometer',

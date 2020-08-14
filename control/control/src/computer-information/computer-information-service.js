@@ -63,6 +63,7 @@ function computerInformationService(computerInformation, eventEmitter, env) {
     monitor('cpu', computerInformation.currentLoad);
     monitor('memory', computerInformation.mem);
     monitor('fssize', getFsSize);
+    monitor('fsused', getFsUsed);
     monitor('ip', getIp);
   }
 

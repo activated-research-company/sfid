@@ -91,12 +91,8 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
         if (args.voltage) { decoratedSystemState.fid.voltage = args.voltage; } // TODO: why is this coming back null?
         updateState(decoratedSystemState.fid, decoratedSystemState.fid.voltage, decoratedSystemState.fid.voltage, null, args.sampleRate);
         updateState(decoratedSystemState.fidFlameTemperature, args.temperature, args.temperature, null, args.sampleRate);
-      })
-      .on(decoratedSystemState.fidIgniter.event, (args) => {
-        updateState(decoratedSystemState.fidIgniter, args, args);
-      })
-      .on(decoratedSystemState.fidFlame.event, (args) => {
-        updateState(decoratedSystemState.fidFlame, args, args);
+        updateState(decoratedSystemState.fidIgniter, args.igniting, args.igniting);
+        updateState(decoratedSystemState.fidFlame, args.ignited, args.ignited);
       });
 
     webSocket

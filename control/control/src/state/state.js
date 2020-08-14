@@ -6,7 +6,7 @@ let s = {};
 const state = {
   subscribe: (args) => subject.subscribe(args),
   next: ({ type, payload }) => {
-    s = { ...s, [type.toLowerCase()]: { ...s[type.toLowerCase()], ...payload}};
+    s = { ...s, type: type.toLowerCase(), [type.toLowerCase()]: { ...s[type.toLowerCase()], ...payload}};
     subject.next(s);
   },
 }

@@ -4,18 +4,6 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
   }
 
   const events = {
-    cellAir: 'cellair',
-    cellTemperature: 'celltemperature',
-    cdllKp: 'cellkp',
-    cellKi: 'cellki',
-    cellKd: 'cellkd',
-    diskRpm: 'diskrpm',
-    cellPressure: 'cellpressure',
-    diversionValve: 'diversionvalve',
-    laserHardInterlock: 'laserhardinterlock',
-    laserSoftInterlock: 'lasersoftinterlock',
-    laserPilot: 'laserpilot',
-    laserPower: 'laserpower',
     fidHydrogen: 'fidhydrogen',
     fidAir: 'fidair',
     fidTemperature: 'fidtemperature',
@@ -59,12 +47,7 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
     httpServer.listen(control.port);
 
     eventEmitter.all((event, args) => {
-      // TODO: we should be stringifying everything on the way out
-      if (event === 'laser') {
         emit(event, JSON.stringify(args));
-      } else {
-        emit(event, args);
-      }
     });
   }
 

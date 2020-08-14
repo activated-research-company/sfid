@@ -7,6 +7,7 @@ const {
   env,
   settings,
   state,
+  stateEmitter,
   webSocketServer,
   influx,
   eventEmitter,
@@ -86,8 +87,6 @@ const listen = () => {
 
   serialPortRegistrar.registerSerialPorts();
 };
-
-// state.subscribe(console.log);
 
 settings
   .load()
