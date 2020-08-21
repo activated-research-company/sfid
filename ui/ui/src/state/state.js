@@ -7,7 +7,7 @@ function state() {
       units: 'SCCM',
       max: 500,
       event: 'fidair',
-      setpoint: 400,
+      setpoint: 350,
       deviceSetpoint: 0,
       actual: 0,
     },

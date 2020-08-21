@@ -13,7 +13,6 @@ function envValidator(env) {
 
   // validateHubConfigured('fidTemperatureSensor');
   // validateHubConfigured('cellTemperatureSensor');
-  // validateHubConfigured('laserTemperatureSensor');
   // validateHubConfigured('heater');
   // validateHubConfigured('leakDetector');
   // validateHubConfigured('encoder');

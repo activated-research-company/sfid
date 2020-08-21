@@ -26,45 +26,38 @@ class Fid extends SerialDevice {
 
   connect() {
     return super.connect().then((parser) => {
-      setInterval(this.emitFidIgniter.bind(this), 1000);
       if (parser) {
         parser.on('data', (data) => {
           const json = this.dataToJson(data);
           if (json) {
-            this.eventEmitter.emit('fid', json);
             this.state.next({ type: 'fid', payload: json });
-            if (this.influx.writePoints && json.voltage) {
-              this.influx.writePoints(
-                [
-                  {
-                    measurement: 'fid',
-                    fields: {
-                      voltage: json.voltage,
-                    },
-                    tags: {
-                      flame: this.ignited ? '1' : '0',
-                    },
-                  },
-                ],
-                {
-                  database: 'sfid',
-                  precision: 'ms',
-                },
-              )
-                .catch((error) => {
-                  console.error(error.stack);
-                });
-            }
+            // if (this.influx.writePoints && json.voltage) {
+            //   this.influx.writePoints(
+            //     [
+            //       {
+            //         measurement: 'fid',
+            //         fields: {
+            //           voltage: json.voltage,
+            //         },
+            //         tags: {
+            //           ignited: this.ignited ? '1' : '0',
+            //         },
+            //       },
+            //     ],
+            //     {
+            //       database: 'sfid',
+            //       precision: 'ms',
+            //     },
+            //   )
+            //     .catch((error) => {
+            //       console.error(error.stack);
+            //     });
+            // }
           }
         });
         setInterval(this.sendCommand.bind(this), this.sampleRate);
       }
     });
-  }
-
-  emitFidIgniter() {
-    this.eventEmitter.emit('fidigniter', this.igniting);
-    this.eventEmitter.emit('fidignited', this.ignited);
   }
 
   turnOffIgniter() {
@@ -102,6 +95,8 @@ class Fid extends SerialDevice {
       voltage: this.voltage ? parseFloat(this.voltage.toFixed(4)) : null,
       temperature: this.temperature,
       sampleRate: this.sampleRate,
+      igniting: this.igniting,
+      ignited: this.ignited,
     };
   }
 }

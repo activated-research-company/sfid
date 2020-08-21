@@ -29,9 +29,6 @@ function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButto
               m('.w-50.pr1', m(simButton, { label: 'Leak', event: 'simleak' })),
               m('.w-50.pl1', m(simButton, { label: 'Stepper Stall', event: 'simstall' })),
             ]),
-            m('.flex', [
-              m('.w-50.pr1', m(simButton, { label: 'Laser Interlock Desync', event: 'siminterlocksync' })),
-            ]),
           ]),
         ]),
         m('.flex.pr2.pt2', [

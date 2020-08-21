@@ -8,7 +8,7 @@ function stateDisplay(m, stateLabel, stateSetpointLabels, stateUnitLabels, state
         ]),
         m('.w-50.ma-aa', [
           m('.w-100.flex', [
-            m('.w-30.ma-aa.b', m(stateActualLabels, { state, hideSecondary })),
+            m('.w-60.ma-aa.b', m(stateActualLabels, { state, hideSecondary })),
             m('.w-20.ma-aa', m(stateUnitLabels, { state, hideSecondary })),
           ]),
         ]),

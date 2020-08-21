@@ -1,9 +1,32 @@
-const influx = require('influx');
+const { InfluxDB, FieldType } = require('influx');
 
-function getInflux(env) {
+function getInfluxdb(env, logger) {
   if (!env.influxdb.host || !env.influxdb.port) { return {}; }
 
-  const influxdb = new influx.InfluxDB({
+  const initDatabase = (databaseNames) => {
+    logger.info('influxdb connected');
+    if (!databaseNames.includes('sfid')) {
+      return influxdb.createDatabase('sfid');
+    }
+    return null;
+  }
+
+  const handleError = (error) => {
+    const errorString = error.toString();
+    if (errorString.includes('ECONNREFUSED')) {
+      console.warn('influxdb connection refused');
+      setTimeout(connect, 10000);
+    }
+  }
+
+  const connect = () => {
+    influxdb
+    .getDatabaseNames()
+    .then(initDatabase)
+    .catch(handleError);
+  };
+
+  const influxdb = new InfluxDB({
     host: env.influxdb.host,
     port: env.influxdb.port,
     database: 'sfid',
@@ -11,27 +34,25 @@ function getInflux(env) {
       {
         measurement: 'fid',
         fields: {
-          voltage: influx.FieldType.FLOAT,
-          temperature: influx.FieldType.FLOAT,
-          flameTemperature: influx.FieldType.FLOAT,
+          voltage: FieldType.FLOAT,
+          temperature: FieldType.FLOAT,
+          flameTemperature: FieldType.FLOAT,
         },
         tags: ['flame'],
       },
     ],
   });
 
-  influxdb
-    .getDatabaseNames()
-    .then((names) => {
-      if (!names.includes('sfid')) {
-        return influxdb.createDatabase('sfid');
-      }
-      return null;
-    });
+  connect();
 
   return influxdb;
 }
 
 module.exports = (container) => {
-  container.service('influx', getInflux, 'env');
+  container.service(
+    'influxdb',
+    getInfluxdb,
+    'env',
+    'logger',
+  );
 };

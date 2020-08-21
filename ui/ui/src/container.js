@@ -56,8 +56,6 @@ require('./layout/error-message/error-message-emitter-decorator/cell-compartment
 require('./layout/error-message/error-message-emitter-decorator/thermal-runaway')(bottle);
 require('./layout/error-message/error-message-emitter-decorator/unresponsive-thermometer')(bottle);
 require('./layout/error-message/error-message-emitter-decorator/stall')(bottle);
-require('./layout/error-message/error-message-emitter-decorator/laser-temp-too-high')(bottle);
-require('./layout/error-message/error-message-emitter-decorator/laser-unknown-error')(bottle);
 
 require('./layout/layout')(bottle);
 
@@ -77,8 +75,8 @@ require('./utility/round')(bottle);
 // require('./setpoint-saver/setpoint-saver')(bottle);
 
 require('./simple-control-panel/simple-control-panel')(bottle);
-require('./simple-control-panel/simple-fid-panel/simple-fid-panel')(bottle);
-require('./simple-control-panel/simple-system-panel/simple-system-panel')(bottle);
+require('./simple-control-panel/simple-fid-panel')(bottle);
+require('./simple-control-panel/simple-system-panel')(bottle);
 
 require('./state/state')(bottle);
 require('./state/decorator/state-decorator')(bottle);

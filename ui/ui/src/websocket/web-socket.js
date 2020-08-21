@@ -5,7 +5,7 @@ function webSocket({ api }, eventEmitter, logger) {
 
   function echo(event, from, to) {
     from.on(event, (args) => {
-      to.emit(event, args);
+      to.emit(event, JSON.parse(args));
     });
   }
 
@@ -50,7 +50,9 @@ function webSocket({ api }, eventEmitter, logger) {
   }
 
   function on(event, handler) {
-    socket.on(event.toLowerCase(), handler);
+    socket.on(event.toLowerCase(), (args) => {
+      handler(JSON.parse(args));
+    });
     return this;
   }
 

@@ -20,11 +20,10 @@ require('./settings/settings')(bottle);
 require('./settings/decorator/default')(bottle);
 require('./settings/decorator/setter')(bottle);
 
-require('./state/state')(bottle);
+require('./state/container')(bottle);
 
 require('./computer-information/computer-information')(bottle);
 require('./computer-information/computer-information-service')(bottle);
-
 
 require('./influx/influx')(bottle);
 
