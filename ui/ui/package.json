@@ -8,6 +8,8 @@
     "test": "ospec",
     "c8": "node node_modules/c8/bin/c8.js npm test",
     "coverage": "node node_modules/c8/bin/c8.js report --reporter=text-lcov > coverage/tests.lcov",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.production.js",
+    "web": "cross-env NODE_ENV=development webpack-dev-server --open --config webpack.development.js",
     "start": "cross-env NODE_ENV=development electron ."
   },
   "repository": {
@@ -51,13 +53,22 @@
   },
   "devDependencies": {
     "c8": "^7.3.0",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
+    "css-loader": "^4.2.1",
     "dotenv": "^8.2.0",
     "electron-reload": "^1.5.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
     "ospec": "^4.1.1",
-    "require-all": "^3.0.0"
+    "require-all": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.2"
   }
 }

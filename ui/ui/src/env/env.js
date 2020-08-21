@@ -1,4 +1,6 @@
-const { env } = process;
+// we cannot destructure this line because webpack needs 'process.env' to fill properly
+// eslint-disable-next-line prefer-destructuring
+const env = process.env;
 
 function getEnv(app, path) {
   // TODO: validate env config and throw errors if something isn't found instead of taking defaults in code
@@ -25,7 +27,7 @@ function getEnv(app, path) {
       host: env.UI_HOST,
     },
     dev: env.NODE_ENV && env.NODE_ENV === 'development',
-    persistentDataPath: getDataPath(env.DATA_PATH) || app.APPDATA,
+    // persistentDataPath: getDataPath(env.DATA_PATH) || app.APPDATA,
     screenSleepTime: env.SCREEN_SLEEP_TIME,
   };
 }

@@ -1,3 +1,5 @@
+require('./nav.css');
+
 function nav(m, eventEmitter) {
   function component() {
     let currentPage = 'simple-control';

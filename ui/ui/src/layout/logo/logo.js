@@ -1,7 +1,9 @@
+const src = require('../../assets/ARC_Teardrop_Transparent.png');
+
 function logo(m) {
   function getComponent() {
     return {
-      view: () => m('img', { src: './assets/ARC_Teardrop_Transparent.png' }),
+      view: () => m('img', { src: src.default }),
     };
   }
 

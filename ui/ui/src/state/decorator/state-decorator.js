@@ -3,7 +3,7 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
   function decorate(systemState) {
     const decoratedSystemState = systemState;
 
-    setpointSaver.load(decoratedSystemState);
+    // setpointSaver.load(decoratedSystemState);
 
     function setSetpoint(newSetpoint) {
       this.setpoint = newSetpoint;

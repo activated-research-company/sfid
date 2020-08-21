@@ -2,10 +2,10 @@ const Bottle = require('bottlejs');
 
 const bottle = new Bottle();
 
-require('./electron/electron')(bottle);
-require('./electron/app')(bottle);
+// require('./electron/electron')(bottle);
+// require('./electron/app')(bottle);
 require('./env/env')(bottle);
-require('./fs/fs')(bottle);
+// require('./fs/fs')(bottle);
 require('./event-emitter/event-emitter')(bottle);
 
 require('./path/path')(bottle);
@@ -17,9 +17,9 @@ require('./logger/logger')(bottle);
 
 require('./websocket/web-socket')(bottle);
 
-require('./settings/settings')(bottle);
-require('./settings/decorator/default')(bottle);
-require('./settings/decorator/setter')(bottle);
+// require('./settings/settings')(bottle);
+// require('./settings/decorator/default')(bottle);
+// require('./settings/decorator/setter')(bottle);
 
 require('./layout/logo/logo')(bottle);
 
@@ -74,7 +74,7 @@ require('./layout/nav/nav')(bottle);
 
 require('./utility/round')(bottle);
 
-require('./setpoint-saver/setpoint-saver')(bottle);
+// require('./setpoint-saver/setpoint-saver')(bottle);
 
 require('./simple-control-panel/simple-control-panel')(bottle);
 require('./simple-control-panel/simple-fid-panel/simple-fid-panel')(bottle);

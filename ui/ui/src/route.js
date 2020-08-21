@@ -12,6 +12,12 @@ const {
   logger,
 } = require('./container');
 
+require('../node_modules/normalize.css/normalize.css');
+require('../node_modules/tachyons/css/tachyons.min.css');
+require('../node_modules/xel/xel.min.js');
+require('../node_modules/xel/themes/vanilla.css');
+require('./index.css');
+
 logger.info('initizializing');
 
 if (!webSocket.isConnected()) { webSocket.connect(); }
@@ -49,7 +55,7 @@ function sfid() {
   };
 }
 
-settings.load().then(() => {
+// settings.load().then(() => {
   // eslint-disable-next-line no-undef
   m.mount(document.body, sfid);
-});
+// });
