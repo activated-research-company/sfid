@@ -82,7 +82,7 @@ services:
     depends_on:
       - log
       - phidget
-      # - db
+      # - influxdb
 
   ui:
     build: ui
