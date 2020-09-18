@@ -28,9 +28,8 @@ services:
 
   wifi-connect:
     build: wifi-connect
-    ports:
-      - '80:80'
-    network_mode: 'host'
+    expose:
+      - '80'
     labels:
       io.balena.features.dbus: '1'
     cap_add:
