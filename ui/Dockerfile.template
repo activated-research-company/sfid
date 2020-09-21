@@ -1,7 +1,6 @@
 # FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-build as build
 FROM balenalib/raspberrypi3-node:10-build as build
 
-
 WORKDIR /usr/src/ui
 
 RUN install_packages \
@@ -24,10 +23,16 @@ RUN install_packages \
   libssh-4 \
   libexpat-dev
 
-COPY ./ui/package.json .
+COPY ./ui ./
 
 RUN    JOBS=MAX npm install --unsafe-perm --production --arch=armv7l \
     && node_modules/.bin/electron-rebuild
+
+COPY --from=build /usr/src/ui/node_modules ./node_modules
+
+RUN JOBS=MAX npm run build
+
+COPY --from=build /usr/src/ui/dist ./dist
 
 # FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-run
  FROM balenalib/raspberrypi3-node:10-run
@@ -66,9 +71,9 @@ RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
 
 ENV UDEV=true
 
-COPY ./ui ./
+# COPY ./ui ./
 
-COPY --from=build /usr/src/ui/node_modules ./node_modules
+# COPY --from=build /usr/src/ui/node_modules ./node_modules
 
 # Remove Windows-style line endings from shell file
 RUN sed -i 's/\r$//' /usr/src/ui/start.sh
