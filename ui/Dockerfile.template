@@ -28,7 +28,7 @@ COPY package.json package-lock.json ./
 RUN npm i --unsafe-perm --production --arch=armv7l
 RUN cp -R node_modules /tmp/node_modules
 
-COPY webpack.common webpack.production ./
+COPY webpack.common.js webpack.production.js ./
 
 RUN npm i
 RUN npm run build
