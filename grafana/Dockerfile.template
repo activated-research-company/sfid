@@ -9,6 +9,7 @@ RUN install_packages \
       wget
 
 # COPY ./provisioning /usr/share/grafana/conf/provisioning
+COPY ./*.ini /usr/local/etc/grafana/
 COPY ./*.sh /usr/src/grafana/
 RUN chmod +x /usr/src/grafana/*.sh
 RUN /usr/src/grafana/download.sh "%%BALENA_ARCH%%"
