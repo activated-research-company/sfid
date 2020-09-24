@@ -1,2 +1,2 @@
-# ufid
-Control for ARC's Standalone Universal FID
+# SFID
+Control for ARC's Standalone FID
