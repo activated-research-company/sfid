@@ -1,3 +1,5 @@
+require('./button.css');
+
 function button(m) {
   function component() {
     function getButtonClasses(large, huge, disabled, toggled) {

@@ -1,3 +1,5 @@
+require('./chart-options.css');
+
 function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings) {
   function getComponent() {
     let hide = true;

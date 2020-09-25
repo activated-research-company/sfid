@@ -1,3 +1,5 @@
+require('./numpad.css');
+
 function numpad(m, eventEmitter, modal, key) {
   function component() {
     let state;

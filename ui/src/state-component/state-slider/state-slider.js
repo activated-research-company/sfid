@@ -1,3 +1,5 @@
+require('./state-slider.css');
+
 function stateSlider(m, stateButton, stateSetpointLabels, stateActualLabels, stateUnitLabels) {
   // TODO: change the name of this thing
   function component() {

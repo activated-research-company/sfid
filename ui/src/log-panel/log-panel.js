@@ -1,3 +1,5 @@
+require('./log-panel.css');
+
 function logPanel(m, env, fs, moment, labelledCard, button, logger) {
   function getComponent() {
     let appFileList = [];

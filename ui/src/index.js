@@ -82,7 +82,7 @@ app.on('ready', () => {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        'Content-Security-Policy': ['default-src \'self\' \'unsafe-inline\' \'unsafe-eval\''],
+        'Content-Security-Policy': ['default-src \'self\' http: \'unsafe-inline\' \'unsafe-eval\''],
       },
     });
   });

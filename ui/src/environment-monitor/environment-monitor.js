@@ -1,3 +1,5 @@
+require('./environment-monitor.css');
+
 function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButton, stateIcon, env) {
   function component() {
     return {

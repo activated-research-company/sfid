@@ -1,3 +1,5 @@
+require('./error-message.css');
+
 function errorMessage(m, eventEmitter, modal, button) {
   function component() {
     let error;

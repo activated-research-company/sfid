@@ -1,3 +1,5 @@
+require('./labelled-card.css');
+
 function labelledCard(m, stateIcon) {
   function component() {
     return {

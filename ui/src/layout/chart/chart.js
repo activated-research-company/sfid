@@ -1,3 +1,5 @@
+require('./chart.css');
+
 // TODO: pick a name that makes sense but doesn't collide with other variables
 function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptions) {
   function component() {

@@ -1,7 +1,7 @@
 const io = require('socket.io-client');
 
-function webSocket({ api }, eventEmitter, logger) {
-  const socket = io(`http://${api.host}:${api.port}`, { autoConnect: false });
+function webSocket({ control }, eventEmitter, logger) {
+  const socket = io(`http://${control.host}:${control.port}`, { autoConnect: false });
 
   function echo(event, from, to) {
     from.on(event, (args) => {

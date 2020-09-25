@@ -5,7 +5,7 @@ const { DefinePlugin } = require('webpack'); // eslint-disable-line
 const common = require('./webpack.common.js');
 
 const config = {
-  ...dotenv.config({ path: path.join(process.cwd(), '..', '..', '.env') }).parsed,
+  ...dotenv.config({ path: path.join(process.cwd(), '..', '.env') }).parsed,
   ...dotenv.config().parsed,
 };
 

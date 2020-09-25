@@ -1,3 +1,5 @@
+require('./change-clock.css');
+
 function changeClock(m, modal, eventEmitter, changeDate, changeTime) {
   function getComponent() {
     let hide = true;

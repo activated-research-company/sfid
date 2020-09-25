@@ -1,3 +1,5 @@
+require('./advanced-control-panel.css');
+
 function advancedControlPanel(
   m,
   eventEmitter,

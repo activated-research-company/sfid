@@ -1,3 +1,5 @@
+require('./state-switch.css');
+
 function stateSwitch(m, stateLabel) {
   function component() {
     const latchTime = 1500;

@@ -19,7 +19,7 @@ function getEnv(app, path) {
       port: parseInt(env.LOG_PORT, 10),
       level: parseInt(env.LOG_LEVEL, 10),
     },
-    api: {
+    control: {
       host: env.CONTROL_HOST,
       port: env.CONTROL_PORT,
     },

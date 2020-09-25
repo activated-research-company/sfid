@@ -1,3 +1,5 @@
+require('./simple-control-panel.css');
+
 function simpleControlPanel(
   m,
   simpleFidPanel,
