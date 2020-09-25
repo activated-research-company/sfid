@@ -78,6 +78,9 @@ COPY ./src ./src
 COPY package.json package-lock.json ./
 COPY ./start.sh ./
 
+
+COPY --from=build /tmp/dist /data/www/control
+
 # Remove Windows-style line endings from shell file
 RUN sed -i 's/\r$//' /usr/src/ui/start.sh
 CMD ["bash", "/usr/src/ui/start.sh"]
