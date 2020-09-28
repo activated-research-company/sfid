@@ -2,10 +2,7 @@ const Bottle = require('bottlejs');
 
 const bottle = new Bottle();
 
-// require('./electron/electron')(bottle);
-// require('./electron/app')(bottle);
 require('./env/env')(bottle);
-// require('./fs/fs')(bottle);
 require('./event-emitter/event-emitter')(bottle);
 
 require('./path/path')(bottle);
