@@ -51,7 +51,7 @@ function sfid() {
     onRemove: () => {
       eventEmitter.off('route', onRoute);
     },
-    view: () => m(layout, { route, hideChart: route === 'log' }, m(getComponent())),
+    view: () => m(`${true ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'log' }, m(getComponent()))),
   };
 }
 

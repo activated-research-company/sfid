@@ -15,6 +15,13 @@ body {
     background: black;
 }
 
+.web {
+  position:fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
 .fade-in { animation: fade-in 5s; }
 @keyframes fade-in {
 	from {opacity:0;}

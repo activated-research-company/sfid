@@ -1,7 +1,21 @@
 const io = require('socket.io-client');
 
 function webSocket({ control }, eventEmitter, logger) {
-  const socket = io(`http://${control.host}:${control.port}`, { autoConnect: false });
+  // eslint-disable-next-line no-undef
+  const url = window.location.href;
+  let address;
+
+  if (url.indexOf('http') === 0) {
+    if (url.indexOf('localhost') >= 0) {
+      address = 'localhost';
+    } else {
+      address = url.substring(url.indexOf('://') + 3, url.indexOf('/control'));
+    }
+  } else {
+    address = control.host;
+  }
+
+  const socket = io(`http://${address}:${control.port}`, { autoConnect: false });
 
   function echo(event, from, to) {
     from.on(event, (args) => {
