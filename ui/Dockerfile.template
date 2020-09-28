@@ -24,16 +24,8 @@ RUN install_packages \
   libexpat-dev
 
 COPY package.json package-lock.json ./
-RUN npm i --unsafe-perm --production --arch=armv7l
-RUN cp -R node_modules /tmp/node_modules
-
 RUN npm i
-COPY webpack.common.js webpack.production.js ./
-COPY ./src ./src
-RUN npm run build
-RUN node_modules/.bin/electron-rebuild
-
-RUN cp -R dist /tmp/dist
+RUN cp -R node_modules /tmp/node_modules
 
 # FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-run
  FROM balenalib/raspberrypi3-node:10-run
@@ -73,9 +65,9 @@ RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
 ENV UDEV=true
 
 COPY --from=build /tmp/node_modules ./node_modules
-COPY --from=build /tmp/dist ./dist
-COPY ./src ./src
 COPY package.json package-lock.json ./
+COPY webpack.common.js webpack.production.js ./
+COPY ./src ./src
 COPY ./start.sh ./
 
 # Remove Windows-style line endings from shell file

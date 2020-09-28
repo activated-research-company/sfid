@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Build files - required to load run-time environment variables
+npm run build
+./node_modules/.bin/electron-rebuild
+
 # Copy built files to the Docker Volume to be served by nginx
 mkdir -p /www/control/
 cp -f ./dist/*.* /www/control/
@@ -22,5 +26,5 @@ if [ ! -c /dev/fb1 ] && [ "$TFT" = "1" ]; then
   mknod /dev/fb1 c $(cat /sys/class/graphics/fb1/dev | tr ':' ' ') || true
   FRAMEBUFFER=/dev/fb1 startx /usr/src/ui/node_modules/electron/dist/electron /usr/src/ui --enable-logging
 else
-  startx /usr/src/ui/node_modules/electron/dist/electron /usr/src/ui --enable-logging --no-sandbox -- -nocursor 
+  startx ./node_modules/electron/dist/electron . --enable-logging --no-sandbox -- -nocursor 
 fi

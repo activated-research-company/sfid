@@ -1,14 +1,19 @@
 require('./environment-monitor.css');
 
-function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButton, stateIcon, env) {
+function environmentMonitor(m, systemState, labelledCard, stateDisplay, stateIcon, env) {
   function component() {
     return {
       view: () => m('.ma-aa', [
         m('.tc.pb2', `Device ID: ${env.uuid}`),
         m('.bb.bt', [
-          m(labelledCard, { label: 'Comp' }, [
+          m(labelledCard, { label: 'Comp', state: systemState.online }, [
             m('.flex.pb2', [
               m('.w-50.pr1', m(stateDisplay, { state: systemState.computerIp })),
+              m('.flex.pl1.ma-aa', [
+                m(stateIcon, { state: systemState.redLight }),
+                m(stateIcon, { state: systemState.orangeLight }),
+                m(stateIcon, { state: systemState.greenLight }),
+              ]),
             ]),
             m('.flex.pb2', [
               m('.w-50.pr1', m(stateDisplay, { state: systemState.computerCpu })),
@@ -23,11 +28,6 @@ function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButto
               m('.w-50.pl1', m(stateDisplay, { state: systemState.computerFsUsed })),
             ]),
           ]),
-        ]),
-        m('.flex.pr2.pt2', [
-          m(stateIcon, { state: systemState.redLight }),
-          m(stateIcon, { state: systemState.orangeLight }),
-          m(stateIcon, { state: systemState.greenLight }),
         ]),
       ]),
     };
@@ -44,7 +44,6 @@ module.exports = (container) => {
     'systemState',
     'labelledCard',
     'stateDisplay',
-    'simButton',
     'stateIcon',
     'env',
   );
