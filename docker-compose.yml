@@ -2,6 +2,7 @@ version: '2.1'
 
 volumes:
   data:
+  www:
 
 services:
 
@@ -18,7 +19,7 @@ services:
         - '80:80'
         - '443:443'
     volumes:
-      - 'data:/data'
+      - 'www:/www'
 
   # battery:
   #   build: battery
@@ -91,6 +92,7 @@ services:
     privileged: true
     volumes:
       - 'data:/data'
+      - 'www:/www'
     labels:
       io.balena.features.kernel-modules: true
     depends_on:
