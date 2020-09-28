@@ -5,15 +5,12 @@ function redIndicatorLight(indicatorLightFactory, { light: { green }}, eventEmit
     'green',
   );
 
-  let diversionValveIsDiverting = true;
   let mode = {};
 
   function checkState() {
     if (mode.inProcess === 'components') { return; }
     if (mode.current !== 'analyze') {
       if (indicatorLight.isOn()) { indicatorLight.off(); }
-    } else if (diversionValveIsDiverting) {
-      indicatorLight.flash();
     } else {
       indicatorLight.on();
     }
@@ -24,18 +21,11 @@ function redIndicatorLight(indicatorLightFactory, { light: { green }}, eventEmit
     checkState();
   }
 
-  function onDiversionValve(args) {
-    diversionValveIsDiverting = args;
-    checkState();
-  }
-
   function listen() {
     indicatorLight
       .connect()
       .then(() => {
-        eventEmitter
-          .on('mode', onMode)
-          .on('diversionvalve', onDiversionValve);
+        eventEmitter.on('mode', onMode);
         indicatorLight.on();
       });
   }

@@ -6,19 +6,13 @@ function redIndicatorLight(indicatorLightFactory, { light: { red }}, eventEmitte
   );
 
   const errorEvents = [
-    'cellcompartment.leak',
-    'stall',
     'thermalrunaway',
     'unresponsivethermometer',
   ];
 
   function listenToErrorEvents() {
     errorEvents.forEach((errorEvent) => {
-      eventEmitter.on(errorEvent, (args) => {
-        if (errorEvent !== 'cellcompartment.leak' || args) {
-          indicatorLight.on();
-        }
-      });
+      eventEmitter.on(errorEvent, indicatorLight.on);
     });
   }
 

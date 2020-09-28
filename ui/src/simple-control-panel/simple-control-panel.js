@@ -7,9 +7,9 @@ function simpleControlPanel(
 ) {
   function component() {
     return {
-      view: () => m('.ma-aa', [
-        m('.bb.bt', m(simpleFidPanel)),
-        m('.bb', m(simpleSystemPanel)),
+      view: () => m('.bt.bb.flex', [
+        m(simpleFidPanel),
+        m(simpleSystemPanel),
       ]),
     };
   }

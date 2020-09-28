@@ -36,10 +36,8 @@ function layout(
           m('.absolute.t-14px.r-13px.f7', m(clock)),
           [
             m('.mb2.flex', m('.ma-aa.w-fc.shadow-1', m(nav))),
-            m('.flex.w-100', [
-              m(`.w-30.br.${attrs.hideChart ? '' : 'mb2'}`, children),
-              attrs.hideChart ? null : m('.w-70', { id: `${attrs.route}-chart` }, m(chart)),
-            ]),
+            m(`.w-100.${attrs.hideChart ? '' : 'mb2'}`, children),
+            attrs.hideChart ? null : m('.w-100', { id: `${attrs.route}-chart` }, m(chart)),
           ],
           attrs.hideChart ? null : m('.absolute.bottom-1h.right-1h.f7.w-464px.z-3', m(emergencyShutdownButton)),
           m(changeClock),

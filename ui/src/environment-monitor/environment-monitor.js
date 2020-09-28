@@ -24,15 +24,6 @@ function environmentMonitor(m, systemState, labelledCard, stateDisplay, simButto
             ]),
           ]),
         ]),
-        m('.bb', [
-          m(labelledCard, { label: 'Sim' }, [
-            m('.tc.pb2', 'Use these buttons to simulate a system event.'),
-            m('.flex.pb2', [
-              m('.w-50.pr1', m(simButton, { label: 'Leak', event: 'simleak' })),
-              m('.w-50.pl1', m(simButton, { label: 'Stepper Stall', event: 'simstall' })),
-            ]),
-          ]),
-        ]),
         m('.flex.pr2.pt2', [
           m(stateIcon, { state: systemState.redLight }),
           m(stateIcon, { state: systemState.orangeLight }),

@@ -5,7 +5,7 @@ function labelledCard(m, stateIcon) {
     return {
       view: ({ attrs: { label, state }, children }) => m('.w-100',
         [
-          m('.flex', [
+          m('.flex.h-100', [
             m(`.w-5.bg-dark.text-light.vertical.f4.tc.b.${state ? '.flex' : ''}`, [
               state ? m('.h-25') : null,
               m(`.${state ? 'h-50' : ''}`, label),

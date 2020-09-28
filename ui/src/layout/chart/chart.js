@@ -1,5 +1,3 @@
-require('./chart.css');
-
 // TODO: pick a name that makes sense but doesn't collide with other variables
 function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptions) {
   function component() {
@@ -48,6 +46,8 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
       chart.update();
     }
 
+    let zoomAreas = [];
+
     function resetZoom() {
       chart.destroy();
       chart = chartFactory.getNewLineChart(chartCanvas, setpointData, chartData, options);
@@ -55,7 +55,7 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
 
     let zoomCanvas;
     let zoomContext;
-    const zoomArea = {
+    let zoomArea = {
       h: 0,
       w: 0,
     };
@@ -89,10 +89,12 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
           chart.getYMin() + (chart.getYSize() * ((zoomCanvas.height - (zoomArea.y + zoomArea.h)) / zoomCanvas.height)),
           chart.getYMax() - (chart.getYSize() * (zoomArea.y / zoomCanvas.height)),
         );
+        zoomAreas.push({ ...zoomArea });
       }
 
       zoomArea.h = 0;
       zoomArea.w = 0;
+
       m.redraw();
     }
 
@@ -120,6 +122,18 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
         zoom();
       } else {
         updateZoomArea(e.targetTouches[0].pageX - rect.left, e.targetTouches[0].pageY - rect.top);
+      }
+    }
+
+    function dblClick() {
+      if (!zoomAreas.length) { return; }
+      resetZoom();
+      zoomAreas.pop();
+      for (let i = 0; i < zoomAreas.length; i += 1) { // replay zooming from start
+        chart.zoom(
+          chart.getYMin() + (chart.getYSize() * ((zoomCanvas.height - (zoomAreas[i].y + zoomAreas[i].h)) / zoomCanvas.height)),
+          chart.getYMax() - (chart.getYSize() * (zoomAreas[i].y / zoomCanvas.height)),
+        );
       }
     }
 
@@ -152,6 +166,7 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
         zoomCanvas.addEventListener('touchmove', touchMove);
         zoomCanvas.addEventListener('touchend', zoom);
         zoomCanvas.addEventListener('touchcancel', zoom);
+        zoomCanvas.addEventListener('dblclick', dblClick);
       },
       view: () => m('div.relative.h-100', [
         m('div.absolute.h-100.w-100', m('canvas', { id: 'chart' })),
@@ -161,7 +176,10 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
         })),
         m('div.absolute.top-0.right-0.w-55px.pr2', m(button, {
           icon: 'zoom-out',
-          onclick: resetZoom,
+          onclick: () => {
+            zoomAreas = [];
+            resetZoom();
+          },
         })),
         m('canvas.absolute', { id: 'zoom' }),
         m(chartOptions),

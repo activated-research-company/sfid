@@ -91,8 +91,6 @@ require('./state/decorator/state-decorator-online')(bottle);
 
 require('./state-component/state-component-register')(bottle); // TODO: make registers for the large subfolders
 
-require('./environment-monitor/sim/sim-button')(bottle);
-
 require('./throbber/throbber')(bottle);
 
 require('./layout/error-message/error-message-emitter-decorator/laser-interlock-sync')(bottle); // TODO: why doesn't this work where I want it to be
