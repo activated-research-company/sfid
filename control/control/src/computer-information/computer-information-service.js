@@ -95,8 +95,8 @@ function computerInformationService(computerInformation, eventEmitter, env) {
                 data += d;
               })
               res.on("end", () => {
-                console.log(data);
-                resolve({ actual: 'fartface', sampleRate });
+                const json = JSON.parse(data);
+                resolve({ actual: json.ip_address.split(' ')[0], sampleRate });
               });
             }
           )
