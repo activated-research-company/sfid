@@ -83,6 +83,7 @@ services:
       - 'data:/data'
     labels:
       io.balena.features.kernel-modules: true
+      io.balena.features.supervisor-api: '1'
     depends_on:
       - log
       - phidget
