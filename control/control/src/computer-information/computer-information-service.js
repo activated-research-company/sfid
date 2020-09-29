@@ -25,7 +25,7 @@ function computerInformationService(computerInformation, eventEmitter, env) {
     }
     return new Promise((resolve) => {
       resolve({
-        actual: computerInformation.time(),
+        actual: computerInformation.time().uptime,
         sampleRate,
       });
     });
