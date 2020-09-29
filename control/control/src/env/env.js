@@ -22,6 +22,12 @@ function getEnv(path) {
   }
 
   return {
+    balena: {
+      supervisor: {
+        address: env.BALENA_SUPERVISOR_ADDRESS,
+        apiKey: env.BALENA_SUPERVISOR_API_KEY,
+      },
+    },
     isDev,
     dataPath: getDataPath(env.DATA_PATH),
     log: {

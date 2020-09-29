@@ -37,7 +37,6 @@ const waitForComponentStartup = () => {
   let ready = false;
   return new Promise((resolve) => {
     eventEmitter.on('computer.time', ({ actual }) => {
-      console.log(actual);
       if (!ready) {
         eventEmitter.emit('components.progress', Math.floor(actual));
         if (actual > env.startup.time) {

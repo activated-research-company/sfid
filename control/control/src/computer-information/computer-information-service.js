@@ -1,3 +1,5 @@
+const http = require('http');
+
 function computerInformationService(computerInformation, eventEmitter, env) {
   const START_DATE = new Date();
   const dataInterval = 60000;
@@ -81,17 +83,38 @@ function computerInformationService(computerInformation, eventEmitter, env) {
   }
 
   function getIp(sampleRate) {
-    return computerInformation
-      .networkInterfaces()
-      .then((interfaces) =>{
-        return interfaces.find((interface) => {
-          return interface.operstate === 'up';
-        });
-      })
-      .then((interface) => {
-        if (interface) { return { actual: interface.ip4, sampleRate }; }
-        return { actual: '', sampleRate };
+    if (env.balena.supervisor.address) {
+      return new Promise((resolve) => {
+        http
+          .get(
+            `${env.balena.supervisor.address}/v1/device?apikey=${env.balena.supervisor.apiKey}`,
+            (res) => {
+              let data = "";
+
+              res.on("data", d => {
+                data += d;
+              })
+              res.on("end", () => {
+                console.log(data);
+                resolve({ actual: 'fartface', sampleRate });
+              });
+            }
+          )
+          .end();
       });
+    } else {
+      return computerInformation
+        .networkInterfaces()
+        .then((interfaces) =>{
+          return interfaces.find((interface) => {
+            return interface.operstate === 'up';
+          });
+        })
+        .then((interface) => {
+          if (interface) { return { actual: interface.ip4, sampleRate }; }
+          return { actual: '', sampleRate };
+        });
+    }
   }
 
   function listen() {
