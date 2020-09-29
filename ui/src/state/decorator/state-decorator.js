@@ -72,27 +72,27 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
     }
 
     webSocket
-      .on(decoratedSystemState.fidHydrogen.event, (args) => {
-        decoratedSystemState.fidHydrogenPressure.actual = round(args.pressure, 1);
-        updateState(decoratedSystemState.fidHydrogen, args.setpoint, round(args.flow, 1), args.reachedSetpoint);
+      .on(decoratedSystemState.fidHydrogen.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
+        decoratedSystemState.fidHydrogenPressure.actual = round(pressure, 1);
+        updateState(decoratedSystemState.fidHydrogen, setpoint, round(flow, 1), reachedSetpoint);
       })
-      .on(decoratedSystemState.fidAir.event, (args) => {
-        decoratedSystemState.fidAirPressure.actual = round(args.pressure, 1);
-        updateState(decoratedSystemState.fidAir, args.setpoint, round(args.flow, 1), args.reachedSetpoint);
+      .on(decoratedSystemState.fidAir.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
+        decoratedSystemState.fidAirPressure.actual = round(pressure, 1);
+        updateState(decoratedSystemState.fidAir, setpoint, round(flow, 1), reachedSetpoint);
       })
-      .on(decoratedSystemState.fidTemperature.event, (args) => {
-        decoratedSystemState.fidTemperature.kp = args.kp;
-        decoratedSystemState.fidTemperature.ki = args.ki;
-        decoratedSystemState.fidTemperature.kd = args.kd;
-        decoratedSystemState.fidTemperature.output = args.output;
-        updateState(decoratedSystemState.fidTemperature, args.setpoint, args.actual, args.reachedSetpoint, args.sampleRate);
+      .on(decoratedSystemState.fidTemperature.event, ({ setpoint, actual, output, kp, ki, kd, reachedSetpoint, sampleRate }) => {
+        decoratedSystemState.fidTemperature.kp = kp;
+        decoratedSystemState.fidTemperature.ki = ki;
+        decoratedSystemState.fidTemperature.kd = kd;
+        decoratedSystemState.fidTemperature.output = output;
+        updateState(decoratedSystemState.fidTemperature, setpoint, actual, reachedSetpoint, sampleRate);
       })
-      .on(decoratedSystemState.fid.event, (args) => {
-        if (args.voltage) { decoratedSystemState.fid.voltage = args.voltage; } // TODO: why is this coming back null?
-        updateState(decoratedSystemState.fid, decoratedSystemState.fid.voltage, decoratedSystemState.fid.voltage, null, args.sampleRate);
-        updateState(decoratedSystemState.fidFlameTemperature, args.temperature, args.temperature, null, args.sampleRate);
-        updateState(decoratedSystemState.fidIgniter, args.igniting, args.igniting);
-        updateState(decoratedSystemState.fidFlame, args.ignited, args.ignited);
+      .on(decoratedSystemState.fid.event, ({ voltage, temperature, igniting, ignited, sampleRate }) => {
+        if (voltage) { decoratedSystemState.fid.voltage = voltage; } // TODO: why is this coming back null?
+        updateState(decoratedSystemState.fid, decoratedSystemState.fid.voltage, decoratedSystemState.fid.voltage, null, sampleRate);
+        updateState(decoratedSystemState.fidFlameTemperature, temperature, temperature, null, sampleRate);
+        updateState(decoratedSystemState.fidIgniter, igniting, igniting);
+        updateState(decoratedSystemState.fidFlame, ignited, ignited);
       });
 
     webSocket

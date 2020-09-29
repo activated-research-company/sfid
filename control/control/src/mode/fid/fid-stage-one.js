@@ -16,7 +16,7 @@ function fidStageOne(eventEmitter, reachedSetpoint) {
     }
   }
 
-  function onIgnited(args) { ignited = args; }
+  function onFid(args) { ignited = args.ignited; }
   function onAir(args) { airReachedSetpoint = reachedSetpoint(args, airSetpoint); }
   function onHydrogen(args) { hydrogenReachedSetpoint = reachedSetpoint(args, hydrogenSetpoint); }
   function onTemp(args) { tempReachedSetpoint = reachedSetpoint(args, tempSetpoint); }
@@ -27,7 +27,7 @@ function fidStageOne(eventEmitter, reachedSetpoint) {
     stage: 1,
     first: true,
     listeners: [
-      { event: 'fidignited', handler: onIgnited },
+      { event: 'fid', handler: onFid },
       { event: 'fidair', handler: onAir },
       { event: 'fidhydrogen', handler: onHydrogen },
       { event: 'fidtemperature', handler: onTemp },
@@ -40,12 +40,12 @@ function fidStageOne(eventEmitter, reachedSetpoint) {
         isComplete: () => airReachedSetpoint,
       },
       {
-        description: `Flowing 10 SCCM H${String.fromCharCode(0x2082)} to the FID`,
+        description: `Flowing 10 SCCM H${String.fromCharCode(0x2082)}`,
         applies: () => !ignited,
         isComplete: () => hydrogenReachedSetpoint,
       },
       {
-        description: `Heating the FID to ${tempSetpoint} ${String.fromCharCode(176)}C`,
+        description: `Heating to ${tempSetpoint} ${String.fromCharCode(176)}C`,
         applies: () => !ignited,
         isComplete: () => tempReachedSetpoint,
       },

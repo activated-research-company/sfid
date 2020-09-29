@@ -1,4 +1,4 @@
-function modeDisplay(m, webSocket, eventEmitter, systemState) {
+function modeDisplay(m, webSocket, eventEmitter) {
   function getComponent() {
     let mode = {
       current: '',
@@ -21,8 +21,6 @@ function modeDisplay(m, webSocket, eventEmitter, systemState) {
             return 'Components starting up';
           case 'ready':
             return 'Components initializing';
-          case 'standby':
-            return 'Going into standby';
           case 'analyze':
             return 'Getting ready to run';
           case 'shutdown':
@@ -36,10 +34,7 @@ function modeDisplay(m, webSocket, eventEmitter, systemState) {
           case 'components':
           case 'ready':
             return 'System is idle';
-          case 'standby':
-            return 'Standing by';
           case 'analyze':
-            if (!systemState.diversionValve.actual) { return 'Ready for liquid'; }
             return 'Running';
           case 'shutdown':
             return 'System is idle';
@@ -73,6 +68,5 @@ module.exports = (container) => {
     'm',
     'webSocket',
     'eventEmitter',
-    'systemState',
   );
 };

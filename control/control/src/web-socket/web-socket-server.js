@@ -22,8 +22,8 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
 
   function listen() {
     webSocket.on('connect', (client) => {
-      logger.debug('app connected');
-      client.on('disconnect', (reason) => { logger.error(`app disconnected: ${reason}`); });
+      logger.debug(`${client.conn.remoteAddress} connected`);
+      client.on('disconnect', (reason) => { logger.error(`${client.conn.remoteAddress} disconnected: ${reason}`); });
       Object.keys(events).forEach((event) => {
         client.on(events[event], (args) => {
           eventEmitter.emit(`set${events[event]}`, args);

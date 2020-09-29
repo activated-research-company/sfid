@@ -3,18 +3,18 @@ function fidStageThree(eventEmitter) {
 
   function start() { if (!ignited) { eventEmitter.emit('setfidigniter'); } }
 
-  function onIgnited(args) { ignited = args; }
+  function onFid(args) { ignited = args.ignited; }
 
   return {
     mode: 'analyze',
     stage: 3,
     listeners: [
-      { event: 'fidignited', handler: onIgnited },
+      { event: 'fid', handler: onFid },
     ],
     start,
     steps: [
       {
-        description: 'Lighting the FID flame',
+        description: 'Igniting the flame',
         applies: () => !ignited,
         isComplete: () => ignited,
       },

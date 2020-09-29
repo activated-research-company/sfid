@@ -5,7 +5,6 @@ function modeService(eventEmitter) {
   let progress = 1;
   let maxProgress = 1;
   let currentStep = '';
-  let secondaryStep = '';
   let emitInterval;
 
   function clearInProcessMode() {
@@ -13,7 +12,6 @@ function modeService(eventEmitter) {
     progress = 1;
     maxProgress = 1;
     currentStep = '';
-    secondaryStep = '';
   }
 
   function clearModes() {
@@ -40,7 +38,6 @@ function modeService(eventEmitter) {
       inProcess: inProcessMode,
       progress: parseFloat((progress / maxProgress).toFixed(2), 10),
       step: currentStep,
-      secondaryStep,
     });
   }
 

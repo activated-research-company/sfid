@@ -9,13 +9,15 @@ function simpleSystemPanel(
   function component() {
     return {
       view: () => m(labelledCard, { label: 'Sys', state: systemState.online }, [
-        m('.flex.pb2', [
-          m('.w-100.pr1.tc', m(modeDisplay)),
-          m('.w-100.pl1.ma-aa', m(modeButton, { mode: 'analyze', label: 'Run', icon: 'play-arrow' })),
-        ]),
         m('.flex', [
-          m('.w-100.pr1.tc.ma-aa', m(modeStepDisplay)),
-          m('.w-100.pl1', m(modeButton, { mode: 'shutdown', label: 'Shutdown', icon: 'power-settings-new' })),
+          m('.w-100.ma-aa.pr1', [
+            m('.w-100.tc.pb1', m(modeDisplay)),
+            m('.w-100.tc.i', m(modeStepDisplay)),
+          ]),
+          m('.w-100.pl1', [
+            m('.w-100.ma-aa.pb2', m(modeButton, { mode: 'analyze', label: 'Run', icon: 'play-arrow' })),
+            m('.w-100.', m(modeButton, { mode: 'shutdown', label: 'Shutdown', icon: 'power-settings-new' })),
+          ]),
         ]),
       ]),
     };

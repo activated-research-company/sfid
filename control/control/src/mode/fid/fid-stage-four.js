@@ -20,7 +20,7 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
     }
   }
 
-  function onIgnited(args) { ignited = args; }
+  function onFid(args) { ignited = args.ignited; }
   function onAir(args, setpoints) { airReachedSetpoint = reachedSetpoint(args, setpoints.fidAir); }
   function onHydrogen(args, setpoints) { hydrogenReachedSetpoint = reachedSetpoint(args, setpoints.fidHydrogen); }
   function onTemperature(args, setpoints) { tempReachedSetpoint = reachedSetpoint(args, setpoints.fidTemperature); }
@@ -29,7 +29,7 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
     mode: 'analyze',
     stage: 4,
     listeners: [
-      { event: 'fidignited', handler: onIgnited },
+      { event: 'fid', handler: onFid },
       { event: 'fidair', handler: onAir },
       { event: 'fidhydrogen', handler: onHydrogen },
       { event: 'fidtemperature', handler: onTemperature },
@@ -37,15 +37,15 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
     start,
     steps: [
       {
-        description: 'Stabilizing the FID flame',
+        description: 'Stabilizing the flame',
         isComplete: () => ignitedForThreeSeconds,
       },
       {
-        description: 'Flowing final FID gasses',
+        description: 'Flowing final gasses',
         isComplete: () => airReachedSetpoint && hydrogenReachedSetpoint,
       },
       {
-        description: 'Heating the FID',
+        description: 'Heating',
         isComplete: () => tempReachedSetpoint,
       },
     ],

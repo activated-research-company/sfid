@@ -14,7 +14,7 @@ function fidStageTwo(eventEmitter, reachedSetpoint) {
     }
   }
 
-  function onIgnited(args) { ignited = args; }
+  function onFid(args) { ignited = args.ignited; }
   function onAir(args) { airReachedSetpoint = reachedSetpoint(args, airSetpoint); }
   function onHydrogen(args) { hydrogenReachedSetpoint = reachedSetpoint(args, hydrogenSetpoint); }
 
@@ -22,14 +22,14 @@ function fidStageTwo(eventEmitter, reachedSetpoint) {
     mode: 'analyze',
     stage: 2,
     listeners: [
-      { event: 'fidignited', handler: onIgnited },
+      { event: 'fid', handler: onFid },
       { event: 'fidair', handler: onAir },
       { event: 'fidhydrogen', handler: onHydrogen },
     ],
     start,
     steps: [
       {
-        description: 'Flowing gasses to light the FID',
+        description: 'Flowing ignition gasses',
         applies: () => !ignited,
         isComplete: () => airReachedSetpoint && hydrogenReachedSetpoint,
       },

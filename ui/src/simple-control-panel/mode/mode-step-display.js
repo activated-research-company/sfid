@@ -2,7 +2,6 @@ function modeStepDisplay(m, eventEmitter) {
   function getComponent() {
     let mode = {
       step: '',
-      secondaryStep: '',
     };
 
     function onMode(newMode) { mode = newMode; }
@@ -14,9 +13,8 @@ function modeStepDisplay(m, eventEmitter) {
       onremove: () => {
         eventEmitter.off('mode', onMode);
       },
-      view: () => m('.f7', [
+      view: () => m('.', [
         m('x-label', mode.step),
-        m('x-label', mode.secondaryStep),
       ]),
     };
   }
