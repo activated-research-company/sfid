@@ -1,16 +1,27 @@
 const { Subject } = require('rxjs');
-const subject = new Subject();
 
-let s = {};
+const subjects = {};
 
 const state = {
-  subscribe: (args) => subject.subscribe(args),
+  register: (type) => {
+    subjects[type.toLowerCase()] = new Subject();
+  },
+  subscribe: ({ type, next }) => {
+    if (type) {
+      subjects[type.toLowerCase()].subscribe(next);
+    } else {
+      Object.keys(subjects).forEach((key) => {
+        subjects[key].subscribe(next);
+      });
+    }
+  },
   next: ({ type, payload }) => {
-    s = { ...s, type: type.toLowerCase(), [type.toLowerCase()]: { ...s[type.toLowerCase()], ...payload}};
-    subject.next(s);
+    subjects[type.toLowerCase()].next({ type: type.toLowerCase(), ...payload });
   },
 }
 
+function getState() { return state; }
+
 module.exports = (container) => {
-  container.constant('state', state);
+  container.service('state', getState);
 };

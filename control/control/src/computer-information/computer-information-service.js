@@ -1,49 +1,86 @@
 function computerInformationService(computerInformation, eventEmitter, env) {
   const START_DATE = new Date();
-  const dataInterval = 1000;
+  const dataInterval = 60000;
   const intervals = [];
 
-  function monitor(attribute, getter) {
+  function monitor(attribute, getter, interval) {
     intervals.push(
       setInterval(() => {
-        getter().then((data) => {
+        getter(interval || dataInterval).then((data) => {
           eventEmitter.emit(`computer.${attribute}`, data);
         });
       },
-      dataInterval),
+      interval || dataInterval),
     );
   }
 
-  function getTime() {
+  function getTime(sampleRate) {
     if (env.startup.useSim) {
       return new Promise((resolve) => {
         resolve({
-          uptime: Math.floor((new Date().getTime() - START_DATE.getTime()) / 1000),
+          actual: Math.floor((new Date().getTime() - START_DATE.getTime()) / 1000),
+          sampleRate,
         });
       });
     }
     return new Promise((resolve) => {
-      resolve(computerInformation.time());
+      resolve({
+        actual: computerInformation.time(),
+        sampleRate,
+      });
     });
   }
 
-  function getFsSize() {
+  function getTemperature(sampleRate) {
+    return computerInformation
+      .cpuTemperature()
+      .then(({ max }) => {
+        return { actual: max, sampleRate };
+      });
+  }
+
+  function getCpu(sampleRate) {
+    return computerInformation
+      .currentLoad()
+      .then(({ currentload }) => {
+        return { actual: currentload, sampleRate };
+      })
+  }
+
+  function getMemory(sampleRate) {
+    return computerInformation
+      .mem()
+      .then((args) => {
+        return {
+          actual: (args.used / args.total) * 100,
+          sampleRate,
+        };
+      });
+  }
+
+  function getFsSize(sampleRate) {
     return computerInformation
       .fsSize()
       .then((fs) => fs.reduce((total, media) => {
         return { size: total.size + media.size };
-      }).size);
+      }))
+      .then(({ size }) => {
+        return { actual: size / 1073741824, sampleRate };
+      });
   }
 
-  function getFsUsed() {
-    return computerInformation.fsSize().then((fs) => {
-      return fs.reduce((total, media) => {
+  function getFsUsed(sampleRate) {
+    return computerInformation
+      .fsSize()
+      .then((fs) => fs.reduce((total, media) => {
         return { used: total.used + media.used };
-      }).used;
-    });
+      }))
+      .then(({ used }) => {
+        return { actual: used / 1073741824, sampleRate };
+      });
   }
 
-  function getIp() {
+  function getIp(sampleRate) {
     return computerInformation
       .networkInterfaces()
       .then((interfaces) =>{
@@ -52,16 +89,16 @@ function computerInformationService(computerInformation, eventEmitter, env) {
         });
       })
       .then((interface) => {
-        if (interface) { return interface.ip4; }
-        return '';
+        if (interface) { return { actual: interface.ip4, sampleRate }; }
+        return { actual: '', sampleRate };
       });
   }
 
   function listen() {
-    monitor('time', getTime);
-    monitor('temperature', computerInformation.cpuTemperature);
-    monitor('cpu', computerInformation.currentLoad);
-    monitor('memory', computerInformation.mem);
+    monitor('time', getTime, 1000);
+    monitor('temperature', getTemperature);
+    monitor('cpu', getCpu);
+    monitor('memory', getMemory);
     monitor('fssize', getFsSize);
     monitor('fsused', getFsUsed);
     monitor('ip', getIp);

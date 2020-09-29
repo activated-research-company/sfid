@@ -1,5 +1,5 @@
 function modeService(eventEmitter) {
-  const modes = ['ready', 'standby', 'analyze', 'shutdown', 'components'];
+  const modes = ['ready', 'analyze', 'shutdown', 'components'];
   let currentMode = '';
   let inProcessMode = '';
   let progress = 1;
@@ -44,17 +44,8 @@ function modeService(eventEmitter) {
     });
   }
 
-  function onSecondaryStart(stages) {
-    maxProgress += stages;
-  }
-
   function onStep(step) {
     currentStep = step;
-    emitMode();
-  }
-
-  function onSecondaryStep(step) {
-    secondaryStep = step;
     emitMode();
   }
 
@@ -91,11 +82,6 @@ function modeService(eventEmitter) {
   function listen() {
     listenToModeEvents();
     eventEmitter
-      .on('fid.started', onSecondaryStart)
-      .on('fid.step', onSecondaryStep)
-      .on('fid.progress', onProgress)
-      .on('fid.complete', () => onSecondaryStep(''))
-      .on('fid.stop', () => onSecondaryStep(''))
       .on('mode.stop', stopInProcessMode)
       .on('emergencyshutdown', clearModes);
     emitInterval = setInterval(emitMode, 1000);

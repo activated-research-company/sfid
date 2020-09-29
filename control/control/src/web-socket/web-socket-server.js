@@ -29,8 +29,6 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
           eventEmitter.emit(`set${events[event]}`, args);
         });
       });
-      echo('standby.start', client, eventEmitter);
-      echo('standby.stop', client, eventEmitter);
       echo('analyze.start', client, eventEmitter);
       echo('analyze.stop', client, eventEmitter);
       echo('shutdown.start', client, eventEmitter);
@@ -39,10 +37,6 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
       echo('setdate', client, eventEmitter);
       echo('settime', client, eventEmitter);
       echo('clearerror', client, eventEmitter);
-
-      echo('simleak', client, eventEmitter);
-      echo('simstall', client, eventEmitter);
-      echo('siminterlocksync', client, eventEmitter);
     });
     httpServer.listen(control.port);
 

@@ -5,10 +5,6 @@ function decorate(settings) {
   decoratedSettings.fidKi = 0.44;
   decoratedSettings.fidKd = 81;
 
-  decoratedSettings.cellKp = 12;
-  decoratedSettings.cellKi = 0.06;
-  decoratedSettings.cellKd = 60;
-
   return decoratedSettings;
 }
 

@@ -22,7 +22,7 @@ function fidStageOne(eventEmitter, reachedSetpoint) {
   function onTemp(args) { tempReachedSetpoint = reachedSetpoint(args, tempSetpoint); }
 
   return {
-    mode: 'fid',
+    mode: 'analyze',
     stages: 5,
     stage: 1,
     first: true,

@@ -62,24 +62,12 @@ require('./mode/reached-setpoint')(bottle);
 require('./mode/mode-service')(bottle);
 require('./mode/mode-stage-decorator')(bottle);
 
-require('./mode/analyze/analyze-stage-one')(bottle);
-require('./mode/analyze/analyze-stage-two')(bottle);
-require('./mode/analyze/analyze-stage-three')(bottle);
-require('./mode/analyze/analyze-stage-four')(bottle);
-require('./mode/analyze/analyze-stage-complete')(bottle);
-
 require('./mode/shutdown/shutdown-stage-one')(bottle);
 require('./mode/shutdown/shutdown-stage-two')(bottle);
 require('./mode/shutdown/shutdown-stage-three')(bottle);
 require('./mode/shutdown/shutdown-stage-four')(bottle);
 require('./mode/shutdown/shutdown-stage-five')(bottle);
 require('./mode/shutdown/shutdown-stage-complete')(bottle);
-
-require('./mode/standby/standby-stage-one')(bottle);
-require('./mode/standby/standby-stage-two')(bottle);
-require('./mode/standby/standby-stage-three')(bottle);
-require('./mode/standby/standby-stage-four')(bottle);
-require('./mode/standby/standby-stage-complete')(bottle);
 
 require('./phidget/phidget')(bottle);
 require('./phidget-channel-sim/digital-output-channel-sim')(bottle);

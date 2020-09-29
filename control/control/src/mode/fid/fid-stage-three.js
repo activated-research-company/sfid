@@ -6,7 +6,7 @@ function fidStageThree(eventEmitter) {
   function onIgnited(args) { ignited = args; }
 
   return {
-    mode: 'fid',
+    mode: 'analyze',
     stage: 3,
     listeners: [
       { event: 'fidignited', handler: onIgnited },

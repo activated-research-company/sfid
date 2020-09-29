@@ -2,7 +2,7 @@ function getSerialDevices(env) {
   const serialDevices = {};
 
   if (env.fc.isAttached) {
-    serialDevices.alicatHub = {
+    serialDevices.fc = {
       name: 'alicat hub',
       onFoundEvent: 'alicathubfound',
       baudRate: env.fc.baudRate,

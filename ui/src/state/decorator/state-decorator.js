@@ -96,26 +96,26 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
       });
 
     webSocket
-      .on(decoratedSystemState.computerUptime.event, (args) => {
-        updateState(decoratedSystemState.computerUptime, args.uptime, args.uptime, false, decoratedSystemState.computerUptime.sampleRate);
+      .on(decoratedSystemState.computerUptime.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerUptime, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerTemperature.event, (args) => {
-        updateState(decoratedSystemState.computerTemperature, args.max, args.max, false, decoratedSystemState.computerTemperature.sampleRate);
+      .on(decoratedSystemState.computerTemperature.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerTemperature, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerCpu.event, (args) => {
-        updateState(decoratedSystemState.computerCpu, args.currentload, args.currentload, false, decoratedSystemState.computerCpu.sampleRate);
+      .on(decoratedSystemState.computerCpu.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerCpu, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerMemory.event, (args) => {
-        updateState(decoratedSystemState.computerMemory, (args.used / args.total) * 100, (args.used / args.total) * 100, false, decoratedSystemState.computerMemory.sampleRate);
+      .on(decoratedSystemState.computerMemory.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerMemory, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerFsSize.event, (args) => {
-        updateState(decoratedSystemState.computerFsSize, args / 1073741824, args / 1073741824, false, decoratedSystemState.computerFsSize.sampleRate);
+      .on(decoratedSystemState.computerFsSize.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerFsSize, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerFsUsed.event, (args) => {
-        updateState(decoratedSystemState.computerFsUsed, args / 1073741824, args / 1073741824, false, decoratedSystemState.computerFsUsed.sampleRate);
+      .on(decoratedSystemState.computerFsUsed.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerFsUsed, actual, actual, false, sampleRate);
       })
-      .on(decoratedSystemState.computerIp.event, (args) => {
-        updateState(decoratedSystemState.computerIp, args, args, false, decoratedSystemState.computerIp.sampleRate);
+      .on(decoratedSystemState.computerIp.event, ({ actual, sampleRate }) => {
+        updateState(decoratedSystemState.computerIp, actual, actual, false, sampleRate);
       });
 
     webSocket

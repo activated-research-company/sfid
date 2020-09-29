@@ -2,7 +2,6 @@ const Delimiter = require('@serialport/parser-delimiter');
 
 const serialDeviceReconnectInterval = 2000;
 
-// TODO: this should be a factory instead of a class
 class SerialDevice {
   constructor(serialDevice, serialPortFactory, eventEmitter) {
     if (serialDevice) {

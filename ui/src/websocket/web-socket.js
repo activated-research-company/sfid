@@ -19,6 +19,7 @@ function webSocket({ control }, eventEmitter, logger) {
 
   function echo(event, from, to) {
     from.on(event, (args) => {
+      if (event === 'analyze.start') { args = JSON.stringify(args); }
       to.emit(event, JSON.parse(args));
     });
   }
@@ -44,9 +45,6 @@ function webSocket({ control }, eventEmitter, logger) {
       echo('analyze.start', eventEmitter, socket);
       echo('analyze.stop', eventEmitter, socket);
       echo('analyze.complete', socket, eventEmitter);
-      echo('standby.start', eventEmitter, socket);
-      echo('standby.stop', eventEmitter, socket);
-      echo('standby.complete', socket, eventEmitter);
       echo('shutdown.start', eventEmitter, socket);
       echo('shutdown.stop', eventEmitter, socket);
       echo('shutdown.complete', socket, eventEmitter);

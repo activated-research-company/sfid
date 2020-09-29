@@ -19,7 +19,7 @@ function fidStageComplete(reachedSetpoint) {
   function onTemperature(args, setpoints) { tempReachedSetpoint = reachedSetpoint(args, setpoints.fidTemperature); }
 
   return {
-    mode: 'fid',
+    mode: 'analyze',
     stage: 5,
     last: true,
     listeners: [

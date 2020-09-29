@@ -19,7 +19,7 @@ function fidStageTwo(eventEmitter, reachedSetpoint) {
   function onHydrogen(args) { hydrogenReachedSetpoint = reachedSetpoint(args, hydrogenSetpoint); }
 
   return {
-    mode: 'fid',
+    mode: 'analyze',
     stage: 2,
     listeners: [
       { event: 'fidignited', handler: onIgnited },

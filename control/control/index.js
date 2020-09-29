@@ -7,18 +7,13 @@ const {
   env,
   settings,
   state,
-  stateEmitter,
   webSocketServer,
   influx,
   eventEmitter,
-  eventRegistry,
   logger,
   readyService,
   serialPortFactory,
   phidget,
-  phidgetFactory,
-  temperatureSensorFactory,
-  digitalOutputFactory,
   redIndicatorLight,
   orangeIndicatorLight,
   greenIndicatorLight,
@@ -27,6 +22,7 @@ const {
 } = require('./src/container');
 
 const waitForComponentStartup = () => {
+  
   logger.info('components initializing');
 
   eventEmitter.emit('components.started', env.startup.time);
@@ -40,10 +36,10 @@ const waitForComponentStartup = () => {
 
   let ready = false;
   return new Promise((resolve) => {
-    eventEmitter.on('computer.time', ({ uptime }) => {
+    eventEmitter.on('computer.time', ({ actual }) => {
       if (!ready) {
-        eventEmitter.emit('components.progress', Math.floor(uptime));
-        if (uptime > env.startup.time) {
+        eventEmitter.emit('components.progress', Math.floor(actual));
+        if (actual > env.startup.time) {
           logger.info('connecting to components');
           eventEmitter.emit('components.complete');
           ready = true;
@@ -56,35 +52,39 @@ const waitForComponentStartup = () => {
 };
 
 const listen = () => {
+  let fc;
+  if (env.fc.isAttached) {
+    const AlicatHub = require('./src/serial-device/alicat/alicat-hub');
+    const alicatDeviceFactory = require('./src/serial-device/alicat/alicat-device-factory')();
+    fc = new AlicatHub(
+      serialDevices.fc,
+      serialPortFactory,
+      eventEmitter,
+      [
+        alicatDeviceFactory.getNewFlowController('a', 'fidair'),
+        alicatDeviceFactory.getNewFlowController('h', 'fidhydrogen'),
+      ],
+      state,
+    );
+  }
+
+  let fidTemperatureController;
+  let fid;
+  if (env.fid.isAttached) {
+    fidTemperatureController = temperatureControllerFactory.getNewTemperatureController(
+      'fid',
+      env.fid.temperatureSensor.hub,
+      env.fid.temperatureSensor.port,
+      env.fid.heater.hub,
+      env.fid.heater.port,
+      env.fid.heater.channel,
+    );
   
-  const fidTemperatureController = temperatureControllerFactory.getNewTemperatureController(
-    'fid',
-    env.fid.temperatureSensor.hub,
-    env.fid.temperatureSensor.port,
-    env.fid.heater.hub,
-    env.fid.heater.port,
-    env.fid.heater.channel,
-  );
+    const Fid = require('./src/serial-device/fid');
+    fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, influx, eventEmitter, state);
+  }
 
   const serialPortRegistrar = require('./src/serial-port/serial-port-registrar')(serialDevices, serialPortFactory, eventEmitter, logger);
-
-  const alicatDeviceFactory = require('./src/serial-device/alicat/alicat-device-factory')();
-  const AlicatHub = require('./src/serial-device/alicat/alicat-hub');
-  const Fid = require('./src/serial-device/fid');
-
-  const alicatHub = new AlicatHub(
-    serialDevices.alicatHub,
-    serialPortFactory,
-    eventEmitter,
-    [
-      alicatDeviceFactory.getNewFlowController('a', 'fidair'),
-      alicatDeviceFactory.getNewFlowController('h', 'fidhydrogen'),
-    ],
-    state,
-  );
-
-  const fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, influx, eventEmitter, state);
-
   serialPortRegistrar.registerSerialPorts();
 };
 

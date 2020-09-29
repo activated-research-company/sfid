@@ -2,6 +2,9 @@ function decorate(systemState) {
   const decoratedSystemState = systemState;
 
   function isConnected() {
+    if (this.sampleRate) {
+      return this.lastUpdated && new Date() - this.lastUpdated < (this.sampleRate * 2);
+    }
     return this.lastUpdated && new Date() - this.lastUpdated < 5000;
   }
 

@@ -26,7 +26,7 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
   function onTemperature(args, setpoints) { tempReachedSetpoint = reachedSetpoint(args, setpoints.fidTemperature); }
 
   return {
-    mode: 'fid',
+    mode: 'analyze',
     stage: 4,
     listeners: [
       { event: 'fidignited', handler: onIgnited },

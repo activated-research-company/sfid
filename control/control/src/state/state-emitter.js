@@ -1,9 +1,11 @@
 function getStateEmitter(state, eventEmitter) {
   const emitState = (state) => {
-    eventEmitter.emit(state.type, state[state.type]);
+    eventEmitter.emit(state.type, state);
   };
   
-  state.subscribe(emitState);
+  state.subscribe({ next: emitState });
+
+  return {};
 }
 
 module.exports = (container) => {
