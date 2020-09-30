@@ -24,7 +24,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'ARC Standlone FID',
+      title: 'ARC Standalone FID',
       template: './src/index.html',
       favicon: './src/assets/favicon.ico',
     }),

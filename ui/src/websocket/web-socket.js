@@ -1,21 +1,29 @@
 const io = require('socket.io-client');
 
 function webSocket({ control }, eventEmitter, logger) {
-  // eslint-disable-next-line no-undef
-  const url = window.location.href;
-  let address;
+  const getUri = () => {
+    // eslint-disable-next-line no-undef
+    const url = window.location.href;
+    const isWebClient = () => url.indexOf('http') === 0;
 
-  if (url.indexOf('http') === 0) {
-    if (url.indexOf('localhost') >= 0) {
-      address = 'localhost';
+    let address;
+    if (isWebClient()) {
+      const http = 'http://';
+      const addressStart = url.indexOf(http) + http.length;
+      const addressEnd = url.substring(addressStart).search(/[:/]/g, addressStart) + addressStart;
+      address = url.substring(addressStart, addressEnd >= 0 ? addressEnd : null);
     } else {
-      address = url.substring(url.indexOf('://') + 3, url.indexOf('/control'));
+      address = control.host;
     }
-  } else {
-    address = control.host;
-  }
 
-  const socket = io(`http://${address}:${control.port}`, { autoConnect: false });
+    return `http://${address}:${control.port}`;
+  };
+
+  const uri = getUri();
+
+  logger.debug(`web socket connecting to ${uri}`);
+
+  const socket = io(uri, { autoConnect: false });
 
   function echo(event, from, to) {
     from.on(event, (args) => {
