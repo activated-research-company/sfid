@@ -1,54 +1,30 @@
-function shutdownStageTwo() {
-  // TODO: combine this with standby stage two (same exact logic)
-  let diskRpm = 0;
-  let laserPower = 0;
-  let needToCleanDisc = false;
-  let discIsClean = false;
-  let cleanDiscTimeout;
-
-  // TODO: we shouldn't have to do this calculation in every single stage
-  function getMillisecondsInTwoRotations() {
-    return (1 / diskRpm) * 60 * 1000 * 2; // rpm * seconds * to milliseconds * two rotations
-  }
+function shutdownStageFive(eventEmitter, reachedSetpoint) {
+  let fidHydrogenReachedSetpoint = false;
 
   function start() {
-    discIsClean = false;
-    if (needToCleanDisc) {
-      cleanDiscTimeout = setTimeout(() => {
-        discIsClean = true;
-      }, getMillisecondsInTwoRotations());
-    } else {
-      discIsClean = true;
-    }
+    eventEmitter
+      .emit('setfidhydrogen', 0)
+      .emit('setfidtemperature', 0);
   }
 
-  function stop() { clearTimeout(cleanDiscTimeout); }
-
-  function onDiskRpm(args) { diskRpm = args.actual; }
-  function onLaser(args) {
-    laserPower = args.actual;
-    needToCleanDisc = laserPower > 0;
-  }
+  function onFidHydrogen(args) { fidHydrogenReachedSetpoint = reachedSetpoint(args, 0); }
 
   return {
     mode: 'shutdown',
     stage: 2,
     listeners: [
-      { event: 'diskrpm', handler: onDiskRpm },
-      { event: 'laser', handler: onLaser }, // TODO: rename this once we remove the old laser
+      { event: 'fidhydrogen', handler: onFidHydrogen },
     ],
     start,
-    stop,
     steps: [
       {
-        description: 'Cleaning the disc',
-        applies: () => needToCleanDisc,
-        isComplete: () => discIsClean,
+        description: `Cutting H${String.fromCharCode(0x2082)}`,
+        isComplete: () => fidHydrogenReachedSetpoint,
       },
     ],
   };
 }
 
 module.exports = (container) => {
-  container.service('shutdownStageTwo', shutdownStageTwo);
+  container.service('shutdownStageFive', shutdownStageFive, 'eventEmitter', 'reachedSetpoint');
 };

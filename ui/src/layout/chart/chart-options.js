@@ -1,6 +1,6 @@
 require('./chart-options.css');
 
-function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings) {
+function chartOptions(m, env, eventEmitter, systemState, modal, chartOption) {
   function getComponent() {
     let hide = true;
     let component;
@@ -32,7 +32,7 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
     function getComponents() {
       const components = [];
       chartables.forEach((chartable) => {
-        components.push(m('x-menuitem.cursor-none', {
+        components.push(m(`x-menuitem${env.isWeb || env.isDev ? '' : '.cursor-none'}`, {
           onclick: (element) => {
             component = element.target.innerText;
             m.redraw();
@@ -51,8 +51,8 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
         });
         allOutputs.push(m(`.w-100.${component === chartable.component ? 'flex' : 'dn'}`, [
           m('x-label.ma-aa.w-30.pr3.tr', 'Output:'),
-          m('x-select.cursor-none.w-60', [
-            m('x-menu.cursor-none', outputs),
+          m(`x-select${env.isWeb || env.isDev ? '' : '.cursor-none'}.w-60`, [
+            m(`x-menu${env.isWeb || env.isDev ? '' : '.cursor-none'}`, outputs),
           ]),
         ]));
       });
@@ -70,8 +70,8 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
       view: () => m(modal, { id: 'chart-options-modal', hide, onclickout: hideChartOptions }, [
         m(`.w-100.${component ? '.pb2' : ''}.flex`, [
           m('x-label.ma-aa.w-30.pr3.tr', 'Component:'),
-          m('x-select.cursor-none.w-60', [
-            m('x-menu.cursor-none', getComponents()),
+          m(`x-select${env.isWeb || env.isDev ? '' : '.cursor-none'}.w-60`, [
+            m(`x-menu${env.isWeb || env.isDev ? '' : '.cursor-none'}`, getComponents()),
           ]),
         ]),
         ...getOutputs(),
@@ -83,5 +83,14 @@ function chartOptions(m, eventEmitter, systemState, modal, chartOption, settings
 }
 
 module.exports = (container) => {
-  container.service('chartOptions', chartOptions, 'm', 'eventEmitter', 'systemState', 'modal', 'chartOption', 'settings');
+  container.service(
+    'chartOptions',
+    chartOptions,
+    'm',
+    'env',
+    'eventEmitter',
+    'systemState',
+    'modal',
+    'chartOption',
+  );
 };

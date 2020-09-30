@@ -1,7 +1,7 @@
-function chartOption(m) {
+function chartOption(m, env) {
   function component() {
     return {
-      view: ({ attrs }) => m('x-menuitem.cursor-none', {
+      view: ({ attrs }) => m(`x-menuitem${env.isWeb || env.isDev ? '' : '.cursor-none'}`, {
         onclick: attrs.state.chart,
       }, m('x-label', `${attrs.state.chartTitle}`)),
     };
@@ -11,5 +11,5 @@ function chartOption(m) {
 }
 
 module.exports = (container) => {
-  container.service('chartOption', chartOption, 'm');
+  container.service('chartOption', chartOption, 'm', 'env');
 };

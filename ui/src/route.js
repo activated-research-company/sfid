@@ -1,4 +1,5 @@
 const {
+  env,
   webSocket,
   settings,
   eventEmitter,
@@ -51,7 +52,7 @@ function sfid() {
     onRemove: () => {
       eventEmitter.off('route', onRoute);
     },
-    view: () => m(`${true ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'log' }, m(getComponent()))),
+    view: () => m(`${env.isDev ? '.dev' : ''}${env.isWeb ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'log' }, m(getComponent()))),
   };
 }
 

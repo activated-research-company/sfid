@@ -1,13 +1,9 @@
 const io = require('socket.io-client');
 
-function webSocket({ control }, eventEmitter, logger) {
+function webSocket({ control, isWeb, url }, eventEmitter, logger) {
   const getUri = () => {
-    // eslint-disable-next-line no-undef
-    const url = window.location.href;
-    const isWebClient = () => url.indexOf('http') === 0;
-
     let address;
-    if (isWebClient()) {
+    if (isWeb) {
       const http = 'http://';
       const addressStart = url.indexOf(http) + http.length;
       const addressEnd = url.substring(addressStart).search(/[:/]/g, addressStart) + addressStart;
@@ -27,7 +23,8 @@ function webSocket({ control }, eventEmitter, logger) {
 
   function echo(event, from, to) {
     from.on(event, (args) => {
-      if (event === 'analyze.start') { args = JSON.stringify(args); }
+      // TODO: stringify echoes out to external and parse echoes in from external
+      if (event === 'analyze.start' || event === 'shutdown.start') { args = JSON.stringify(args); }
       to.emit(event, JSON.parse(args));
     });
   }

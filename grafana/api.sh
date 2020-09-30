@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GRAFANA_URL="127.0.0.1:$GF_SERVER_HTTP_PORT"
+GRAFANA_URL="localhost:$GF_SERVER_HTTP_PORT"
 
 count=0
 max_retries=10

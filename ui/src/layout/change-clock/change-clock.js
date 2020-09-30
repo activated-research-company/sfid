@@ -1,9 +1,9 @@
 require('./change-clock.css');
 
-function changeClock(m, modal, eventEmitter, changeDate, changeTime) {
+function changeClock(m, modal, env, eventEmitter, changeDate, changeTime) {
   function getComponent() {
     let hide = true;
-    let changedAtLeastOnce = false;
+    let changedAtLeastOnce = !env.isWeb;
 
     function onChangeClock() { hide = false; }
     function onClickout() {
@@ -41,6 +41,7 @@ module.exports = (container) => {
     changeClock,
     'm',
     'modal',
+    'env',
     'eventEmitter',
     'changeDate',
     'changeTime',

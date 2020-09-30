@@ -7,7 +7,10 @@ function nav(m, eventEmitter) {
     function getTab(label, icon, route) {
       return m(`x-tab${currentPage === route ? '[selected]' : ''}`, {
         onclick: () => {
-          if (!currentPage !== route) { eventEmitter.emit('route', route); }
+          if (!currentPage !== route) {
+            currentPage = route;
+            eventEmitter.emit('route', route);
+          }
         },
       },
       m('x-box', [

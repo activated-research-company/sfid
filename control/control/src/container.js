@@ -64,9 +64,6 @@ require('./mode/mode-stage-decorator')(bottle);
 
 require('./mode/shutdown/shutdown-stage-one')(bottle);
 require('./mode/shutdown/shutdown-stage-two')(bottle);
-require('./mode/shutdown/shutdown-stage-three')(bottle);
-require('./mode/shutdown/shutdown-stage-four')(bottle);
-require('./mode/shutdown/shutdown-stage-five')(bottle);
 require('./mode/shutdown/shutdown-stage-complete')(bottle);
 
 require('./phidget/phidget')(bottle);

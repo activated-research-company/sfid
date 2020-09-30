@@ -9,7 +9,7 @@ function shutdownStageComplete(reachedSetpoint) {
 
   return {
     mode: 'shutdown',
-    stage: 6,
+    stage: 3,
     last: true,
     listeners: [
       { event: 'fidhydrogen', handler: onFidHydrogen },
