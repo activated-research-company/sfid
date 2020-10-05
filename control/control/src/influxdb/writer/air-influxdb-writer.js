@@ -3,7 +3,7 @@ function getHeaterInfluxdbWriter(state, influxdb) {
     influxdb.writePoints(
       [
         {
-          measurement: 'heater',
+          measurement: 'air',
           fields: {
             setpoint: state.setpoint,
             temperature: state.actual,
