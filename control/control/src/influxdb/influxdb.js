@@ -47,6 +47,7 @@ function getInfluxdb(env, logger) {
           setpoint: FieldType.FLOAT,
           temperature: FieldType.FLOAT,
         },
+        tags: [],
       },
     ],
   });

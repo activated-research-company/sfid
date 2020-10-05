@@ -47,6 +47,7 @@ function getEnv(path) {
     influxdb: {
       host: env.INFLUXDB_HOST,
       port: env.INFLUXDB_PORT,
+      useSim: isTrue(env.INFLUXDB_USE_SIM),
     },
     startup: {
       time: parseInt(env.STARTUP_TIME, 10),

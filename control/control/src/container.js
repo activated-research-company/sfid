@@ -13,7 +13,12 @@ function listen(service) {
 
 bottle.decorator(listen);
 
+require('./path/path')(bottle);
+require('./fs/fs')(bottle);
+
 require('./env/env')(bottle);
+require('./env/env-validator')(bottle);
+require('./env/env-logger')(bottle);
 
 require('./settings/settings')(bottle);
 require('./settings/decorator/default')(bottle);
@@ -39,17 +44,10 @@ require('./mode/fid/fid-stage-complete')(bottle);
 
 require('./http-server/http-server')(bottle);
 
-require('./path/path')(bottle);
-require('./fs/fs')(bottle);
-
 require('./logger/winston')(bottle);
 require('./logger/logger')(bottle);
 require('./logger/transport/console')(bottle);
 require('./logger/transport/http')(bottle);
-
-require('./env/env-validator')(bottle);
-require('./env/env-logger')(bottle);
-
 require('./clock/clock')(bottle);
 
 require('./ready-service/ready-service')(bottle);
