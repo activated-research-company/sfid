@@ -15,7 +15,7 @@ o.spec('layout', () => {
   o.beforeEach(() => {
     mithrilMock = o.spy((element) => {
       if (element === fadeInMock) { return 'fadeIn'; }
-      if (element === '.relative.max.bg-light-gray.cursor-none') { return 'layout'; }
+      if (element === '.relative.max.bg-light-gray') { return 'layout'; }
       if (element === '.relative.max.bg-light-gray') { return 'layoutDev'; }
       return null;
     });

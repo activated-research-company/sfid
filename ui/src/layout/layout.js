@@ -25,7 +25,7 @@ function layout(
         if (!env.isWeb) { eventEmitter.emit('changeclock'); }
       },
       view: ({ attrs, children }) => m(
-        `.relative.max.pt2.bg-light-gray${env.isWeb || env.dev ? '' : '.cursor-none'}`,
+        '.relative.max.pt2.bg-light-gray',
         {
           onmouseup: updateLastTouch,
           ontouchend: updateLastTouch,

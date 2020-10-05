@@ -32,7 +32,7 @@ function chartOptions(m, env, eventEmitter, systemState, modal, chartOption) {
     function getComponents() {
       const components = [];
       chartables.forEach((chartable) => {
-        components.push(m(`x-menuitem${env.isWeb || env.isDev ? '' : '.cursor-none'}`, {
+        components.push(m('x-menuitem', {
           onclick: (element) => {
             component = element.target.innerText;
             m.redraw();
@@ -51,8 +51,8 @@ function chartOptions(m, env, eventEmitter, systemState, modal, chartOption) {
         });
         allOutputs.push(m(`.w-100.${component === chartable.component ? 'flex' : 'dn'}`, [
           m('x-label.ma-aa.w-30.pr3.tr', 'Output:'),
-          m(`x-select${env.isWeb || env.isDev ? '' : '.cursor-none'}.w-60`, [
-            m(`x-menu${env.isWeb || env.isDev ? '' : '.cursor-none'}`, outputs),
+          m('x-select.w-60', [
+            m('x-menu', outputs),
           ]),
         ]));
       });
@@ -70,8 +70,8 @@ function chartOptions(m, env, eventEmitter, systemState, modal, chartOption) {
       view: () => m(modal, { id: 'chart-options-modal', hide, onclickout: hideChartOptions }, [
         m(`.w-100.${component ? '.pb2' : ''}.flex`, [
           m('x-label.ma-aa.w-30.pr3.tr', 'Component:'),
-          m(`x-select${env.isWeb || env.isDev ? '' : '.cursor-none'}.w-60`, [
-            m(`x-menu${env.isWeb || env.isDev ? '' : '.cursor-none'}`, getComponents()),
+          m('x-select.w-60', [
+            m('x-menu', getComponents()),
           ]),
         ]),
         ...getOutputs(),

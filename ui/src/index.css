@@ -34,8 +34,6 @@ body {
 	to {opacity:0;}
 }
 
-.cursor-none { cursor: none; }
-
 .outline-white { outline: 1px solid white; }
 
 .disabled { pointer-events: none; }
@@ -174,10 +172,12 @@ x-icon.icon-large {
   width: 40px;
 }
 
-x-label, x-select { font-size: 1em; }
-x-menuitem x-label { font-size: 1em; }
+x-label, x-select, x-menuitem x-label { font-size: 1em; }
 
-/* TODO: move all conditional no-cursor classes into this parent selector paradigm */
-.electron:not(.dev) x-backdrop { cursor: none; }
-.electron:not(.dev) x-dateselect { cursor: none; }
+.electron:not(.dev),
+.electron:not(.dev) x-backdrop,
+.electron:not(.dev) x-dateselect,
+.electron:not(.dev) x-menu,
+.electron:not(.dev) x-menuitem,
+.electron:not(.dev) x-select,
 .electron:not(.dev) x-tab { cursor: none; }
