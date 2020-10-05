@@ -8,7 +8,6 @@ const {
   settings,
   state,
   webSocketServer,
-  influxdb,
   eventEmitter,
   logger,
   readyService,
@@ -81,7 +80,7 @@ const listen = () => {
     );
   
     const Fid = require('./src/serial-device/fid');
-    fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, influxdb, eventEmitter, state);
+    fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, eventEmitter, state);
   }
 
   const serialPortRegistrar = require('./src/serial-port/serial-port-registrar')(serialDevices, serialPortFactory, eventEmitter, logger);

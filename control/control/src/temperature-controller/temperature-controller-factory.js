@@ -2,6 +2,7 @@ function getTemperatureControllerFactory(
   pidControllerFactory,
   digitalOutputFactory,
   temperatureSensorFactory,
+  state,
   eventEmitter,
   logger,
 ) {
@@ -37,7 +38,7 @@ function getTemperatureControllerFactory(
     eventEmitter.on(`set${identifier}temperature`, setTemperature);
 
     function emit(temperature) {
-      eventEmitter.emit(`${identifier}temperature`, {
+      const payload = {
         setpoint: pidController.target,
         kp: pidController.k_p,
         ki: pidController.k_i,
@@ -45,7 +46,10 @@ function getTemperatureControllerFactory(
         output: digitalOutput.getOutput(),
         actual: temperature,
         sampleRate: 250,
-      });
+      };
+
+      state.next({ type: 'heater', payload });
+      eventEmitter.emit(`${identifier}temperature`, payload);      
     }
 
     function setOutput(output) {
@@ -91,6 +95,7 @@ module.exports = (container) => {
     'pidControllerFactory',
     'digitalOutputFactory',
     'temperatureSensorFactory',
+    'state',
     'eventEmitter',
     'logger',
   );

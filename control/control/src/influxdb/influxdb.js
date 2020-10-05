@@ -1,7 +1,7 @@
 const { InfluxDB, FieldType } = require('influx');
 
 function getInfluxdb(env, logger) {
-  if (!env.influxdb.host || !env.influxdb.port) { return {}; }
+  if (!env.influxdb.host || !env.influxdb.port) { return null; }
 
   const initDatabase = (databaseNames) => {
     logger.info('influxdb connected');
@@ -16,6 +16,8 @@ function getInfluxdb(env, logger) {
     if (errorString.includes('ECONNREFUSED')) {
       console.warn('influxdb connection refused');
       setTimeout(connect, 10000);
+    } else {
+      console.error(errorString);
     }
   }
 
@@ -35,8 +37,16 @@ function getInfluxdb(env, logger) {
         measurement: 'fid',
         fields: {
           voltage: FieldType.FLOAT,
+          flameTemperature: FieldType.FLAOT
         },
-        tags: ['ignited'],
+        tags: ['igniting', 'ignited'],
+      },
+      {
+        measurement: 'heater',
+        fields: {
+          setpoint: state.setpoint,
+          temperature: state.actual,
+        },
       },
     ],
   });

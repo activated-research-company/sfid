@@ -5,7 +5,6 @@ const Bottle = require('bottlejs');
 const bottle = new Bottle();
 
 bottle.constant('delay', require('./utilitites/delay'));
-bottle.constant('eventRegistry', require('./event-registry/event-registry'));
 
 function listen(service) {
   if (service.listen && service.stopListening) { service.listen(); }
@@ -25,7 +24,7 @@ require('./state/container')(bottle);
 require('./computer-information/computer-information')(bottle);
 require('./computer-information/computer-information-service')(bottle);
 
-require('./influxdb/influxdb')(bottle);
+require('./influxdb/container')(bottle);
 
 require('./serial-device/serial-devices')(bottle);
 
