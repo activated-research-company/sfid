@@ -1,3 +1,3 @@
 #!/bin/bash
 mount -a
-influxd
+influxd -config /etc/influxdb/influxdb.conf

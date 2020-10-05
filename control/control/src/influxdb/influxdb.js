@@ -44,8 +44,8 @@ function getInfluxdb(env, logger) {
       {
         measurement: 'heater',
         fields: {
-          setpoint: state.setpoint,
-          temperature: state.actual,
+          setpoint: FieldType.FLOAT,
+          temperature: FieldType.FLOAT,
         },
       },
     ],

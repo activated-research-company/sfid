@@ -6,6 +6,8 @@ RUN apk add influxdb
 RUN mkdir -p /root/.influxdb/data
 RUN echo "LABEL=influxdb /root/.influxdb/data ext4 rw,relatime,discard,data=ordered 0 2" >> /etc/fstab
 
+COPY ./*.conf /etc/influxdb/
+
 COPY start.sh .
 
 CMD ["bash", "/usr/src/influxdb/start.sh"]
