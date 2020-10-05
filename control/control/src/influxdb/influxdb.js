@@ -20,7 +20,7 @@ function getInfluxdb(env, logger) {
   }
 
   const connect = () => {
-    influxdb
+    return influxdb
     .getDatabaseNames()
     .then(initDatabase)
     .catch(handleError);

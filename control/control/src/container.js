@@ -25,7 +25,7 @@ require('./state/container')(bottle);
 require('./computer-information/computer-information')(bottle);
 require('./computer-information/computer-information-service')(bottle);
 
-require('./influx/influx')(bottle);
+require('./influxdb/influxdb')(bottle);
 
 require('./serial-device/serial-devices')(bottle);
 
