@@ -31,28 +31,28 @@ class Fid extends SerialDevice {
           const json = this.dataToJson(data);
           if (json) {
             this.state.next({ type: 'fid', payload: json });
-            // if (this.influx.writePoints && json.voltage) {
-            //   this.influx.writePoints(
-            //     [
-            //       {
-            //         measurement: 'fid',
-            //         fields: {
-            //           voltage: json.voltage,
-            //         },
-            //         tags: {
-            //           ignited: this.ignited ? '1' : '0',
-            //         },
-            //       },
-            //     ],
-            //     {
-            //       database: 'sfid',
-            //       precision: 'ms',
-            //     },
-            //   )
-            //     .catch((error) => {
-            //       console.error(error.stack);
-            //     });
-            // }
+            if (this.influx.writePoints && json.voltage) {
+              this.influx.writePoints(
+                [
+                  {
+                    measurement: 'fid',
+                    fields: {
+                      voltage: json.voltage,
+                    },
+                    tags: {
+                      ignited: this.ignited ? '1' : '0',
+                    },
+                  },
+                ],
+                {
+                  database: 'sfid',
+                  precision: 'ms',
+                },
+              )
+                .catch((error) => {
+                  console.error(error.stack);
+                });
+            }
           }
         });
         setInterval(this.sendCommand.bind(this), this.sampleRate);
