@@ -1,10 +1,12 @@
 function getHeaterInfluxdbWriter(state, influxdb) {
   const writePoints = (state) => {
+    console.log(state);
     influxdb.writePoints([{
       measurement: 'heater',
       fields: {
         setpoint: state.setpoint,
         temperature: state.actual,
+        output: state.output,
       },
     }]);
   }
