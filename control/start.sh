@@ -1,1 +1,1 @@
-node /usr/src/control/index.js
+node /usr/src/control/src/index.js
