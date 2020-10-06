@@ -1,4 +1,6 @@
-function getFileTransportFactory(winston, path, env) {
+const path = require('path');
+
+function getFileTransportFactory(winston, env) {
   function getNewFileTransport(url, handleExceptions) {
 
     const formatter = winston.format.printf(({ level, message, timestamp }) => {
@@ -29,7 +31,6 @@ module.exports = (container) => {
     'fileTransportFactory',
     getFileTransportFactory,
     'winston',
-    'path',
     'env',
   );
 };

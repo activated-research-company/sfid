@@ -13,7 +13,6 @@ function listen(service) {
 
 bottle.decorator(listen);
 
-require('./path/path')(bottle);
 require('./fs/fs')(bottle);
 
 require('./env/env')(bottle);

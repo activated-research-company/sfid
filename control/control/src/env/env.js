@@ -1,6 +1,7 @@
+const path = require('path');
 const { env } = process;
 
-function getEnv(path) {
+function getEnv() {
   const isDev = env.NODE_ENV === 'development'
 
   if (isDev) {
@@ -96,5 +97,5 @@ function getEnv(path) {
 }
 
 module.exports = (container) => {
-  container.service('env', getEnv, 'path');
+  container.service('env', getEnv);
 };

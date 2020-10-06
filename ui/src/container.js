@@ -5,8 +5,6 @@ const bottle = new Bottle();
 require('./env/env')(bottle);
 require('./event-emitter/event-emitter')(bottle);
 
-require('./path/path')(bottle);
-
 require('./logger/winston')(bottle);
 require('./logger/transport/console')(bottle);
 require('./logger/transport/http')(bottle);

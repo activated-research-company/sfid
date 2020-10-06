@@ -1,6 +1,7 @@
+const path = require('path');
 const { env } = process;
 
-function getEnv(path) {
+function getEnv() {
   // TODO: validate env config and throw errors if something isn't found instead of taking defaults in code
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line global-require, import/no-extraneous-dependencies
@@ -33,5 +34,5 @@ function getEnv(path) {
 }
 
 module.exports = (container) => {
-  container.service('env', getEnv, 'path');
+  container.service('env', getEnv);
 };
