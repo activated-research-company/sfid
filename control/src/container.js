@@ -24,8 +24,6 @@ require('./state/container')(bottle);
 require('./computer-information/computer-information')(bottle);
 require('./computer-information/computer-information-service')(bottle);
 
-require('./influxdb/container')(bottle);
-
 require('./serial-device/serial-devices')(bottle);
 
 require('./event-emitter/event-emitter-on-all-decorator')(bottle);
@@ -44,6 +42,8 @@ require('./logger/logger')(bottle);
 require('./logger/transport/console')(bottle);
 require('./logger/transport/http')(bottle);
 require('./clock/clock')(bottle);
+
+require('./influxdb/container')(bottle);
 
 require('./ready-service/ready-service')(bottle);
 
