@@ -48,7 +48,7 @@ services:
       - '8086'
     volumes:
       - 'data:/data'
-    -environment:
+    environment:
       - 'INFLUXDB_DATA_QUERY_LOG_ENABLED=false'
 
   grafana:
