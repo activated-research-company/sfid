@@ -4,16 +4,12 @@ const Bottle = require('bottlejs');
 
 const bottle = new Bottle();
 
-bottle.constant('delay', require('./utilitites/delay'));
-
 function listen(service) {
   if (service.listen && service.stopListening) { service.listen(); }
   return service;
 }
 
 bottle.decorator(listen);
-
-require('./fs/fs')(bottle);
 
 require('./env/env')(bottle);
 require('./env/env-validator')(bottle);

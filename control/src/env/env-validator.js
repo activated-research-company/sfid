@@ -12,22 +12,16 @@ function envValidator(env) {
   }
 
   // validateHubConfigured('fidTemperatureSensor');
-  // validateHubConfigured('cellTemperatureSensor');
   // validateHubConfigured('heater');
-  // validateHubConfigured('leakDetector');
-  // validateHubConfigured('encoder');
   // validateHubConfigured('redIndicatorLight');
   // validateHubConfigured('orangeIndicatorLight');
   // validateHubConfigured('greenIndicatorLight');
-  // validateHubConfigured('diversionValvePosition');
-  // validateHubConfigured('diversionValveControl');
 }
 
 module.exports = (container) => {
   container.service(
     'envValidator',
     envValidator,
-    'env',
-    'logger', // make sure the logger is created first
+    'env'
   );
 };

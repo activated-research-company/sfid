@@ -1,6 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 
-function getSettings(env, fs, logger) { // TODO: centralize this logic among containers somehow
+function getSettings(env, logger) { // TODO: centralize this logic among containers somehow
   const directory = path.join(env.dataPath, 'api');
   const fileName = path.join(directory, 'settings.json');
   const settings = {};
@@ -46,5 +47,5 @@ function getSettings(env, fs, logger) { // TODO: centralize this logic among con
 }
 
 module.exports = (container) => {
-  container.service('settings', getSettings, 'env', 'fs', 'logger');
+  container.service('settings', getSettings, 'env', 'logger');
 };

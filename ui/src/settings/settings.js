@@ -1,6 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 
-function getSettings(env, fs, logger) {
+function getSettings(env, logger) {
   const directory = path.join(env.persistentDataPath, 'app');
   const fileName = path.join(directory, 'settings.json');
   const settings = {};
@@ -46,5 +47,5 @@ function getSettings(env, fs, logger) {
 }
 
 module.exports = (container) => {
-  container.service('settings', getSettings, 'env', 'fs', 'logger');
+  container.service('settings', getSettings, 'env', 'logger');
 };

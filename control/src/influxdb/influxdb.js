@@ -3,13 +3,18 @@ const { InfluxDB, FieldType } = require('influx');
 function getInfluxdb(env, logger) {
   if (!env.influxdb.host || !env.influxdb.port) { return null; }
 
+  let connected = false;
+
   const initDatabase = (databaseNames) => {
     logger.info('influxdb connected');
     if (!databaseNames.includes('sfid')) {
+      logger.warn('creating sfid database');
       return influxdb.createDatabase('sfid');
     }
     return null;
   }
+
+  const setConnected = () => { connected = true; }
 
   const handleError = (error) => {
     const errorString = error.toString();
@@ -25,6 +30,7 @@ function getInfluxdb(env, logger) {
     return influxdb
     .getDatabaseNames()
     .then(initDatabase)
+    .then(setConnected)
     .catch(handleError);
   };
 
@@ -54,7 +60,22 @@ function getInfluxdb(env, logger) {
 
   connect();
 
-  return influxdb;
+  return {
+    writePoints: (measurements) => {
+      if (connected) {
+        influxdb.writePoints(
+          measurements,
+          {
+            database: 'sfid',
+            precision: 'ms',
+          },
+        )
+        .catch((error) => {
+          console.error(error.stack);
+        });
+      }
+    },
+  };
 }
 
 module.exports = (container) => {

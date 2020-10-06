@@ -1,6 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 
-function setpointSaver(env, fs, logger) {
+function setpointSaver(env, logger) {
   const fileName = path.join(env.persistentDataPath, 'setpoints.json');
   let savedSetpoints = {};
 
@@ -44,5 +45,5 @@ function setpointSaver(env, fs, logger) {
 }
 
 module.exports = (container) => {
-  container.service('setpointSaver', setpointSaver, 'env', 'fs', 'logger');
+  container.service('setpointSaver', setpointSaver, 'env', 'logger');
 };
