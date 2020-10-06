@@ -1,6 +1,5 @@
 function getHeaterInfluxdbWriter(state, influxdb) {
   const writePoints = (state) => {
-    console.log(state);
     influxdb.writePoints([{
       measurement: 'heater',
       fields: {
