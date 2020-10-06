@@ -37,7 +37,7 @@ function getInfluxdb(env, logger) {
         measurement: 'fid',
         fields: {
           voltage: FieldType.FLOAT,
-          flameTemperature: FieldType.FLAOT
+          flameTemperature: FieldType.FLOAT,
         },
         tags: ['igniting', 'ignited'],
       },
