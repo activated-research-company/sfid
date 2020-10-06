@@ -48,6 +48,8 @@ services:
       - '8086'
     volumes:
       - 'data:/data'
+    -environment:
+      - 'INFLUXDB_DATA_QUERY_LOG_ENABLED=false'
 
   grafana:
     build: grafana
