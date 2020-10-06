@@ -1,7 +1,6 @@
 /* eslint-disable import/newline-after-import, import/order, no-unused-vars, global-require */
 
 // TODO: put this file in the root of src (for some reason breaks in the docker container, probably template pointing to the wrong directory)
-// TODO: bottlejs this entire mess
 
 const {
   env,
@@ -18,7 +17,7 @@ const {
   greenIndicatorLight,
   temperatureControllerFactory,
   serialDevices,
-} = require('./src/container');
+} = require('./container');
 
 const waitForComponentStartup = () => {
   
@@ -26,7 +25,7 @@ const waitForComponentStartup = () => {
 
   eventEmitter.emit('components.started', env.startup.time);
 
-  const phidgetManager = require('./src/phidget-manager/phidget-manager')(env, phidget, logger);
+  const phidgetManager = require('./phidget-manager/phidget-manager')(env, phidget, logger);
   phidgetManager.connect();
 
   redIndicatorLight.listen();
@@ -53,8 +52,8 @@ const waitForComponentStartup = () => {
 const listen = () => {
   let fc;
   if (env.fc.isAttached) {
-    const AlicatHub = require('./src/serial-device/alicat/alicat-hub');
-    const alicatDeviceFactory = require('./src/serial-device/alicat/alicat-device-factory')();
+    const AlicatHub = require('./serial-device/alicat/alicat-hub');
+    const alicatDeviceFactory = require('./serial-device/alicat/alicat-device-factory')();
     fc = new AlicatHub(
       serialDevices.fc,
       serialPortFactory,
@@ -79,11 +78,11 @@ const listen = () => {
       env.fid.heater.channel,
     );
   
-    const Fid = require('./src/serial-device/fid');
+    const Fid = require('./serial-device/fid');
     fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, eventEmitter, state);
   }
 
-  const serialPortRegistrar = require('./src/serial-port/serial-port-registrar')(serialDevices, serialPortFactory, eventEmitter, logger);
+  const serialPortRegistrar = require('./serial-port/serial-port-registrar')(serialDevices, serialPortFactory, eventEmitter, logger);
   serialPortRegistrar.registerSerialPorts();
 };
 
