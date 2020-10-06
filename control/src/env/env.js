@@ -7,7 +7,7 @@ function getEnv() {
   if (isDev) {
     // eslint-disable-next-line global-require, import/no-extraneous-dependencies
     const dotenv = require('dotenv');
-    dotenv.config({ path: path.join(process.cwd(), '..', '..', '.env') });
+    dotenv.config({ path: path.join(process.cwd(), '..', '.env') });
     dotenv.config();
   }
 

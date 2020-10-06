@@ -2,7 +2,7 @@ function getInfluxdb(env) {
   if (!env.influxdb.host || !env.influxdb.port) { return null; }
 
   return {
-    writePoints: () => null,
+    writePoints: () => new Promise(resolve => resolve()),
   };
 }
 
