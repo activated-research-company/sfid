@@ -56,6 +56,26 @@ function getInfluxdb(env, logger) {
         },
         tags: [],
       },
+      {
+        measurement: 'air',
+        fields: {
+          setpoint: FieldType.FLOAT,
+          actual: FieldType.FLOAT,
+          pressure: FieldType.FLOAT,
+          temperature: FieldType.FLOAT,
+        },
+        tags: [],
+      },
+      {
+        measurement: 'hydrogen',
+        fields: {
+          setpoint: FieldType.FLOAT,
+          actual: FieldType.FLOAT,
+          pressure: FieldType.FLOAT,
+          temperature: FieldType.FLOAT,
+        },
+        tags: [],
+      },
     ],
   });
 

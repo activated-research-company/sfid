@@ -1,7 +1,7 @@
-function getAirInfluxdbWriter(state, influxdb) {
+function getHydrogenInfluxdbWriter(state, influxdb) {
   const writePoints = (state) => {
     influxdb.writePoints([{
-      measurement: 'air',
+      measurement: 'hydrogen',
       fields: {
         setpoint: state.setpoint,
         actual: parseFloat(state.flow),
@@ -11,9 +11,9 @@ function getAirInfluxdbWriter(state, influxdb) {
     }]);
   }
   
-  state.subscribe({ type: 'air', next: writePoints });
+  state.subscribe({ type: 'hydrogen', next: writePoints });
 }
 
 module.exports = (container) => {
-  container.service('airInfluxdbWriter', getAirInfluxdbWriter, 'state', 'influxdb');
+  container.service('hydrogenInfluxdbWriter', getHydrogenInfluxdbWriter, 'state', 'influxdb');
 };
