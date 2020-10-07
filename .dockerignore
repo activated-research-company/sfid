@@ -1,15 +1,15 @@
 # logs
-*.log
+**/*.log
 
 # coverage directory used by tools like istanbul
-coverage
-*.lcov
+**/coverage
+**/*.lcov
 
 # dependency directories
-node_modules/
+**/node_modules
 
 # dotenv environment variables
-.env
+**/.env
 
 # build output
-dist/
+**/dist
