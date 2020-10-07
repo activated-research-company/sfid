@@ -1,0 +1,37 @@
+{
+  "name": "log",
+  "version": "1.0.0",
+  "description": "This is the centralized logging server for maintaining persistent logs on the SFID.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "ospec",
+    "start": "NODE_ENV=development nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamlee-ARC/sfid.git"
+  },
+  "author": "Adam Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamlee-ARC/sfid/issues"
+  },
+  "homepage": "https://github.com/adamlee-ARC/sfid#readme",
+  "dependencies": {
+    "bottlejs": "^1.7.2",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "strict": true
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "nodemon": "^2.0.4",
+    "ospec": "^4.1.1"
+  }
+}

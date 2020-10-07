@@ -1,5 +1,7 @@
 const { Subject } = require('rxjs');
 
+function getState(logger) {
+  
 const subjects = {};
 
 const state = {
@@ -16,12 +18,17 @@ const state = {
     }
   },
   next: ({ type, payload }) => {
-    subjects[type.toLowerCase()].next({ type: type.toLowerCase(), ...payload });
+    if (!type) {
+      logger.error(`received falsy type [${type}] w/ ${JSON.stringify(payload)}`);
+    } else {
+      subjects[type.toLowerCase()].next({ type: type.toLowerCase(), ...payload });
+    }
   },
 }
 
-function getState() { return state; }
+  return state;
+}
 
 module.exports = (container) => {
-  container.service('state', getState);
+  container.service('state', getState, 'logger');
 };
