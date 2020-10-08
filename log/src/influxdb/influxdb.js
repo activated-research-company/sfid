@@ -37,44 +37,14 @@ function getInfluxdb(env, logger) {
   const influxdb = new InfluxDB({
     host: env.influxdb.host,
     port: env.influxdb.port,
-    database: 'sfid',
+    database: 'log',
     schema: [
       {
-        measurement: 'fid',
+        measurement: 'entry',
         fields: {
-          voltage: FieldType.FLOAT,
-          flameTemperature: FieldType.FLOAT,
+          message: FieldType.STRING,
         },
-        tags: ['igniting', 'ignited'],
-      },
-      {
-        measurement: 'heater',
-        fields: {
-          setpoint: FieldType.FLOAT,
-          temperature: FieldType.FLOAT,
-          output: FieldType.FLOAT,
-        },
-        tags: [],
-      },
-      {
-        measurement: 'air',
-        fields: {
-          setpoint: FieldType.FLOAT,
-          actual: FieldType.FLOAT,
-          pressure: FieldType.FLOAT,
-          temperature: FieldType.FLOAT,
-        },
-        tags: [],
-      },
-      {
-        measurement: 'hydrogen',
-        fields: {
-          setpoint: FieldType.FLOAT,
-          actual: FieldType.FLOAT,
-          pressure: FieldType.FLOAT,
-          temperature: FieldType.FLOAT,
-        },
-        tags: [],
+        tags: ['container', 'level'],
       },
     ],
   });
@@ -87,7 +57,7 @@ function getInfluxdb(env, logger) {
         influxdb.writePoints(
           measurements,
           {
-            database: 'sfid',
+            database: 'log',
             precision: 'ms',
           },
         )

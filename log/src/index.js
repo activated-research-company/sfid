@@ -1,7 +1,12 @@
 const http = require('http');
-const { controlLogger, uiLogger, logLogger, env } = require('./container')
+const { controlLogger, uiLogger, logLogger, influxdb, env } = require('./container')
 
 logLogger.info('initializing');
+
+const loggers = {
+  [`/${env.control.host}`]: controlLogger,
+  [`/${env.ui.host}`]: uiLogger,
+};
 
 const server = http.createServer((req, res) => {
   if (req.method !== 'POST') { return; }
@@ -11,22 +16,25 @@ const server = http.createServer((req, res) => {
   req.on('end', () => {
     res.end('ok');
 
-    try {
-      json = JSON.parse(body);
-      switch (req.url) {
-        case `/${env.control.host}`:
-          controlLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
-          break;
-        case `/${env.ui.host}`:
-          uiLogger[json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
-          break;
-        default:
-          logLogger.error(`received post on invalid url '${req.url}'`);
-          break;
+    if (loggers[req.url]) {
+      try {
+        json = JSON.parse(body);
+        loggers[req.url][json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
+        influxdb.writePoints([{
+          measurement: 'log',
+          fields: {
+            message: json.message,
+          },
+          tags: {
+            container: req.url.substring(1),
+            level: json.level,
+          },
+        }]);
+      } catch (e) {
+        logLogger.error(e);
       }
-    }
-    catch (e) {
-      logLogger.error(e);
+    } else {
+      logLogger.error(`received post on invalid url '${req.url}'`);
     }
   });
 });

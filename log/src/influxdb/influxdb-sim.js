@@ -1,4 +1,4 @@
-function getInfluxdb(env) {
+function getInfluxdbSim(env) {
   if (!env.influxdb.host || !env.influxdb.port) { return null; }
 
   return {
@@ -9,7 +9,7 @@ function getInfluxdb(env) {
 module.exports = (container) => {
   container.service(
     'influxdb',
-    getInfluxdb,
+    getInfluxdbSim,
     'env',
   );
 };

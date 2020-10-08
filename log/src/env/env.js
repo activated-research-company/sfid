@@ -17,6 +17,10 @@ function getEnv() {
     return directory;
   }  
 
+  function isTrue(envVar) {
+    return envVar === 'true';
+  }
+
   return {
     dataPath: getDataPath(process.env.DATA_PATH),
     log: {
