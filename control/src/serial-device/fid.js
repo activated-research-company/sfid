@@ -67,8 +67,8 @@ class Fid extends SerialDevice {
       }
     }
     return {
-      voltage: this.voltage ? parseFloat(this.voltage.toFixed(4)) : null,
-      temperature: this.temperature,
+      voltage: this.voltage ? parseFloat(this.voltage.toFixed(4)) : 0,
+      temperature: this.temperature || 0,
       sampleRate: this.sampleRate,
       igniting: this.igniting,
       ignited: this.ignited,
