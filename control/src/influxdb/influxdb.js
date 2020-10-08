@@ -28,10 +28,10 @@ function getInfluxdb(env, logger) {
 
   const connect = () => {
     return influxdb
-    .getDatabaseNames()
-    .then(initDatabase)
-    .then(setConnected)
-    .catch(handleError);
+      .getDatabaseNames()
+      .then(initDatabase)
+      .then(setConnected)
+      .catch(handleError);
   };
 
   const influxdb = new InfluxDB({

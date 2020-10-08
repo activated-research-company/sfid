@@ -1,8 +1,8 @@
 function getStateEmitter(state, eventEmitter) {
-  const emitState = (state) => {
-    eventEmitter.emit(state.type, state);
+  const emitState = (args) => {
+    eventEmitter.emit(args.type, args);
   };
-  
+
   state.subscribe({ next: emitState });
 
   return {};

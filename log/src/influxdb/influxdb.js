@@ -1,6 +1,6 @@
 const { InfluxDB, FieldType } = require('influx');
 
-function getInfluxdb(env, logger) {
+function getInfluxdb(env, logLogger) {
   if (!env.influxdb.host || !env.influxdb.port) { return null; }
 
   let connected = false;
@@ -23,10 +23,10 @@ function getInfluxdb(env, logger) {
   const setConnected = () => { connected = true; };
 
   const initDatabase = (databaseNames) => {
-    logger.info('influxdb connected');
-    if (!databaseNames.includes('sfid')) {
-      logger.warn('creating sfid database');
-      return influxdb.createDatabase('sfid');
+    logLogger.info('influxdb connected');
+    if (!databaseNames.includes('log')) {
+      logLogger.warn('creating log database');
+      return influxdb.createDatabase('log');
     }
     return null;
   };
@@ -73,6 +73,6 @@ module.exports = (container) => {
     'influxdb',
     getInfluxdb,
     'env',
-    'logger',
+    'logLogger',
   );
 };
