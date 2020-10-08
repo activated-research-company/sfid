@@ -2,14 +2,13 @@ const path = require('path');
 
 function getFileTransportFactory(winston, env) {
   function getNewFileTransport(url, handleExceptions) {
-
-    const formatter = winston.format.printf(({ level, message, timestamp }) => {
-      return JSON.stringify({
+    const formatter = winston
+      .format
+      .printf(({ level, message, timestamp }) => JSON.stringify({
         timestamp,
         level,
         message,
-      });
-    });
+      }));
 
     return new winston.transports.DailyRotateFile({
       dirname: path.join(env.dataPath, 'log', url),

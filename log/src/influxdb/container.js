@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = (container) => {
   if (container.container.env.influxdb.useSim) {
     require('./influxdb-sim')(container);

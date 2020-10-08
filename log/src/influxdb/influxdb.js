@@ -5,35 +5,6 @@ function getInfluxdb(env, logger) {
 
   let connected = false;
 
-  const initDatabase = (databaseNames) => {
-    logger.info('influxdb connected');
-    if (!databaseNames.includes('sfid')) {
-      logger.warn('creating sfid database');
-      return influxdb.createDatabase('sfid');
-    }
-    return null;
-  }
-
-  const setConnected = () => { connected = true; }
-
-  const handleError = (error) => {
-    const errorString = error.toString();
-    if (errorString.includes('ECONNREFUSED')) {
-      console.warn('influxdb connection refused');
-      setTimeout(connect, 10000);
-    } else {
-      console.error(errorString);
-    }
-  }
-
-  const connect = () => {
-    return influxdb
-    .getDatabaseNames()
-    .then(initDatabase)
-    .then(setConnected)
-    .catch(handleError);
-  };
-
   const influxdb = new InfluxDB({
     host: env.influxdb.host,
     port: env.influxdb.port,
@@ -49,21 +20,49 @@ function getInfluxdb(env, logger) {
     ],
   });
 
+  const setConnected = () => { connected = true; };
+
+  const initDatabase = (databaseNames) => {
+    logger.info('influxdb connected');
+    if (!databaseNames.includes('sfid')) {
+      logger.warn('creating sfid database');
+      return influxdb.createDatabase('sfid');
+    }
+    return null;
+  };
+
+  const connect = () => {
+    return influxdb
+      .getDatabaseNames()
+      .then(initDatabase)
+      .then(setConnected)
+      .catch((error) => {
+        const errorString = error.toString();
+        if (errorString.includes('ECONNREFUSED')) {
+          console.warn('influxdb connection refused');
+          setTimeout(connect, 10000);
+        } else {
+          console.error(errorString);
+        }
+      });
+  };
+
   connect();
 
   return {
     writePoints: (measurements) => {
       if (connected) {
-        influxdb.writePoints(
-          measurements,
-          {
-            database: 'log',
-            precision: 'ms',
-          },
-        )
-        .catch((error) => {
-          console.error(error.stack);
-        });
+        influxdb
+          .writePoints(
+            measurements,
+            {
+              database: 'log',
+              precision: 'ms',
+            },
+          )
+          .catch((error) => {
+            console.error(error.stack);
+          });
       }
     },
   };

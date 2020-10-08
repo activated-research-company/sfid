@@ -1,5 +1,11 @@
 const http = require('http');
-const { controlLogger, uiLogger, logLogger, influxdb, env } = require('./container')
+const {
+  controlLogger,
+  uiLogger,
+  logLogger,
+  influxdb,
+  env,
+} = require('./container');
 
 logLogger.info('initializing');
 
@@ -18,7 +24,7 @@ const server = http.createServer((req, res) => {
 
     if (loggers[req.url]) {
       try {
-        json = JSON.parse(body);
+        const json = JSON.parse(body);
         loggers[req.url][json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
         influxdb.writePoints([{
           measurement: 'log',

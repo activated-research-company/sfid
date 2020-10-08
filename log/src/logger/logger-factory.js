@@ -1,7 +1,7 @@
 function getLoggerFactory(winston, { log }) {
   const logLevels = ['error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'];
 
-  function getNewLogger(options) {
+  function getNewLogger() {
     return winston.createLogger({
       level: logLevels[Math.max(log.level, logLevels.length - 1)],
       format: winston.format.timestamp(),

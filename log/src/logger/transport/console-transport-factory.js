@@ -1,8 +1,8 @@
 function getConsoleTransportFactory(winston) {
   function getNewConsoleTransport() {
-    const formatter = winston.format.printf(({ level, message, timestamp }) => {
-      return `${timestamp} | ${level} --> ${message}`;
-    });
+    const formatter = winston
+      .format
+      .printf(({ level, message, timestamp }) => `${timestamp} | ${level} --> ${message}`);
     return new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),

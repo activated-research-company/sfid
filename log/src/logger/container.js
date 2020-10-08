@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = (container) => {
   require('./winston')(container);
   require('./logger-factory')(container);
@@ -6,5 +7,4 @@ module.exports = (container) => {
   require('./control-logger')(container);
   require('./ui-logger')(container);
   require('./log-logger')(container);
-
-}
+};

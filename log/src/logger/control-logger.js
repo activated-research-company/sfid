@@ -1,6 +1,6 @@
 function getControlLogger(loggerFactory, fileTransportFactory) {
   const logger = loggerFactory.getNewLogger();
-  logger.add(fileTransportFactory.getNewFileTransport('control'))
+  logger.add(fileTransportFactory.getNewFileTransport('control'));
   return logger;
 }
 

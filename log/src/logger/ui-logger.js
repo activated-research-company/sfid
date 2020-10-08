@@ -1,6 +1,6 @@
 function getUiLogger(loggerFactory, fileTransportFactory) {
   const logger = loggerFactory.getNewLogger();
-  logger.add(fileTransportFactory.getNewFileTransport('ui'))
+  logger.add(fileTransportFactory.getNewFileTransport('ui'));
   return logger;
 }
 

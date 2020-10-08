@@ -7,4 +7,4 @@ function getWinston() {
 
 module.exports = (container) => {
   container.service('winston', getWinston);
-}
+};
