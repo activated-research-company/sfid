@@ -21,10 +21,10 @@ function decorate(systemState) {
     return getDisplayValue;
   }
 
-  decoratedSystemState.fidAir.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
-  decoratedSystemState.fidAirPressure.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
-  decoratedSystemState.fidHydrogen.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
-  decoratedSystemState.fidHydrogenPressure.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
+  decoratedSystemState.air.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
+  decoratedSystemState.airPressure.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
+  decoratedSystemState.hydrogen.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
+  decoratedSystemState.hydrogenPressure.getDisplayValue = pipe(oneDecimal, addNumberSign, sixCharacters);
   decoratedSystemState.fidTemperature.getDisplayValue = pipe(twoDecimals);
   decoratedSystemState.fid.getDisplayValue = pipe(twoDecimals, sixCharacters);
   decoratedSystemState.fidFlameTemperature.getDisplayValue = pipe(twoDecimals);

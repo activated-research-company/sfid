@@ -33,7 +33,7 @@ class AlicatHub extends SerialDevice {
       if (parser) {
         parser.on('data', (data) => {
           const json = AlicatHub.dataToJson(data);
-          this.state.next({ type: json.gas, payload: json})
+          this.state.next({ type: json.gas || controller.event.toLowerCase(), payload: json})
           this.controllers.forEach((controller) => {
             if (controller.address === json.id) {
               this.eventEmitter.emit(controller.event.toLowerCase(), controller.get(json));

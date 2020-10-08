@@ -1,43 +1,43 @@
 function state() {
   const systemState = {
-    fidAir: {
+    air: {
       label: 'Air',
-      chartTitle: 'FID Air Flow',
-      editTitle: 'FID Air',
+      chartTitle: 'Air Flow',
+      editTitle: 'Air',
       units: 'SCCM',
       max: 500,
-      event: 'fidair',
+      event: 'air',
       setpoint: 350,
       deviceSetpoint: 0,
       actual: 0,
     },
-    fidAirPressure: {
-      chartTitle: 'FID Air Pressure',
+    airPressure: {
+      chartTitle: 'Air Pressure',
       units: 'PSI',
-      event: 'fidair',
+      event: 'air',
       actual: 0,
     },
-    fidHydrogen: {
+    hydrogen: {
       label: `H${String.fromCharCode(0x2082)}`,
-      chartTitle: 'FID Hydrogen Flow',
-      editTitle: 'FID Hydrogen',
+      chartTitle: 'Hydrogen Flow',
+      editTitle: 'Hydrogen',
       units: 'SCCM',
       max: 100,
-      event: 'fidhydrogen',
+      event: 'hydrogen',
       setpoint: 50,
       deviceSetpoint: 0,
       actual: 0,
     },
-    fidHydrogenPressure: {
-      chartTitle: 'FID Hydrogen Pressure',
+    hydrogenPressure: {
+      chartTitle: 'Hydrogen Pressure',
       units: 'PSI',
-      event: 'fidhydrogen',
+      event: 'hydrogen',
       actual: 0,
     },
     fidTemperature: {
       label: 'Temp',
-      chartTitle: 'FID Temperature',
-      editTitle: 'FID Temp',
+      chartTitle: 'Temperature',
+      editTitle: 'Temp',
       units: `${String.fromCharCode(176)}C`,
       max: 450,
       event: 'fidtemperature',
@@ -51,7 +51,7 @@ function state() {
     },
     fid: {
       label: 'Response',
-      chartTitle: 'FID Response',
+      chartTitle: 'Response',
       units: 'mV',
       event: 'fid',
       actual: 0,
@@ -142,8 +142,8 @@ function state() {
     },
   };
 
-  systemState.fidAir.secondary = systemState.fidAirPressure;
-  systemState.fidHydrogen.secondary = systemState.fidHydrogenPressure;
+  systemState.air.secondary = systemState.airPressure;
+  systemState.hydrogen.secondary = systemState.hydrogenPressure;
 
   return systemState;
 }

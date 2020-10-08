@@ -14,8 +14,8 @@ function fidStageComplete(reachedSetpoint) {
   }
 
   function onFid(args) { ignited = args.ignited; }
-  function onAir(args, setpoints) { airReachedSetpoint = reachedSetpoint(args, setpoints.fidAir); }
-  function onHydrogen(args, setpoints) { hydrogenReachedSetpoint = reachedSetpoint(args, setpoints.fidHydrogen); }
+  function onAir(args, setpoints) { airReachedSetpoint = reachedSetpoint(args, setpoints.air); }
+  function onHydrogen(args, setpoints) { hydrogenReachedSetpoint = reachedSetpoint(args, setpoints.hydrogen); }
   function onTemperature(args, setpoints) { tempReachedSetpoint = reachedSetpoint(args, setpoints.fidTemperature); }
 
   return {
@@ -24,8 +24,8 @@ function fidStageComplete(reachedSetpoint) {
     last: true,
     listeners: [
       { event: 'fid', handler: onFid },
-      { event: 'fidair', handler: onAir },
-      { event: 'fidhydrogen', handler: onHydrogen },
+      { event: 'air', handler: onAir },
+      { event: 'hydrogen', handler: onHydrogen },
       { event: 'fidtemperature', handler: onTemperature },
     ],
     isComplete,

@@ -31,7 +31,7 @@ function layout(
           ontouchend: updateLastTouch,
         },
         [
-          !env.isWeb && new Date() - lastTouch < env.screenSleepTime ? null : m(modal),
+          env.isWeb || new Date() - lastTouch < env.screenSleepTime ? null : m(modal),
           m(`.absolute.l-20px.h-5px.w-18px${webSocket.isConnected() ? '' : '.spin'}`, m(logo)),
           m('.absolute.t-14px.r-13px.f7', m(clock)),
           [

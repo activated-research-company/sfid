@@ -14,15 +14,15 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
         ignitedForThreeSeconds = true;
         flameStabilizing = false;
         eventEmitter
-          .emit('setfidair', setpoints.fidAir)
-          .emit('setfidhydrogen', setpoints.fidHydrogen);
+          .emit('setair', setpoints.air)
+          .emit('sethydrogen', setpoints.hydrogen);
       }, 3000);
     }
   }
 
   function onFid(args) { ignited = args.ignited; }
-  function onAir(args, setpoints) { airReachedSetpoint = reachedSetpoint(args, setpoints.fidAir); }
-  function onHydrogen(args, setpoints) { hydrogenReachedSetpoint = reachedSetpoint(args, setpoints.fidHydrogen); }
+  function onAir(args, setpoints) { airReachedSetpoint = reachedSetpoint(args, setpoints.air); }
+  function onHydrogen(args, setpoints) { hydrogenReachedSetpoint = reachedSetpoint(args, setpoints.hydrogen); }
   function onTemperature(args, setpoints) { tempReachedSetpoint = reachedSetpoint(args, setpoints.fidTemperature); }
 
   return {
@@ -30,8 +30,8 @@ function fidStageFour(eventEmitter, reachedSetpoint) {
     stage: 4,
     listeners: [
       { event: 'fid', handler: onFid },
-      { event: 'fidair', handler: onAir },
-      { event: 'fidhydrogen', handler: onHydrogen },
+      { event: 'air', handler: onAir },
+      { event: 'hydrogen', handler: onHydrogen },
       { event: 'fidtemperature', handler: onTemperature },
     ],
     start,

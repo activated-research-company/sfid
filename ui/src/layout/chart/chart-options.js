@@ -8,10 +8,10 @@ function chartOptions(m, env, eventEmitter, systemState, modal, chartOption) {
       {
         component: 'FID',
         outputs: [
-          systemState.fidAir,
-          systemState.fidAirPressure,
-          systemState.fidHydrogen,
-          systemState.fidHydrogenPressure,
+          systemState.air,
+          systemState.airPressure,
+          systemState.hydrogen,
+          systemState.hydrogenPressure,
           systemState.fidTemperature,
           systemState.fid,
         ],

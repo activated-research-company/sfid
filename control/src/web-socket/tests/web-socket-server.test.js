@@ -67,20 +67,8 @@ o.spec('web socket server', () => {
 
   o('contains all incoming events', () => {
     // TODO: make sure this contains all events and force count check
-    o(webSocketServer.events.cellAir).equals('cellair');
-    o(webSocketServer.events.cellTemperature).equals('celltemperature');
-    o(webSocketServer.events.cdllKp).equals('cellkp');
-    o(webSocketServer.events.cellKi).equals('cellki');
-    o(webSocketServer.events.cellKd).equals('cellkd');
-    o(webSocketServer.events.diskRpm).equals('diskrpm');
-    o(webSocketServer.events.cellPressure).equals('cellpressure');
-    o(webSocketServer.events.diversionValve).equals('diversionvalve');
-    o(webSocketServer.events.laserHardInterlock).equals('laserhardinterlock');
-    o(webSocketServer.events.laserSoftInterlock).equals('lasersoftinterlock');
-    o(webSocketServer.events.laserPilot).equals('laserpilot');
-    o(webSocketServer.events.laserPower).equals('laserpower');
-    o(webSocketServer.events.fidHydrogen).equals('fidhydrogen');
-    o(webSocketServer.events.fidAir).equals('fidair');
+    o(webSocketServer.events.hydrogen).equals('hydrogen');
+    o(webSocketServer.events.air).equals('air');
     o(webSocketServer.events.fidTemperature).equals('fidtemperature');
     o(webSocketServer.events.fidKp).equals('fidkp');
     o(webSocketServer.events.fidKi).equals('fidki');
@@ -304,20 +292,20 @@ o.spec('web socket server', () => {
   o('should emit fid hydrogen setter', () => {
     webSocketServer.listen();
     webSocketMock.connectHandler(localClientMock);
-    localClientMock.fidhydrogenHandler(argsMock);
+    localClientMock.hydrogenHandler(argsMock);
 
     o(eventEmitterMock.emit.callCount).equals(1);
-    o(eventEmitterMock.emit.args[0]).equals('setfidhydrogen');
+    o(eventEmitterMock.emit.args[0]).equals('sethydrogen');
     o(eventEmitterMock.emit.args[1]).equals(argsMock);
   });
 
   o('should emit fid air setter', () => {
     webSocketServer.listen();
     webSocketMock.connectHandler(localClientMock);
-    localClientMock.fidairHandler(argsMock);
+    localClientMock.airHandler(argsMock);
 
     o(eventEmitterMock.emit.callCount).equals(1);
-    o(eventEmitterMock.emit.args[0]).equals('setfidair');
+    o(eventEmitterMock.emit.args[0]).equals('setair');
     o(eventEmitterMock.emit.args[1]).equals(argsMock);
   });
 

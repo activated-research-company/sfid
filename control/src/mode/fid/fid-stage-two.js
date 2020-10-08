@@ -8,8 +8,8 @@ function fidStageTwo(eventEmitter, reachedSetpoint) {
   function start(setpoints) {
     if (!ignited) {
       eventEmitter
-        .emit('setfidair', airSetpoint)
-        .emit('setfidhydrogen', hydrogenSetpoint)
+        .emit('setair', airSetpoint)
+        .emit('sethydrogen', hydrogenSetpoint)
         .emit('setfidtemperature', setpoints.fidTemperature);
     }
   }
@@ -23,8 +23,8 @@ function fidStageTwo(eventEmitter, reachedSetpoint) {
     stage: 2,
     listeners: [
       { event: 'fid', handler: onFid },
-      { event: 'fidair', handler: onAir },
-      { event: 'fidhydrogen', handler: onHydrogen },
+      { event: 'air', handler: onAir },
+      { event: 'hydrogen', handler: onHydrogen },
     ],
     start,
     steps: [

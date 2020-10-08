@@ -13,12 +13,12 @@ function fidPortMock(eventEmitter) {
     }
   }
 
-  eventEmitter.on('fidhydrogen', (args) => {
+  eventEmitter.on('hydrogen', (args) => {
     hydrogenflow = parseFloat(args.actual);
     checkIfFlameShouldBeExtinguished();
   });
 
-  eventEmitter.on('fidair', (args) => {
+  eventEmitter.on('air', (args) => {
     airflow = parseFloat(args.actual);
     checkIfFlameShouldBeExtinguished();
   });

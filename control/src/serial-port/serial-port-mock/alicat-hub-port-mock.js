@@ -17,11 +17,6 @@ function getFlowControllerHubPortMock() {
     }
   }
 
-  function setPressureControllerSetpoint(setpoint) {
-    this.setpoint = setpoint;
-    this.pressure = setpoint;
-  }
-
   function createFlowController(address, gas) {
     return {
       address,
@@ -34,22 +29,9 @@ function getFlowControllerHubPortMock() {
     };
   }
 
-  function createPressureController(address) {
-    return {
-      address,
-      gas: 'Air',
-      pressure: 0,
-      flow: 0,
-      setpoint: 0,
-      setSetpoint: setPressureControllerSetpoint,
-    };
-  }
-
   const controllers = {
-    fidAir: createFlowController('a', 'Air'),
-    fidHydrogen: createFlowController('h', 'Hydrogen'),
-    cellAir: createFlowController('x', 'Air'),
-    cellPressure: createPressureController('c'),
+    air: createFlowController('a', 'Air'),
+    hydrogen: createFlowController('h', 'Hydrogen'),
   };
 
   function getController(address) {

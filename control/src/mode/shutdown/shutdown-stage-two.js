@@ -1,25 +1,25 @@
 function shutdownStageFive(eventEmitter, reachedSetpoint) {
-  let fidHydrogenReachedSetpoint = false;
+  let hydrogenReachedSetpoint = false;
 
   function start() {
     eventEmitter
-      .emit('setfidhydrogen', 0)
+      .emit('sethydrogen', 0)
       .emit('setfidtemperature', 0);
   }
 
-  function onFidHydrogen(args) { fidHydrogenReachedSetpoint = reachedSetpoint(args, 0); }
+  function onHydrogen(args) { hydrogenReachedSetpoint = reachedSetpoint(args, 0); }
 
   return {
     mode: 'shutdown',
     stage: 2,
     listeners: [
-      { event: 'fidhydrogen', handler: onFidHydrogen },
+      { event: 'hydrogen', handler: onHydrogen },
     ],
     start,
     steps: [
       {
         description: `Cutting H${String.fromCharCode(0x2082)}`,
-        isComplete: () => fidHydrogenReachedSetpoint,
+        isComplete: () => hydrogenReachedSetpoint,
       },
     ],
   };

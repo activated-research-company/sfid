@@ -4,8 +4,8 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
   }
 
   const events = {
-    fidHydrogen: 'fidhydrogen',
-    fidAir: 'fidair',
+    hydrogen: 'hydrogen',
+    air: 'air',
     fidTemperature: 'fidtemperature',
     fidKp: 'fidkp',
     fidKi: 'fidki',

@@ -59,8 +59,8 @@ const listen = () => {
       serialPortFactory,
       eventEmitter,
       [
-        alicatDeviceFactory.getNewFlowController('a', 'fidair'),
-        alicatDeviceFactory.getNewFlowController('h', 'fidhydrogen'),
+        alicatDeviceFactory.getNewFlowController('a', 'air'),
+        alicatDeviceFactory.getNewFlowController('h', 'hydrogen'),
       ],
       state,
     );

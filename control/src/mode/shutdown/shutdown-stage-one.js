@@ -1,23 +1,23 @@
 function shutdownStageFour(eventEmitter, reachedSetpoint) {
-  let fidHydrogen = 0;
-  const fidHydrogenSetpoint = 10;
-  let fidHydrogenReachedSetpoint = false;
-  let fidAirReachedSetpoint = false;
+  let hydrogen = 0;
+  const hydrogenSetpoint = 10;
+  let hydrogenReachedSetpoint = false;
+  let airReachedSetpoint = false;
   const fidTemperatureSetpoint = 50;
   let fidTemperature = 0;
 
   function start() {
-    if (fidHydrogen > 10) { eventEmitter.emit('setfidhydrogen', fidHydrogenSetpoint); }
+    if (hydrogen > 10) { eventEmitter.emit('sethydrogen', hydrogenSetpoint); }
     if (fidTemperature > 50) { eventEmitter.emit('setfidtemperature', fidTemperatureSetpoint); }
-    eventEmitter.emit('setfidair', 0)
+    eventEmitter.emit('setair', 0)
   }
 
-  function onFidHydrogen(args) {
-    fidHydrogen = args.actual;
-    fidHydrogenReachedSetpoint = reachedSetpoint(args, 0) || reachedSetpoint(args, fidHydrogenSetpoint);
+  function onHydrogen(args) {
+    hydrogen = args.actual;
+    hydrogenReachedSetpoint = reachedSetpoint(args, 0) || reachedSetpoint(args, hydrogenSetpoint);
   }
 
-  function onFidAir(args) { fidAirReachedSetpoint = reachedSetpoint(args, 0); }
+  function onAir(args) { airReachedSetpoint = reachedSetpoint(args, 0); }
   function onFidTemperature(args) { fidTemperature = args.actual; }
 
   return {
@@ -26,20 +26,20 @@ function shutdownStageFour(eventEmitter, reachedSetpoint) {
     stage: 1,
     first: true,
     listeners: [
-      { event: 'fidhydrogen', handler: onFidHydrogen },
-      { event: 'fidair', handler: onFidAir },
+      { event: 'hydrogen', handler: onHydrogen },
+      { event: 'air', handler: onAir },
       { event: 'fidtemperature', handler: onFidTemperature },
     ],
     start,
     steps: [
       {
-        description: `Cutting H${String.fromCharCode(0x2082)} to ${fidHydrogenSetpoint} SCCM`,
-        applies: () => fidHydrogen > fidHydrogenSetpoint,
-        isComplete: () => fidHydrogenReachedSetpoint,
+        description: `Cutting H${String.fromCharCode(0x2082)} to ${hydrogenSetpoint} SCCM`,
+        applies: () => hydrogen > hydrogenSetpoint,
+        isComplete: () => hydrogenReachedSetpoint,
       },
       {
         description: 'Cutting air',
-        isComplete: () => fidAirReachedSetpoint,
+        isComplete: () => airReachedSetpoint,
       },
       {
         description: `Cooling to ${fidTemperatureSetpoint} ${String.fromCharCode(176)}C`,

@@ -10,8 +10,8 @@ function advancedFidPanel(
     return {
       view: () => m(labelledCard, { label: 'FID', state: systemState.fidFlame }, [
         m('.flex.pb2', [
-          m('.w-50.pr1', m(stateSlider, { state: systemState.fidHydrogen })),
-          m('.w-50.pl1', m(stateSlider, { state: systemState.fidAir })),
+          m('.w-50.pr1', m(stateSlider, { state: systemState.hydrogen })),
+          m('.w-50.pl1', m(stateSlider, { state: systemState.air })),
         ]),
         m('.flex.pb2', [
           m('.w-50.pr1', m(stateSlider, { state: systemState.fidTemperature })),

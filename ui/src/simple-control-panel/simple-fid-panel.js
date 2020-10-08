@@ -3,8 +3,8 @@ function fidPanel(m, systemState, labelledCard, stateDisplay) {
     return {
       view: () => m(labelledCard, { label: 'FID', state: systemState.fidFlame }, [
         m('.flex.pb2', [
-          m('.w-50.pr1', m(stateDisplay, { state: systemState.fidHydrogen, hideSecondary: true })),
-          m('.w-50.pl1', m(stateDisplay, { state: systemState.fidAir, hideSecondary: true })),
+          m('.w-50.pr1', m(stateDisplay, { state: systemState.hydrogen, hideSecondary: true })),
+          m('.w-50.pl1', m(stateDisplay, { state: systemState.air, hideSecondary: true })),
         ]),
         m('.flex', [
           m('.w-50.pr1', m(stateDisplay, { state: systemState.fidTemperature })),

@@ -1,10 +1,10 @@
 function shutdownStageComplete(reachedSetpoint) {
-  let fidHydrogenReachedSetpoint = false;
+  let hydrogenReachedSetpoint = false;
 
-  const isComplete = () => fidHydrogenReachedSetpoint;
+  const isComplete = () => hydrogenReachedSetpoint;
 
-  function onFidHydrogen(args) {
-    fidHydrogenReachedSetpoint = reachedSetpoint(args, 0);
+  function onHydrogen(args) {
+    hydrogenReachedSetpoint = reachedSetpoint(args, 0);
   }
 
   return {
@@ -12,7 +12,7 @@ function shutdownStageComplete(reachedSetpoint) {
     stage: 3,
     last: true,
     listeners: [
-      { event: 'fidhydrogen', handler: onFidHydrogen },
+      { event: 'hydrogen', handler: onHydrogen },
     ],
     isComplete,
   };

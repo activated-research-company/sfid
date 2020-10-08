@@ -38,8 +38,6 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
       state.synchronize = function() {
         if (typeof this.setpoint === 'boolean') {
           webSocket.emit(this.event, this.setpoint ? (this.flip ? '0' : '1') : (this.flip ? '1' : '0'));
-        } else if (this.event === 'laserpower') {
-          webSocket.emit(this.event, Math.round((this.setpoint / 100) * process.env.LASER_MAX_POWER));
         } else {
           webSocket.emit(this.event, this.setpoint);
         }
@@ -47,8 +45,8 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
       state.turnOff = function() { webSocket.emit(this.event, 0); };
     }
 
-    addCommunicationMethods(decoratedSystemState.fidHydrogen);
-    addCommunicationMethods(decoratedSystemState.fidAir);
+    addCommunicationMethods(decoratedSystemState.hydrogen);
+    addCommunicationMethods(decoratedSystemState.air);
     addCommunicationMethods(decoratedSystemState.fidTemperature);
     addCommunicationMethods(decoratedSystemState.fidIgniter);
 
@@ -72,13 +70,13 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
     }
 
     webSocket
-      .on(decoratedSystemState.fidHydrogen.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
-        decoratedSystemState.fidHydrogenPressure.actual = round(pressure, 1);
-        updateState(decoratedSystemState.fidHydrogen, setpoint, round(flow, 1), reachedSetpoint);
+      .on(decoratedSystemState.hydrogen.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
+        decoratedSystemState.hydrogenPressure.actual = round(pressure, 1);
+        updateState(decoratedSystemState.hydrogen, setpoint, round(flow, 1), reachedSetpoint);
       })
-      .on(decoratedSystemState.fidAir.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
-        decoratedSystemState.fidAirPressure.actual = round(pressure, 1);
-        updateState(decoratedSystemState.fidAir, setpoint, round(flow, 1), reachedSetpoint);
+      .on(decoratedSystemState.air.event, ({ setpoint, flow, pressure, reachedSetpoint }) => {
+        decoratedSystemState.airPressure.actual = round(pressure, 1);
+        updateState(decoratedSystemState.air, setpoint, round(flow, 1), reachedSetpoint);
       })
       .on(decoratedSystemState.fidTemperature.event, ({ setpoint, actual, output, kp, ki, kd, reachedSetpoint, sampleRate }) => {
         decoratedSystemState.fidTemperature.kp = kp;

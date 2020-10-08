@@ -1,8 +1,8 @@
 function decorate(systemState) {
   const decoratedSystemState = systemState;
 
-  decoratedSystemState.fidAir.defaultSetpoint = 350;
-  decoratedSystemState.fidHydrogen.defaultSetpoint = 50;
+  decoratedSystemState.air.defaultSetpoint = 350;
+  decoratedSystemState.hydrogen.defaultSetpoint = 50;
   decoratedSystemState.fidTemperature.defaultSetpoint = 400;
 
   return decoratedSystemState;
