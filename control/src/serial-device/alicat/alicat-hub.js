@@ -61,7 +61,7 @@ class AlicatHub extends SerialDevice {
       pressure: dataArray[1],
       temperature: dataArray[2],
       flow: dataArray[4],
-      setpoint: parseFloat(dataArray[5], 10),
+      setpoint: parseFloat(dataArray[5], 10) || 0,
       gas: dataArray[9],
     };
   }
