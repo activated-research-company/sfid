@@ -7,7 +7,7 @@ volumes:
 services:
 
   log:
-    build: log_old
+    build: log
     expose:
       - '80'
     volumes:

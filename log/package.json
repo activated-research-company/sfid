@@ -20,6 +20,7 @@
   "homepage": "https://github.com/adamlee-ARC/sfid#readme",
   "dependencies": {
     "bottlejs": "^1.7.2",
+    "influx": "^5.6.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   },

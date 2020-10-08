@@ -24,6 +24,11 @@ function getEnv() {
       port: parseInt(env.LOG_PORT, 10),
       level: parseInt(env.LOG_LEVEL, 10),
     },
+    influxdb: {
+      host: env.INFLUXDB_HOST,
+      port: env.INFLUXDB_PORT,
+      useSim: isTrue(env.INFLUXDB_USE_SIM),
+    },
     control: {
       host: env.CONTROL_HOST,
     },
