@@ -20,6 +20,7 @@ const state = {
   next: ({ type, payload }) => {
     if (!type) {
       logger.error(`received falsy type [${type}] w/ ${JSON.stringify(payload)}`);
+      throw new Error(`uknown state encountered: ${type}`);
     } else {
       subjects[type.toLowerCase()].next({ type: type.toLowerCase(), ...payload });
     }
