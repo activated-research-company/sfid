@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
         const json = JSON.parse(body);
         loggers[req.url][json.level]({ level: json.level, message: json.message, timestamp: json.timestamp });
         influxdb.writePoints([{
-          measurement: 'log',
+          measurement: 'entry',
           fields: {
             message: json.message,
           },
