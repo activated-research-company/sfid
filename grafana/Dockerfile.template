@@ -8,7 +8,7 @@ RUN install_packages \
       jq \
       wget
 
-# COPY ./provisioning /usr/share/grafana/conf/provisioning
+COPY ./provisioning /usr/share/grafana/conf/provisioning
 COPY ./*.ini /usr/share/grafana/conf/
 COPY ./*.sh /usr/src/grafana/
 RUN chmod +x /usr/src/grafana/*.sh

@@ -5,13 +5,6 @@ volumes:
   www:
 
 services:
-
-  log:
-    build: log
-    expose:
-      - '80'
-    volumes:
-      - 'data:/data'
   
   nginx:
     build : nginx
@@ -58,6 +51,15 @@ services:
         - 'GF_SERVER_HTTP_PORT=80'
         - 'GF_SESSION_PROVIDER=memory'
         # - 'GF_AUTH_ANONYMOUS_ENABLED=true'
+    depends_on:
+      - influxdb
+
+  log:
+    build: log
+    expose:
+      - '80'
+    volumes:
+      - 'data:/data'
     depends_on:
       - influxdb
 
