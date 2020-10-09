@@ -77,7 +77,7 @@ const listen = () => {
       env.fid.heater.port,
       env.fid.heater.channel,
     );
-  
+
     const Fid = require('./serial-device/fid');
     fid = new Fid(serialPortFactory, serialDevices, env.fid.sampleRate, eventEmitter, state);
   }

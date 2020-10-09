@@ -67,29 +67,29 @@ function getEnv() {
       sampleRate: parseInt(env.FID_SAMPLE_RATE, 10),
       temperatureSensor: {
         isAttached: isTrue(env.FID_TEMPERATURE_SENSOR_IS_ATTACHED),
-        hub: parseInt(env.FID_TEMPERATURE_SENSOR_HUB),
+        hub: env.FID_TEMPERATURE_SENSOR_HUB,
         port: parseInt(env.FID_TEMPERATURE_SENSOR_PORT),
       },
       heater: {
         isAttached: isTrue(env.FID_HEATER_IS_ATTACHED),
-        hub: parseInt(env.FID_HEATER_HUB),
+        hub: env.FID_HEATER_HUB,
         port: parseInt(env.FID_HEATER_PORT),
       },
     },
     light: {
       red: {
         isAttached: isTrue(env.RED_LIGHT_IS_ATTACHED),
-        hub: parseInt(env.RED_LIGHT_HUB),
+        hub: env.RED_LIGHT_HUB,
         port: parseInt(env.RED_LIGHT_PORT),
       },
       orange: {
         isAttached: isTrue(env.ORANGE_LIGHT_IS_ATTACHED),
-        hub: parseInt(env.ORANGE_LIGHT_HUB),
+        hub: env.ORANGE_LIGHT_HUB,
         port: parseInt(env.ORANGE_LIGHT_PORT),
       },
       green: {
         isAttached: isTrue(env.GREEN_LIGHT_IS_ATTACHED),
-        hub: parseInt(env.GREEN_LIGHT_HUB),
+        hub: env.GREEN_LIGHT_HUB,
         port: parseInt(env.GREEN_LIGHT_PORT),
       },
     },
