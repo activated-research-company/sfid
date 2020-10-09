@@ -7,7 +7,7 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
 
     function setSetpoint(newSetpoint) {
       this.setpoint = newSetpoint;
-      setpointSaver.save(this.event, this.setpoint);
+      // setpointSaver.save(this.event, this.setpoint);
     }
 
     function setKp(kp) {

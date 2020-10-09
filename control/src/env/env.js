@@ -74,6 +74,7 @@ function getEnv() {
         isAttached: isTrue(env.FID_HEATER_IS_ATTACHED),
         hub: env.FID_HEATER_HUB,
         port: parseInt(env.FID_HEATER_PORT),
+        channel: parseInt(env.FID_HEATER_CHANNEL),
       },
     },
     light: {
