@@ -6,7 +6,7 @@ function modal(m) {
 
     function getChildren(children, id) {
       if (children.length) {
-        return m('x-card.shadow-1.ma-10pa.w-fc', {
+        return m('x-card.shadow-1.ma-5pa.w-fc', {
           id,
           onclick: (e) => {
             e.stopPropagation();

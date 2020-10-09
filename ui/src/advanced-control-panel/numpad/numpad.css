@@ -10,6 +10,11 @@
   width: 168.83px;
 }
 
+.web .numpad-input {
+  width: 163.8px;
+}
+
+
 #default-key {
   width: 83px;
   height: 24.5px;
@@ -30,4 +35,8 @@
 
 #zero-key {
   width:107px;
+}
+
+.web #zero-key {
+  width:104px;
 }
