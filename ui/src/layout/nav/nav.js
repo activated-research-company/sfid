@@ -24,7 +24,7 @@ function nav(m, eventEmitter) {
         getTab('', 'home', 'simple-control'),
         getTab('', 'edit', 'advanced-control'),
         getTab('', 'build', 'environment-monitor'),
-        getTab('', 'view-list', 'log'),
+        getTab('', 'view-list', 'links'),
       ]),
     };
   }

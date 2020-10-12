@@ -39,10 +39,10 @@ function layout(
             m(`.w-100.${attrs.hideChart ? '' : 'mb2'}`, children),
             attrs.hideChart ? null : m('.w-100', { id: `${attrs.route}-chart` }, m(chart)),
           ],
-          attrs.hideChart ? null : m('.absolute.bottom-1h.right-1h.f7.w-785px.z-3', m(emergencyShutdownButton)),
+          m('.absolute.bottom-1h.right-1h.f7.w-785px.z-3', m(emergencyShutdownButton)),
           m(changeClock),
           m(errorMessage),
-          attrs.hideChart ? null : m(emergencyShutdownConfirm),
+          m(emergencyShutdownConfirm),
         ],
       ),
     };

@@ -3,14 +3,19 @@
 const env = process.env;
 
 function getEnv() {
-  // TODO: validate env config and throw errors if something isn't found instead of taking defaults in code
+  // TODO: validate config and throw errors instead of taking defaults
 
   // eslint-disable-next-line no-undef
   const url = window.location.href;
   const isWebClient = () => url.indexOf('http') === 0;
 
+  const getLocalUrl = (uri) => url.concat(uri);
+
   return {
     url,
+    dataUrl: getLocalUrl(env.DATA_URI),
+    logUrl: getLocalUrl(env.LOG_URI),
+    productUrl: env.PRODUCT_URL,
     isDev: env.NODE_ENV && env.NODE_ENV === 'development',
     isWeb: isWebClient(),
     uuid: env.BALENA_DEVICE_UUID,

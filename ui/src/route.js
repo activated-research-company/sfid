@@ -9,7 +9,7 @@ const {
   simpleControlPanel,
   advancedControlPanel,
   environmentMonitor,
-  logPanel,
+  linkPanel,
   logger,
 } = require('./container');
 
@@ -36,8 +36,8 @@ function sfid() {
         return advancedControlPanel;
       case 'environment-monitor':
         return environmentMonitor;
-      case 'log':
-        return logPanel;
+      case 'links':
+        return linkPanel;
       default:
         return null;
     }
@@ -52,7 +52,7 @@ function sfid() {
     onRemove: () => {
       eventEmitter.off('route', onRoute);
     },
-    view: () => m(`${env.isDev ? '.dev' : ''}${env.isWeb ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'log' }, m(getComponent()))),
+    view: () => m(`${env.isDev ? '.dev' : ''}${env.isWeb ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'links' }, m(getComponent()))),
   };
 }
 

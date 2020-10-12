@@ -34,7 +34,7 @@ require('./layout/chart/chart-factory')(bottle);
 require('./layout/chart/chart-option')(bottle);
 require('./layout/chart/chart-options')(bottle);
 
-require('./log-panel/log-panel')(bottle);
+require('./link-panel/container')(bottle);
 
 require('./time/time')(bottle);
 require('./time/moment')(bottle);
