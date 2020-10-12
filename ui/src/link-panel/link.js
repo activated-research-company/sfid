@@ -1,7 +1,7 @@
 function link(m, button) {
   function getComponent() {
     return {
-      view: ({ attrs: { url, label } }) => m('a', { href: url, target: '_blank' }, m(button, { label })),
+      view: ({ attrs: { url, label, disabled } }) => m('a', { href: url, target: '_blank' }, m(button, { label, disabled })),
     };
   }
 

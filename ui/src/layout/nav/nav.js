@@ -21,9 +21,9 @@ function nav(m, eventEmitter) {
 
     return {
       view: () => m('x-tabs.z-0.ma-aa', [
-        getTab('', 'home', 'simple-control'),
-        getTab('', 'edit', 'advanced-control'),
-        getTab('', 'build', 'environment-monitor'),
+        getTab('', 'home', 'simple'),
+        getTab('', 'edit', 'advanced'),
+        getTab('', 'build', 'computer'),
         getTab('', 'view-list', 'links'),
       ]),
     };

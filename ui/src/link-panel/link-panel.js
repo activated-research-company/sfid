@@ -1,11 +1,14 @@
+require('./link-panel.css');
+
 function linkPanel(m, env, systemState, labelledCard, link) {
-  const getLink = (url, label) => m('.pb2', m('.pb2', m(link, { url, label })));
+  const getLink = (url, label) => m(link, { url, label, disabled: !env.isWeb });
 
   function getComponent() {
     return {
       view: () => m('.bt.bb', m(labelledCard, { label: 'Links', state: systemState.online }, [
-        getLink(env.dataUrl, 'Data'),
-        getLink(env.logUrl, 'System Logs'),
+        env.isWeb ? null : m('.pb2', `Navigate to ${systemState.computerIp} in your browser to access these links.`),
+        m('.pb2', getLink(env.dataUrl, 'Data')),
+        m('.pb2', getLink(env.logUrl, 'System Logs')),
         getLink(env.productUrl, 'Product Page'),
       ])),
     };

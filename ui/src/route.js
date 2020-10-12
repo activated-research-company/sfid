@@ -8,7 +8,7 @@ const {
   layout,
   simpleControlPanel,
   advancedControlPanel,
-  environmentMonitor,
+  computerPanel,
   linkPanel,
   logger,
 } = require('./container');
@@ -26,16 +26,16 @@ if (!webSocket.isConnected()) { webSocket.connect(); }
 setInterval(m.redraw, 250); // this is much more efficient than actively redrawing on state updates
 
 function sfid() {
-  let route = 'simple-control';
+  let route = 'simple';
 
   function getComponent() {
     switch (route) {
-      case 'simple-control':
+      case 'simple':
         return simpleControlPanel;
-      case 'advanced-control':
+      case 'advanced':
         return advancedControlPanel;
-      case 'environment-monitor':
-        return environmentMonitor;
+      case 'computer':
+        return computerPanel;
       case 'links':
         return linkPanel;
       default:
@@ -52,7 +52,7 @@ function sfid() {
     onRemove: () => {
       eventEmitter.off('route', onRoute);
     },
-    view: () => m(`${env.isDev ? '.dev' : ''}${env.isWeb ? '.web' : '.electron'}`, m(layout, { route, hideChart: route === 'links' }, m(getComponent()))),
+    view: () => m(`${env.isDev ? '.dev' : ''}${env.isWeb ? '.web' : '.electron'}`, m(layout, { route }, m(getComponent()))),
   };
 }
 

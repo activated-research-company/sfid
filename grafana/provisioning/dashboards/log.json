@@ -15,6 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1602522251850,
   "links": [],
   "panels": [
     {
@@ -88,7 +90,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "level"
+            "displayName": "Time"
           }
         ]
       },
@@ -113,7 +115,19 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "level",
+              "operator": "=~",
+              "value": "/^$level$/"
+            },
+            {
+              "condition": "AND",
+              "key": "container",
+              "operator": "=~",
+              "value": "/^$container$/"
+            }
+          ]
         }
       ],
       "timeFrom": null,
@@ -126,7 +140,113 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Log",
+        "definition": "SHOW TAG VALUES ON \"log\" WITH KEY = \"container\"",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Container",
+        "multi": true,
+        "name": "container",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "control",
+            "value": "control"
+          },
+          {
+            "selected": false,
+            "text": "ui",
+            "value": "ui"
+          }
+        ],
+        "query": "SHOW TAG VALUES ON \"log\" WITH KEY = \"container\"",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Log",
+        "definition": "SHOW TAG VALUES ON \"log\" WITH KEY = \"level\"",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "level",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "debug",
+            "value": "debug"
+          },
+          {
+            "selected": false,
+            "text": "error",
+            "value": "error"
+          },
+          {
+            "selected": false,
+            "text": "info",
+            "value": "info"
+          },
+          {
+            "selected": false,
+            "text": "verbose",
+            "value": "verbose"
+          },
+          {
+            "selected": false,
+            "text": "warn",
+            "value": "warn"
+          }
+        ],
+        "query": "SHOW TAG VALUES ON \"log\" WITH KEY = \"level\"",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -148,5 +268,5 @@
   "timezone": "",
   "title": "Log",
   "uid": "AHG4UIcMz",
-  "version": 2
+  "version": 4
 }

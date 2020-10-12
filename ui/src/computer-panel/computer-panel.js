@@ -1,6 +1,6 @@
-require('./environment-monitor.css');
+require('./computer-panel.css');
 
-function environmentMonitor(m, systemState, labelledCard, stateDisplay, stateIcon, env) {
+function computerPanel(m, systemState, labelledCard, stateDisplay, stateIcon, env) {
   function component() {
     return {
       view: () => m('.ma-aa', [
@@ -38,8 +38,8 @@ function environmentMonitor(m, systemState, labelledCard, stateDisplay, stateIco
 
 module.exports = (container) => {
   container.service(
-    'environmentMonitor',
-    environmentMonitor,
+    'computerPanel',
+    computerPanel,
     'm',
     'systemState',
     'labelledCard',

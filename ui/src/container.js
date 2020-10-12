@@ -42,7 +42,7 @@ require('./time/moment')(bottle);
 require('./simple-control-panel/emergency-shutdown/emergency-shutdown-button')(bottle);
 require('./simple-control-panel/emergency-shutdown/emergency-shutdown-confirm')(bottle);
 
-require('./environment-monitor/environment-monitor')(bottle);
+require('./computer-panel/computer-panel')(bottle);
 
 require('./layout/error-message/error-message')(bottle);
 require('./layout/error-message/error-message-factory')(bottle);
