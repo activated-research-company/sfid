@@ -21,10 +21,15 @@ function webSocket({ control, isWeb, url }, eventEmitter, logger) {
 
   const socket = io(uri, { autoConnect: false });
 
+  const needToStringify = (event) => event === 'analyze.start'
+      || event === 'shutdown.start'
+      || event === 'analyze.stop'
+      || event === 'shutdown.stop';
+
   function echo(event, from, to) {
     from.on(event, (args) => {
       // TODO: stringify echoes out to external and parse echoes in from external
-      if (event === 'analyze.start' || event === 'shutdown.start') { args = JSON.stringify(args); }
+      if (needToStringify(event)) { args = JSON.stringify(args); }
       to.emit(event, JSON.parse(args));
     });
   }
