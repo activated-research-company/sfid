@@ -64,7 +64,7 @@ function chartFactory() {
     const chart = new Chart(canvas, {
       type: 'line',
       data: {
-        labels: getXAxisLabels((1000 / options.sampleRate) * -60, 0, ((1000 / options.sampleRate) * 60) / 4),
+        labels: getXAxisLabels((1000 / options.sampleRate) * -60, 0, ((1000 / options.sampleRate) * 60) / 6),
         datasets: getDatasets(data, setpointData),
       },
       options: {

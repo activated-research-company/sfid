@@ -1,9 +1,9 @@
 const io = require('socket.io-client');
 
-function webSocket({ control, isWeb, url }, eventEmitter, logger) {
+function webSocket({ control, isWeb, isDev, url }, eventEmitter, logger) {
   const getUri = () => {
     let address;
-    if (isWeb) {
+    if (isWeb && !isDev) {
       const http = 'http://';
       const addressStart = url.indexOf(http) + http.length;
       const addressEnd = url.substring(addressStart).search(/[:/]/g, addressStart) + addressStart;

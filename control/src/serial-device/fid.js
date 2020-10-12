@@ -51,6 +51,7 @@ class Fid extends SerialDevice {
   dataToJson(data) {
     // TODO: figure out why some of these data array indexes are coming back null
     const dataArray = data.toString().split(' ').filter((e) => e !== '');
+    if (dataArray[0] === ':') { return null; } 
     if (dataArray[0] === 'Ignitor') { return null; }
     if (this.command === 'RD') {
       if (dataArray[0] === 'Measured') { return null; }
