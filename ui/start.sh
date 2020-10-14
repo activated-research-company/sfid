@@ -2,12 +2,9 @@
 
 # Build files - required to load run-time environment variables
 npm run build
-
-sleep 60
-
-./node_modules/.bin/electron-
-
-sleep 60
+sleep 10
+./node_modules/.bin/electron-rebuild
+sleep 10
 
 # Copy built files to the Docker Volume to be served by nginx
 mkdir -p /www/control/
