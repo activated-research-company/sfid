@@ -57,7 +57,7 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
 
     let zoomCanvas;
     let zoomContext;
-    let zoomArea = {
+    const zoomArea = {
       h: 0,
       w: 0,
     };
@@ -75,7 +75,7 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
     }
 
     function mouseDown(e) {
-      startDrawingZoomArea(e.layerX, e.layerY);
+      startDrawingZoomArea(e.offsetX, e.offsetY);
     }
 
     function zoom() {
@@ -111,7 +111,7 @@ function someNameWithChartInIt(m, eventEmitter, chartFactory, button, chartOptio
     }
 
     function mouseMove(e) {
-      updateZoomArea(e.layerX, e.layerY);
+      updateZoomArea(e.offsetX, e.offsetY);
     }
 
     function touchMove(e) {
