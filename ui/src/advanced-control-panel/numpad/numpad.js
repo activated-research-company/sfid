@@ -25,7 +25,7 @@ function numpad(m, eventEmitter, modal, key) {
       return title;
     }
 
-    const getUnits = () => (state && !pidTerm ? state.units : '');
+    const getUnits = () => (state && !pidTerm ? (state.editUnits || state.units) : '');
     const isWithinTheMin = (value) => parseFloat(value) >= getMin();
     const isWithinTheMax = (value) => parseFloat(value) <= getMax();
     const isValidValue = (value) => isWithinTheMin(value) && isWithinTheMax(value);

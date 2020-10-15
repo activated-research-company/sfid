@@ -52,8 +52,13 @@ function state() {
     fid: {
       label: 'Response',
       chartTitle: 'Response',
+      editTitle: 'FID Sample Rate',
       units: 'mV',
+      editUnits: 'Hz',
+      min: 1,
+      max: 10,
       event: 'fid',
+      setpoint: 4,
       actual: 0,
       voltage: 0,
     },

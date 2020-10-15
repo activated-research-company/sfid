@@ -15,7 +15,7 @@ function advancedFidPanel(
         ]),
         m('.flex.pb2', [
           m('.w-50.pr1', m(stateSlider, { state: systemState.fidTemperature })),
-          m('.w-50.pl1.ma-aa', m(stateDisplay, { state: systemState.fid })),
+          m('.w-50.pl1.ma-aa', m(stateSlider, { state: systemState.fid })),
         ]),
         m('.flex', [
           m('.w-50.pr1', m(stateSwitch, { state: systemState.pump })),

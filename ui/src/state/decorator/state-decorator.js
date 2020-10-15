@@ -49,6 +49,7 @@ function getDecorator(webSocket, eventEmitter, round) {
     addCommunicationMethods(decoratedSystemState.air);
     addCommunicationMethods(decoratedSystemState.fidTemperature);
     addCommunicationMethods(decoratedSystemState.fidIgniter);
+    addCommunicationMethods(decoratedSystemState.fid);
     addCommunicationMethods(decoratedSystemState.pump);
 
     function updateState(state, deviceSetpoint, actual, reachedSetpoint, sampleRate) {
@@ -87,8 +88,13 @@ function getDecorator(webSocket, eventEmitter, round) {
         updateState(decoratedSystemState.fidTemperature, setpoint, actual, reachedSetpoint, sampleRate);
       })
       .on(decoratedSystemState.fid.event, ({ voltage, temperature, igniting, ignited, sampleRate }) => {
-        if (voltage) { decoratedSystemState.fid.voltage = voltage; } // TODO: why is this coming back null?
-        updateState(decoratedSystemState.fid, decoratedSystemState.fid.voltage, decoratedSystemState.fid.voltage, null, sampleRate);
+        if (voltage) { decoratedSystemState.fid.voltage = voltage; }
+
+        let refreshChart = false;
+        if (decoratedSystemState.fid.sampleRate !== sampleRate) { refreshChart = true; }
+        updateState(decoratedSystemState.fid, 1000 / sampleRate, decoratedSystemState.fid.voltage, null, sampleRate);
+        if (refreshChart && decoratedSystemState.fid.chart) { decoratedSystemState.fid.chart(); }
+
         updateState(decoratedSystemState.fidFlameTemperature, temperature, temperature, null, sampleRate);
         updateState(decoratedSystemState.fidIgniter, igniting, igniting);
         updateState(decoratedSystemState.fidFlame, ignited, ignited);
