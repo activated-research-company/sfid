@@ -37,7 +37,7 @@ function errorMessage(m, eventEmitter, modal, button) {
       oninit: () => {
         eventEmitter.on('errormessage', showMessage);
       },
-      view: () => m(`.z-999${error ? '' : '.dn'}`, m(modal, { id: 'error-message-modal' }, [
+      view: () => m(`.z-999${error ? '' : '.dn'}`, m(modal, { id: 'error-message-modal', color: 'red' }, [
         m('h3.tc.b', getTitle()),
         m('.pa2', getContent()),
         m('.pa2.tc', getOccurredOn()),

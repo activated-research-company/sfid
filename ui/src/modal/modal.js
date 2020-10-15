@@ -1,7 +1,9 @@
+require('./modal.css');
+
 function modal(m) {
   function component() {
     function getOuterClasses(options) {
-      return `.z-2.max.fixed.top-0.left-0.bg-black-50${options.hide ? '.dn' : ''}`; // TODO: hide should display null instead of display non children for proper init
+      return `.z-2.max.fixed.top-0.left-0.bg-${options.color || 'black'}-50${options.hide ? '.dn' : ''}`; // TODO: hide should display null instead of display non children for proper init
     }
 
     function getChildren(children, id) {

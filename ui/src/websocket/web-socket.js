@@ -28,6 +28,10 @@ function webSocket({ control, isWeb, isDev, url }, eventEmitter, logger) {
 
   function echo(event, from, to) {
     from.on(event, (args) => {
+      if (!args) {
+        to.emit(event, args);
+        return;
+      }
       // TODO: stringify echoes out to external and parse echoes in from external
       if (needToStringify(event)) { args = JSON.stringify(args); }
       to.emit(event, JSON.parse(args));

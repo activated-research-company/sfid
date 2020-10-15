@@ -8,6 +8,7 @@ function redIndicatorLight(indicatorLightFactory, { light: { red }}, eventEmitte
   const errorEvents = [
     'thermalrunaway',
     'unresponsivethermometer',
+    'badrtd',
   ];
 
   function listenToErrorEvents() {

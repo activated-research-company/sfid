@@ -1,7 +1,7 @@
 function mockPhidgetDecorator(channelMockService) {
   function scheduleOnAttach(phidget) {
     setTimeout(() => {
-      if (phidget.onAttach) { phidget.onAttach(); }
+      if (phidget.onAttach) { phidget.onAttach(phidget); }
     }, 500);
   }
 
@@ -18,6 +18,8 @@ function mockPhidgetDecorator(channelMockService) {
     decoratedPhidget.setChannel = (value) => { decoratedPhidget.channel = value; };
     decoratedPhidget.getChannel = () => decoratedPhidget.channel;
     decoratedPhidget.setDeviceLabel = () => null;
+    decoratedPhidget.setRTDWireSetup = () => null;
+    decoratedPhidget.setRTDType = () => null;
 
     channelMockService
       .getDecorator(decoratedPhidget.name, identifier)

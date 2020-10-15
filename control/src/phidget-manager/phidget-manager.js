@@ -12,7 +12,7 @@ function phidgetManager({ phidget }, phidget22, logger) {
         manager = new phidget22.Manager();
         manager.open();
       }).catch((err) => {
-        logger.error(err);
+        logger.error(`Phidget Manager: ${err}`);
       });
     }
   }

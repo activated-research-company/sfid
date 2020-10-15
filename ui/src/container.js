@@ -51,6 +51,7 @@ require('./layout/error-message/error-message-emitter-decorator/cell-compartment
 require('./layout/error-message/error-message-emitter-decorator/thermal-runaway')(bottle);
 require('./layout/error-message/error-message-emitter-decorator/unresponsive-thermometer')(bottle);
 require('./layout/error-message/error-message-emitter-decorator/stall')(bottle);
+require('./layout/error-message/error-message-emitter-decorator/bad-rtd')(bottle);
 
 require('./layout/layout')(bottle);
 

@@ -49,7 +49,7 @@ function getTemperatureControllerFactory(
       };
 
       state.next({ type: 'heater', payload });
-      eventEmitter.emit(`${identifier}temperature`, payload);      
+      eventEmitter.emit(`${identifier}temperature`, payload);
     }
 
     function setOutput(output) {
@@ -75,9 +75,9 @@ function getTemperatureControllerFactory(
       }
     }
 
-    temperatureSensor.connect();
-    digitalOutput
+    temperatureSensor
       .connect()
+      .then(digitalOutput.connect)
       .then(() => {
         setInterval(update, 250);
       });
