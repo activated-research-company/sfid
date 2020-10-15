@@ -1,8 +1,9 @@
 const path = require('path');
+
 const { env } = process;
 
 function getEnv() {
-  const isDev = env.NODE_ENV === 'development'
+  const isDev = env.NODE_ENV === 'development';
 
   if (isDev) {
     // eslint-disable-next-line global-require, import/no-extraneous-dependencies
@@ -68,30 +69,35 @@ function getEnv() {
       temperatureSensor: {
         isAttached: isTrue(env.FID_TEMPERATURE_SENSOR_IS_ATTACHED),
         hub: env.FID_TEMPERATURE_SENSOR_HUB,
-        port: parseInt(env.FID_TEMPERATURE_SENSOR_PORT),
+        port: parseInt(env.FID_TEMPERATURE_SENSOR_PORT, 10),
       },
       heater: {
         isAttached: isTrue(env.FID_HEATER_IS_ATTACHED),
         hub: env.FID_HEATER_HUB,
-        port: parseInt(env.FID_HEATER_PORT),
-        channel: parseInt(env.FID_HEATER_CHANNEL),
+        port: parseInt(env.FID_HEATER_PORT, 10),
+        channel: parseInt(env.FID_HEATER_CHANNEL, 10),
+      },
+      pump: {
+        isAttached: isTrue(env.PUMP_IS_ATTACHED),
+        hub: env.PUMP_HUB,
+        port: parseInt(env.PUMP_PORT, 10),
       },
     },
     light: {
       red: {
         isAttached: isTrue(env.RED_LIGHT_IS_ATTACHED),
         hub: env.RED_LIGHT_HUB,
-        port: parseInt(env.RED_LIGHT_PORT),
+        port: parseInt(env.RED_LIGHT_PORT, 10),
       },
       orange: {
         isAttached: isTrue(env.ORANGE_LIGHT_IS_ATTACHED),
         hub: env.ORANGE_LIGHT_HUB,
-        port: parseInt(env.ORANGE_LIGHT_PORT),
+        port: parseInt(env.ORANGE_LIGHT_PORT, 10),
       },
       green: {
         isAttached: isTrue(env.GREEN_LIGHT_IS_ATTACHED),
         hub: env.GREEN_LIGHT_HUB,
-        port: parseInt(env.GREEN_LIGHT_PORT),
+        port: parseInt(env.GREEN_LIGHT_PORT, 10),
       },
     },
   };

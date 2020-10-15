@@ -78,6 +78,14 @@ function state() {
       units: `${String.fromCharCode(176)}C`,
       actual: 0,
     },
+    pump: {
+      label: 'Pump',
+      event: 'pump',
+      setpoint: false,
+      actual: false,
+      // isEnabled: () => systemState.fidFlame.actual,
+      isEnabled: () => true,
+    },
     computerUptime: {
       label: 'Uptime',
       units: '',

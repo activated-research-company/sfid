@@ -12,6 +12,7 @@ const {
   readyService,
   serialPortFactory,
   phidget,
+  digitalOutputFactory,
   redIndicatorLight,
   orangeIndicatorLight,
   greenIndicatorLight,
@@ -50,6 +51,17 @@ const waitForComponentStartup = () => {
 };
 
 const listen = () => {
+
+  let pump;
+  if (env.fid.pump.isAttached) {
+    const pumpFactory = require('./pump/pump-factory')(digitalOutputFactory, eventEmitter);
+    pump = pumpFactory.getNewPump(
+      env.fid.pump.hub,
+      env.fid.pump.port,
+    );
+    pump.listen();
+  }
+
   let fc;
   if (env.fc.isAttached) {
     const AlicatHub = require('./serial-device/alicat/alicat-hub');

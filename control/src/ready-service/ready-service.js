@@ -14,6 +14,7 @@ function readyService(env, eventEmitter, logger) {
   function listen() {
     if (env.fid.isAttached) { addEvent('fid'); }
     if (env.fc.isAttached) { addEvent('alicat hub'); }
+    if (env.fid.pump.isAttached) { addEvent('pump'); }
 
     events.forEach((event) => {
       eventEmitter.on(event.event, () => {

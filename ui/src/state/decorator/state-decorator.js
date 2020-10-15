@@ -1,3 +1,5 @@
+const webSocketServer = require("../../../../control/src/web-socket/web-socket-server");
+
 function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
   // TODO: continue to break this huge decorator into separate files
   function decorate(systemState) {
@@ -49,6 +51,7 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
     addCommunicationMethods(decoratedSystemState.air);
     addCommunicationMethods(decoratedSystemState.fidTemperature);
     addCommunicationMethods(decoratedSystemState.fidIgniter);
+    addCommunicationMethods(decoratedSystemState.pump);
 
     function updateState(state, deviceSetpoint, actual, reachedSetpoint, sampleRate) {
       state.lastUpdated = new Date();
@@ -92,6 +95,10 @@ function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
         updateState(decoratedSystemState.fidIgniter, igniting, igniting);
         updateState(decoratedSystemState.fidFlame, ignited, ignited);
       });
+
+    webSocket.on(decoratedSystemState.pump.event, (args) => {
+      updateState(decoratedSystemState.pump, args, args);
+    });
 
     webSocket
       .on(decoratedSystemState.computerUptime.event, ({ actual, sampleRate }) => {

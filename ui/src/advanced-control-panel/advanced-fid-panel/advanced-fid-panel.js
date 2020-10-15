@@ -18,8 +18,11 @@ function advancedFidPanel(
           m('.w-50.pl1.ma-aa', m(stateDisplay, { state: systemState.fid })),
         ]),
         m('.flex', [
-          m('.w-50.pr1', m(stateSwitch, { state: systemState.fidIgniter })),
-          m('.w-50.pl1.ma-aa', m(stateDisplay, { state: systemState.fidFlameTemperature })),
+          m('.w-50.pr1', m(stateSwitch, { state: systemState.pump })),
+          m('.w-50.pl1.flex', [
+            m('.w-50.pr1', m(stateSwitch, { state: systemState.fidIgniter })),
+            m('.w-50.pl1.ma-aa', m(stateDisplay, { state: systemState.fidFlameTemperature })),
+          ]),
         ]),
       ]),
     };

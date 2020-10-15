@@ -12,6 +12,7 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
     fidKd: 'fidkd',
     fidIgniter: 'fidigniter',
     emergencyShutdown: 'enableemergencyshutdown',
+    pump: 'pump',
   };
 
   function echo(event, from, to) {
