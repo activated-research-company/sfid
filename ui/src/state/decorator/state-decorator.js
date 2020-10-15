@@ -1,6 +1,4 @@
-const webSocketServer = require("../../../../control/src/web-socket/web-socket-server");
-
-function getDecorator(webSocket, eventEmitter, setpointSaver, round) {
+function getDecorator(webSocket, eventEmitter, round) {
   // TODO: continue to break this huge decorator into separate files
   function decorate(systemState) {
     const decoratedSystemState = systemState;
@@ -148,7 +146,6 @@ module.exports = (container) => {
     getDecorator(
       container.container.webSocket,
       container.container.eventEmitter,
-      container.container.setpointSaver,
       container.container.round,
     ),
   );
