@@ -4,6 +4,7 @@ class Fid extends SerialDevice {
   constructor(serialPortFactory, { fid }, sampleRate, eventEmitter, state) {
     super(fid, serialPortFactory, eventEmitter);
     eventEmitter.on('setfidigniter', this.ignite.bind(this));
+    eventEmitter.on('setfid', this.setSampleRate.bind(this));
     this.sampleRate = sampleRate;
     this.eventEmitter = eventEmitter;
     this.state = state;
@@ -23,6 +24,11 @@ class Fid extends SerialDevice {
     super.send(`${this.command}\r\n`);
   }
 
+  updateInterval() {
+    clearInterval(this.interval);
+    if (this.sampleRate) { this.interval = setInterval(this.sendCommand.bind(this), this.sampleRate); }
+  }
+
   connect() {
     return super.connect().then((parser) => {
       if (parser) {
@@ -30,7 +36,7 @@ class Fid extends SerialDevice {
           const json = this.dataToJson(data);
           if (json) { this.state.next({ type: 'fid', payload: json }); }
         });
-        setInterval(this.sendCommand.bind(this), this.sampleRate);
+        this.updateInterval();
       }
     });
   }
@@ -73,6 +79,11 @@ class Fid extends SerialDevice {
       igniting: this.igniting,
       ignited: this.ignited,
     };
+  }
+
+  setSampleRate(hz) {
+    this.sampleRate = hz ? 1000 / hz : 0;
+    this.updateInterval();
   }
 }
 

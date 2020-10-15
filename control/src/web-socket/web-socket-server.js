@@ -13,6 +13,7 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
     fidIgniter: 'fidigniter',
     emergencyShutdown: 'enableemergencyshutdown',
     pump: 'pump',
+    fidSampleRate: 'fid',
   };
 
   function echo(event, from, to) {
@@ -42,7 +43,7 @@ function webSocketServer({ control }, httpServer, webSocket, eventEmitter, logge
     httpServer.listen(control.port);
 
     eventEmitter.all((event, args) => {
-        emit(event, JSON.stringify(args));
+      emit(event, JSON.stringify(args));
     });
   }
 
