@@ -14,18 +14,18 @@ services:
     volumes:
       - 'www:/www'
 
-  wifi-connect:
-    build: wifi-connect
-    network_mode: 'host'
-    ports:
-      - '81:81'
-    cap_add:
-      - NET_ADMIN
-    labels:
-      io.balena.features.dbus: '1'
-    environment:
-      - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
-      - 'PORTAL_LISTENING_PORT=81'
+  # wifi-connect:
+  #   build: wifi-connect
+  #   network_mode: 'host'
+  #   ports:
+  #     - '81:81'
+  #   cap_add:
+  #     - NET_ADMIN
+  #   labels:
+  #     io.balena.features.dbus: '1'
+  #   environment:
+  #     - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
+  #     - 'PORTAL_LISTENING_PORT=81'
 
   influxdb:
     build: influxdb
